@@ -1,0 +1,2145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>NADHIR — Protocole Athlétique 15 ans</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root {
+--bg:#080c10;--bg2:#0d1318;--bg3:#111820;--bg4:#0a0f14;
+--glass:rgba(255,255,255,0.03);--glass2:rgba(255,255,255,0.06);--glass3:rgba(255,255,255,0.09);
+--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
+--green:#00e676;--green2:#00c853;--green3:#69f0ae;
+--amber:#ffb300;--amber2:#ff8f00;--amber3:#ffe57f;
+--red:#ff5252;--red2:#c62828;--blue:#40c4ff;--blue2:#0091ea;
+--purple:#ce93d8;
+--text:#e8edf2;--text2:#8fa0b0;--text3:#4a5a6a;--text4:#2a3a4a;
+--glow-g:0 0 24px rgba(0,230,118,0.35);--glow-a:0 0 24px rgba(255,179,0,0.35);
+--glow-r:0 0 24px rgba(255,82,82,0.35);
+--r:16px;--r2:12px;--r3:8px;
+--nav-h:70px;--top-h:60px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+html,body{height:100%;overflow:hidden;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased;}
+body::before{content:'';position:fixed;inset:0;background:
+radial-gradient(ellipse 70% 50% at 15% 5%,rgba(0,230,118,0.045) 0%,transparent 65%),
+radial-gradient(ellipse 60% 70% at 85% 90%,rgba(255,179,0,0.04) 0%,transparent 65%),
+radial-gradient(ellipse 40% 40% at 70% 20%,rgba(64,196,255,0.025) 0%,transparent 60%);
+pointer-events:none;z-index:0;}
+
+::-webkit-scrollbar{width:3px;height:3px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--text4);border-radius:10px;}
+
+#app{position:fixed;inset:0;z-index:1;display:flex;flex-direction:column;}
+
+/* ── TOPBAR ── */
+#topbar{
+flex-shrink:0;height:var(--top-h);
+background:rgba(8,12,16,0.93);backdrop-filter:blur(24px);
+border-bottom:1px solid var(--border);
+display:flex;align-items:center;justify-content:space-between;
+padding:0 12px;z-index:100;gap:8px;
+}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:5px;
+background:linear-gradient(90deg,var(--green),var(--amber));
+-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.logo-sub{font-size:9px;color:var(--text3);letter-spacing:3px;margin-top:-4px;display:block;}
+
+#snc-widget{
+display:flex;align-items:center;gap:8px;
+background:var(--glass2);border:1px solid var(--border);
+border-radius:24px;padding:5px 12px;cursor:pointer;
+transition:all .2s;user-select:none;
+}
+#snc-widget:hover{border-color:var(--green);box-shadow:var(--glow-g);}
+.snc-dot{width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0;}
+.snc-dot.pulse{animation:dotpulse 2s infinite;}
+@keyframes dotpulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.8);}}
+.snc-label{font-size:10px;color:var(--text3);letter-spacing:1px;}
+.snc-val{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--green);}
+.snc-ok .snc-dot{background:var(--green);}
+.snc-warn .snc-dot{background:var(--amber);}
+.snc-bad .snc-dot{background:var(--red);}
+.snc-ok .snc-val{color:var(--green);}
+.snc-warn .snc-val{color:var(--amber);}
+.snc-bad .snc-val{color:var(--red);}
+
+/* ── BADGE EXPORT CLOUD ── */
+#cloud-btn{
+position:relative;display:flex;align-items:center;gap:5px;
+background:var(--glass2);border:1px solid var(--border);
+border-radius:24px;padding:5px 10px;cursor:pointer;
+transition:all .2s;font-size:14px;flex-shrink:0;
+}
+#cloud-btn:hover{border-color:var(--blue);box-shadow:0 0 14px rgba(64,196,255,.3);}
+#cloud-badge{
+position:absolute;top:-4px;right:-4px;
+background:var(--red);color:#fff;border-radius:50%;
+width:14px;height:14px;font-size:8px;font-weight:700;
+display:none;align-items:center;justify-content:center;
+border:2px solid var(--bg);
+}
+#cloud-badge.show{display:flex;}
+#cloud-btn .cloud-lbl{font-size:10px;color:var(--text3);}
+
+/* ── NAV ── */
+#nav{
+flex-shrink:0;height:var(--nav-h);
+background:rgba(8,12,16,0.96);backdrop-filter:blur(24px);
+border-top:1px solid var(--border);
+display:flex;justify-content:space-around;align-items:center;
+z-index:100;padding-bottom:env(safe-area-inset-bottom);
+}
+.nav-btn{
+display:flex;flex-direction:column;align-items:center;gap:2px;
+padding:8px 10px;border-radius:10px;cursor:pointer;
+transition:all .2s;border:none;background:transparent;
+color:var(--text3);font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:.5px;
+min-width:50px;
+}
+.nav-btn .ni{font-size:20px;transition:all .2s;}
+.nav-btn:hover{color:var(--text2);}
+.nav-btn.active{color:var(--green);}
+.nav-btn.active .ni{filter:drop-shadow(0 0 5px var(--green));}
+
+/* ── MAIN ── */
+#main{flex:1 1 0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;}
+.tab-pane{display:none;padding:14px 14px 100px;animation:fadein .3s;}
+.tab-pane.active{display:block;}
+@keyframes fadein{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+/* ── CARDS ── */
+.card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:14px;backdrop-filter:blur(12px);}
+.card-title{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:2.5px;color:var(--amber);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.card-green{border-color:rgba(0,230,118,0.15);background:linear-gradient(135deg,rgba(0,230,118,0.04),rgba(255,179,0,0.02));}
+.card-red{border-color:rgba(255,82,82,0.25);background:rgba(255,82,82,0.04);}
+.card-blue{border-color:rgba(64,196,255,0.18);background:rgba(64,196,255,0.03);}
+
+/* ── BANDEAU DÉCISION DU JOUR ── */
+.decision-banner{
+display:flex;align-items:center;gap:10px;
+padding:11px 14px;border-radius:12px;margin-bottom:12px;
+font-size:12px;font-weight:600;line-height:1.4;
+border:1px solid;
+}
+.dec-ok{background:rgba(0,230,118,.08);border-color:rgba(0,230,118,.3);color:var(--green);}
+.dec-warn{background:rgba(255,179,0,.08);border-color:rgba(255,179,0,.3);color:var(--amber);}
+.dec-bad{background:rgba(255,82,82,.08);border-color:rgba(255,82,82,.3);color:var(--red);}
+.dec-icon{font-size:20px;flex-shrink:0;}
+.dec-content{flex:1;}
+.dec-title{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;margin-bottom:2px;}
+.dec-sub{font-size:10px;opacity:.8;font-weight:400;}
+
+/* ── EX CARD AJUSTÉE ── */
+.ex-item{display:flex;justify-content:space-between;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--border);}
+.ex-item:last-child{border-bottom:none;}
+.ex-item.ex-adjusted{background:rgba(0,230,118,.04);border-radius:8px;padding:9px 8px;margin:2px -8px;}
+.ex-item.ex-reduced{background:rgba(255,179,0,.04);border-radius:8px;padding:9px 8px;margin:2px -8px;}
+.ex-item.ex-cancelled{opacity:.45;}
+.ex-adj-badge{display:inline-flex;align-items:center;gap:3px;padding:1px 7px;border-radius:10px;font-size:9px;font-weight:700;margin-top:3px;}
+.ex-adj-up{background:rgba(0,230,118,.15);color:var(--green);border:1px solid rgba(0,230,118,.3);}
+.ex-adj-down{background:rgba(255,179,0,.15);color:var(--amber);border:1px solid rgba(255,179,0,.3);}
+.ex-adj-std{background:rgba(64,196,255,.12);color:var(--blue);border:1px solid rgba(64,196,255,.2);}
+
+/* ── WIDGET NUTRITION ── */
+.nutri-widget{
+background:linear-gradient(135deg,rgba(64,196,255,.06),rgba(0,230,118,.04));
+border:1px solid rgba(64,196,255,.2);
+border-radius:var(--r2);padding:14px;margin-bottom:14px;
+}
+.nutri-title{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;color:var(--blue);margin-bottom:10px;}
+.nutri-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.nutri-box{text-align:center;background:var(--glass2);border-radius:8px;padding:8px 4px;}
+.nutri-val{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;line-height:1;}
+.nutri-lbl{font-size:9px;color:var(--text3);margin-top:3px;letter-spacing:.5px;}
+.nutri-phase{font-size:10px;color:var(--text2);margin-top:8px;text-align:center;}
+
+/* ── CLOUD SYNC PANEL ── */
+#cloud-popup{position:fixed;top:68px;right:14px;width:310px;background:var(--bg2);border:1px solid rgba(64,196,255,.3);border-radius:var(--r);padding:18px;z-index:120;display:none;animation:slidedn .25s;box-shadow:0 16px 50px rgba(0,0,0,.5);}
+#cloud-popup.show{display:block;}
+.cloud-section{margin-bottom:12px;}
+.cloud-section-title{font-size:10px;color:var(--blue);letter-spacing:1px;font-weight:700;margin-bottom:7px;}
+
+/* ── DAILY CARD ── */
+.daily-card{background:linear-gradient(135deg,rgba(0,230,118,0.08),rgba(255,179,0,0.05));border:1px solid rgba(0,230,118,0.3);border-radius:var(--r);padding:18px;margin-bottom:14px;position:relative;overflow:hidden;}
+.daily-card::after{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(0,230,118,0.12),transparent 70%);border-radius:50%;pointer-events:none;}
+.daily-card.cancelled{background:linear-gradient(135deg,rgba(255,82,82,0.08),rgba(255,82,82,0.03));border-color:rgba(255,82,82,0.3);}
+.daily-card.cancelled::after{background:radial-gradient(circle,rgba(255,82,82,0.12),transparent 70%);}
+.daily-greeting{font-size:11px;color:var(--text3);letter-spacing:1px;margin-bottom:4px;}
+.daily-day{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:4px;color:var(--green);line-height:1;}
+.daily-seance{font-size:14px;font-weight:600;color:var(--text);margin-top:6px;}
+.daily-snc{font-size:11px;color:var(--text2);margin-top:4px;}
+.daily-alert{font-size:12px;color:var(--red);font-weight:600;margin-top:6px;}
+.daily-info{font-size:11px;color:var(--amber);margin-top:4px;}
+
+/* ── MESO DOTS ── */
+.meso-dots{display:flex;gap:6px;align-items:center;margin:10px 0;}
+.meso-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;border:2px solid transparent;transition:all .2s;flex-shrink:0;cursor:default;}
+.meso-dot.prep{background:rgba(0,230,118,0.15);color:var(--green);border-color:rgba(0,230,118,0.3);}
+.meso-dot.charge{background:rgba(255,179,0,0.15);color:var(--amber);border-color:rgba(255,179,0,0.3);}
+.meso-dot.pic{background:rgba(255,82,82,0.15);color:var(--red);border-color:rgba(255,82,82,0.3);}
+.meso-dot.dech{background:rgba(100,100,100,0.15);color:var(--text3);border-color:rgba(100,100,100,0.3);}
+.meso-dot.current{width:38px;height:38px;font-size:12px;font-weight:900;box-shadow:0 0 18px currentColor;animation:mesogl 2s infinite alternate;}
+@keyframes mesogl{0%{transform:scale(1);}100%{transform:scale(1.08);}}
+
+/* ── PHASE BANNER ── */
+.phase-banner{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;margin-bottom:14px;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;}
+.phase-prep{background:rgba(0,230,118,0.12);border:1px solid rgba(0,230,118,0.3);color:var(--green);}
+.phase-charge{background:rgba(255,179,0,0.12);border:1px solid rgba(255,179,0,0.3);color:var(--amber);}
+.phase-pic{background:rgba(255,82,82,0.12);border:1px solid rgba(255,82,82,0.3);color:var(--red);}
+.phase-dech{background:rgba(100,100,100,0.1);border:1px solid rgba(100,100,100,0.2);color:var(--text3);}
+.phase-hiv{background:rgba(64,196,255,0.12);border:1px solid rgba(64,196,255,0.3);color:var(--blue);}
+
+/* ── BADGES ── */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.5px;}
+.bg{background:rgba(0,230,118,.12);color:var(--green);border:1px solid rgba(0,230,118,.2);}
+.ba{background:rgba(255,179,0,.12);color:var(--amber);border:1px solid rgba(255,179,0,.2);}
+.br{background:rgba(255,82,82,.12);color:var(--red);border:1px solid rgba(255,82,82,.2);}
+.bb{background:rgba(64,196,255,.12);color:var(--blue);border:1px solid rgba(64,196,255,.2);}
+.bp{background:rgba(206,147,216,.12);color:var(--purple);border:1px solid rgba(206,147,216,.2);}
+.bdim{background:var(--glass2);color:var(--text3);border:1px solid var(--border);}
+
+/* ── PROGRESS ── */
+.prog-wrap{margin:8px 0;}
+.prog-lbl{display:flex;justify-content:space-between;font-size:11px;color:var(--text2);margin-bottom:5px;}
+.prog-bar{height:5px;background:rgba(255,255,255,0.06);border-radius:10px;overflow:hidden;}
+.prog-fill{height:100%;border-radius:10px;transition:width 1.2s cubic-bezier(.4,0,.2,1);}
+.pf-g{background:linear-gradient(90deg,var(--green2),var(--green));}
+.pf-a{background:linear-gradient(90deg,var(--amber2),var(--amber));}
+.pf-b{background:linear-gradient(90deg,var(--blue2),var(--blue));}
+.pf-r{background:linear-gradient(90deg,var(--red2),var(--red));}
+
+/* ── STATS ── */
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.stat-box{background:var(--glass2);border:1px solid var(--border);border-radius:var(--r2);padding:14px;text-align:center;}
+.stat-val{font-family:'JetBrains Mono',monospace;font-size:24px;color:var(--green);font-weight:700;line-height:1;}
+.stat-lbl{font-size:10px;color:var(--text2);margin-top:5px;letter-spacing:.5px;}
+.stat-sub{font-size:9px;color:var(--text3);margin-top:3px;}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 18px;border-radius:10px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;transition:all .2s;white-space:nowrap;}
+.btn-g{background:linear-gradient(135deg,var(--green2),var(--green));color:#000;box-shadow:0 3px 12px rgba(0,230,118,.3);}
+.btn-g:hover{transform:translateY(-1px);box-shadow:0 5px 18px rgba(0,230,118,.4);}
+.btn-g:active{transform:translateY(0);}
+.btn-a{background:linear-gradient(135deg,var(--amber2),var(--amber));color:#000;box-shadow:0 3px 12px rgba(255,179,0,.3);}
+.btn-r{background:linear-gradient(135deg,var(--red2),var(--red));color:#fff;}
+.btn-o{background:transparent;color:var(--text);border:1px solid var(--border);}
+.btn-o:hover{border-color:var(--green);color:var(--green);}
+.btn-b{background:linear-gradient(135deg,var(--blue2),var(--blue));color:#000;}
+.btn-sm{padding:6px 13px;font-size:11px;border-radius:8px;}
+.btn-full{width:100%;justify-content:center;}
+
+/* ── INPUTS ── */
+.ig{margin-bottom:13px;}
+.il{font-size:11px;color:var(--text2);margin-bottom:5px;display:block;letter-spacing:.5px;}
+.inp{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:9px 13px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;transition:border-color .2s;}
+.inp:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(0,230,118,.1);}
+.inp-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+select.inp option{background:var(--bg2);}
+
+/* ── WEEK SLIDER ── */
+.week-slider-wrap{margin:10px 0 14px;}
+.week-slider-row{display:flex;align-items:center;gap:8px;}
+.week-slider-wrap input[type=range]{flex:1;-webkit-appearance:none;height:6px;background:rgba(255,255,255,.08);border-radius:10px;outline:none;}
+.week-slider-wrap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--green2),var(--green));cursor:pointer;box-shadow:var(--glow-g);}
+.week-num-badge{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--green);font-weight:700;min-width:36px;text-align:center;background:var(--glass2);border:1px solid var(--border);border-radius:8px;padding:4px 8px;}
+
+.div{height:1px;background:var(--border);margin:12px 0;}
+
+/* ── EX-ITEM ── */
+.ex-name{font-size:13px;font-weight:500;}
+.ex-det{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:var(--amber);}
+.ex-sub{font-size:10px;color:var(--text3);margin-top:2px;}
+.charge-big{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:var(--amber);display:block;margin-top:3px;}
+
+.hr{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:12px;}
+.hr:last-child{border-bottom:none;}
+.hr-date{color:var(--text3);font-size:10px;font-family:'JetBrains Mono',monospace;}
+
+/* ── PILLS ── */
+.pill-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px;}
+.pill{padding:5px 11px;border-radius:20px;font-size:10px;font-weight:700;cursor:pointer;transition:all .2s;border:1px solid var(--border);background:transparent;color:var(--text2);letter-spacing:.5px;}
+.pill.ap{background:var(--amber);color:#000;border-color:var(--amber);}
+.pill.ag{background:var(--green);color:#000;border-color:var(--green);}
+
+.coudes-alert{display:flex;align-items:center;gap:10px;background:rgba(255,82,82,0.08);border:1px solid rgba(255,82,82,0.35);border-radius:10px;padding:10px 14px;margin-bottom:12px;}
+.coudes-dot{width:10px;height:10px;border-radius:50%;background:var(--red);flex-shrink:0;animation:dotpulse 1.5s infinite;}
+.coudes-txt{font-size:11px;color:var(--red);font-weight:600;}
+
+.cm{background:linear-gradient(135deg,rgba(0,230,118,.05),rgba(255,179,0,.04));border:1px solid rgba(0,230,118,.18);border-radius:12px;padding:14px;margin-bottom:12px;position:relative;}
+.cm::before{content:'🤖';font-size:18px;position:absolute;top:-10px;left:14px;background:var(--bg2);padding:0 4px;}
+.cm p{font-size:12px;line-height:1.75;color:var(--text);}
+.cm .ct{font-size:9px;color:var(--text3);margin-top:7px;}
+.cm-alert{background:rgba(255,82,82,.06);border-color:rgba(255,82,82,.25);}
+.cm-alert::before{content:'⚠️';}
+.cm-warn{background:rgba(255,179,0,.06);border-color:rgba(255,179,0,.25);}
+.cm-warn::before{content:'💡';}
+
+.sug{background:var(--glass2);border:1px solid rgba(64,196,255,.2);border-radius:12px;padding:14px;margin-bottom:10px;}
+.sug-title{font-size:12px;font-weight:700;color:var(--blue);margin-bottom:5px;}
+.sug-body{font-size:11px;color:var(--text2);line-height:1.6;}
+.sug-foot{display:flex;gap:7px;margin-top:10px;}
+
+.timeline{position:relative;padding-left:26px;}
+.timeline::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--green),var(--amber),transparent);}
+.tl-item{position:relative;margin-bottom:18px;}
+.tl-dot{position:absolute;left:-23px;top:3px;width:10px;height:10px;border-radius:50%;background:var(--green);border:2px solid var(--bg);box-shadow:var(--glow-g);}
+.tl-dot.da{background:var(--amber);box-shadow:var(--glow-a);}
+.tl-dot.dd{background:var(--text4);box-shadow:none;}
+.tl-y{font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:2px;color:var(--text3);}
+.tl-title{font-size:13px;font-weight:600;color:var(--text);margin-top:1px;}
+.tl-sub{font-size:11px;color:var(--text2);margin-top:2px;}
+.tl-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:5px;}
+.tl-item-clickable{cursor:pointer;transition:opacity .15s;}
+.tl-item-clickable:hover{opacity:.8;}
+.tl-item-clickable .tl-y{text-decoration:underline dotted rgba(255,179,0,.4);}
+
+/* ── TIMER ── */
+#timer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(12px);z-index:200;display:none;place-items:center;animation:fadein .2s;}
+#timer-overlay.show{display:grid;}
+#timer-box{background:var(--bg2);border:1px solid var(--border);border-radius:24px;padding:36px 28px;text-align:center;min-width:280px;max-width:340px;width:90%;}
+#timer-lbl{font-size:10px;color:var(--text3);letter-spacing:2px;margin-bottom:6px;}
+#timer-ex{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:var(--amber);margin-bottom:18px;line-height:1.2;}
+#timer-num{font-family:'JetBrains Mono',monospace;font-size:64px;color:var(--green);text-shadow:var(--glow-g);margin-bottom:14px;line-height:1;transition:color .3s;}
+#timer-prog{height:4px;background:rgba(255,255,255,.06);border-radius:10px;overflow:hidden;margin-bottom:22px;}
+#timer-pf{height:100%;background:linear-gradient(90deg,var(--green2),var(--green));border-radius:10px;transition:width 1s linear;}
+.timer-btns{display:flex;gap:8px;justify-content:center;}
+
+/* ── MODAL ── */
+#modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(8px);z-index:150;display:none;place-items:center;padding:20px;}
+#modal-overlay.show{display:grid;}
+#modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:26px;width:100%;max-width:460px;max-height:85vh;overflow-y:auto;animation:slideup .3s cubic-bezier(.4,0,.2,1);position:relative;}
+#modal-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:var(--amber);margin-bottom:14px;}
+#modal-close{position:absolute;top:20px;right:20px;background:var(--glass2);border:1px solid var(--border);border-radius:7px;padding:5px 9px;color:var(--text2);cursor:pointer;font-size:14px;}
+@keyframes slideup{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
+@keyframes slidedn{from{transform:translateY(-8px);opacity:0}to{transform:none;opacity:1}}
+
+/* ── NOTIF ── */
+#notif{position:fixed;bottom:calc(var(--nav-h)+12px);left:14px;right:14px;max-width:400px;margin:0 auto;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:12px 16px;z-index:300;display:none;animation:notifin .35s cubic-bezier(.4,0,.2,1);}
+#notif.show{display:flex;align-items:center;gap:10px;}
+#notif.success{border-color:rgba(0,230,118,.35);}
+#notif.warn{border-color:rgba(255,179,0,.35);}
+#notif.error{border-color:rgba(255,82,82,.35);}
+#notif.info{border-color:rgba(64,196,255,.35);}
+#notif-ico{font-size:20px;}
+#notif-txt{flex:1;font-size:12px;line-height:1.5;}
+@keyframes notifin{from{transform:translateY(12px);opacity:0}to{transform:none;opacity:1}}
+
+/* ── SNC POPUP ── */
+#snc-popup{position:fixed;top:68px;right:14px;width:290px;background:var(--bg2);border:1px solid rgba(0,230,118,.3);border-radius:var(--r);padding:18px;z-index:120;display:none;animation:slidedn .25s;box-shadow:0 16px 50px rgba(0,0,0,.5),var(--glow-g);}
+#snc-popup.show{display:block;}
+
+/* ── CHART ── */
+.chart-wrap{overflow-x:auto;position:relative;}
+.chart-svg{min-width:280px;}
+
+input[type=range]{width:100%;-webkit-appearance:none;height:5px;background:rgba(255,255,255,.08);border-radius:10px;outline:none;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,var(--green2),var(--green));cursor:pointer;box-shadow:var(--glow-g);}
+
+.empty{text-align:center;padding:32px 16px;color:var(--text3);}
+.empty-ico{font-size:42px;margin-bottom:10px;}
+.empty-txt{font-size:13px;}
+
+/* ── SEANCE CARD ── */
+.sc{background:var(--glass);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:10px;position:relative;overflow:hidden;}
+.sc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px;}
+.sc.g::before{background:var(--green);}
+.sc.a::before{background:var(--amber);}
+.sc.r::before{background:var(--red);}
+.sc.b::before{background:var(--blue);}
+.sc.d::before{background:var(--text4);}
+.sc-hd{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;}
+.sc-day{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:2px;}
+.sc-type{font-size:10px;color:var(--text2);margin-top:2px;letter-spacing:.5px;}
+.sc-title{font-size:14px;font-weight:600;margin-bottom:2px;}
+
+.week-info{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.week-num{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;}
+.week-sub{font-size:10px;color:var(--text2);margin-top:2px;}
+.week-nav{display:flex;gap:6px;}
+
+.cal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px;}
+.cal-month{background:var(--glass2);border:1px solid var(--border);border-radius:8px;padding:8px;text-align:center;}
+.cal-m-name{font-size:9px;color:var(--text3);letter-spacing:1px;margin-bottom:3px;}
+.cal-m-badge{font-size:10px;font-weight:700;padding:2px 6px;border-radius:6px;display:inline-block;}
+.cal-prep{background:rgba(0,230,118,.15);color:var(--green);}
+.cal-hiv{background:rgba(64,196,255,.15);color:var(--blue);}
+.cal-comp{background:rgba(255,179,0,.15);color:var(--amber);}
+.cal-dech{background:rgba(255,82,82,.12);color:var(--red);}
+
+.test-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);}
+.test-row:last-child{border-bottom:none;}
+.test-info{flex:1;}
+.test-name{font-size:12px;font-weight:600;}
+.test-target{font-size:10px;color:var(--text3);}
+.test-inp-w{width:95px;}
+
+.year-preview{background:var(--glass2);border:1px solid var(--border);border-radius:10px;padding:12px;margin-top:12px;}
+
+.toggle-track{position:relative;display:inline-block;width:52px;height:28px;cursor:pointer;border-radius:28px;transition:background .2s;}
+.toggle-track.on{background:var(--green);}
+.toggle-track.off{background:var(--text4);}
+.toggle-knob{position:absolute;top:4px;height:20px;width:20px;background:#fff;border-radius:50%;transition:left .2s;box-shadow:0 1px 4px rgba(0,0,0,.4);}
+.toggle-track.on .toggle-knob{left:28px;}
+.toggle-track.off .toggle-knob{left:4px;}
+
+/* ── QUICK STATS CARD ── */
+.quick-stats-card{
+background:linear-gradient(135deg,rgba(255,179,0,0.06),rgba(64,196,255,0.04));
+border:1px solid rgba(255,179,0,0.25);
+border-radius:var(--r2);padding:14px;margin-bottom:14px;
+}
+.quick-stats-title{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;color:var(--amber);margin-bottom:10px;}
+.quick-stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+.quick-stat-item{display:flex;flex-direction:column;gap:3px;}
+.quick-stat-lbl{font-size:9px;color:var(--text3);letter-spacing:.5px;}
+.quick-stat-inp{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:6px 10px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;outline:none;transition:border-color .2s;text-align:center;}
+.quick-stat-inp:focus{border-color:var(--amber);box-shadow:0 0 0 2px rgba(255,179,0,.12);}
+
+@media(max-width:380px){
+.stats-grid{grid-template-columns:1fr 1fr;}
+#timer-num{font-size:52px;}
+.logo{font-size:22px;}
+.meso-dot{width:24px;height:24px;font-size:8px;}
+.meso-dot.current{width:32px;height:32px;font-size:10px;}
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- TOPBAR -->
+<div id="topbar">
+<div>
+<div class="logo">NADHIR</div>
+<span class="logo-sub">PROTOCOLE 15 ANS</span>
+</div>
+<div style="display:flex;gap:6px;align-items:center;">
+<div id="cloud-btn" onclick="toggleCloudPopup()" title="Sauvegarde cloud">
+☁️
+<span class="cloud-lbl">Sync</span>
+<div id="cloud-badge">!</div>
+</div>
+<div id="snc-widget" onclick="toggleSNCPopup()">
+<div class="snc-dot pulse"></div>
+<div class="snc-label">SNC</div>
+<div class="snc-val" id="snc-display">—</div>
+</div>
+</div>
+</div>
+
+<!-- SNC POPUP -->
+<div id="snc-popup">
+<div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:3px;color:var(--amber);margin-bottom:3px;">TEST SNC MATINAL</div>
+<div style="font-size:10px;color:var(--text2);margin-bottom:12px;">3 sauts verticaux sans élan → hauteur en cm</div>
+<div class="inp-row">
+<div class="ig"><label class="il">Saut 1</label><input class="inp" type="number" id="snc1" placeholder="cm" min="0" max="200"></div>
+<div class="ig"><label class="il">Saut 2</label><input class="inp" type="number" id="snc2" placeholder="cm" min="0" max="200"></div>
+</div>
+<div class="ig"><label class="il">Saut 3</label><input class="inp" type="number" id="snc3" placeholder="cm" min="0" max="200"></div>
+<div class="ig"><label class="il">Sommeil (heures)</label><input class="inp" type="number" id="sleep-h" placeholder="ex: 8.0" step="0.5" min="0" max="24"></div>
+<button class="btn btn-g btn-full" onclick="saveSNC()">✓ Valider test SNC</button>
+<div id="snc-result" style="margin-top:10px;font-size:11px;line-height:1.7;"></div>
+</div>
+
+<!-- CLOUD POPUP -->
+<div id="cloud-popup">
+<div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:3px;color:var(--blue);margin-bottom:3px;">☁️ SAUVEGARDE CLOUD</div>
+<div style="font-size:10px;color:var(--text2);margin-bottom:12px;">Synchronisation via JSONBin.io (gratuit)</div>
+<div class="cloud-section">
+<div class="cloud-section-title">CLÉ API JSONBIN</div>
+<input class="inp" type="password" id="jsonbin-key" placeholder="$2b$10$..." style="font-size:11px;margin-bottom:6px;">
+<input class="inp" type="text" id="jsonbin-binid" placeholder="Bin ID (ex: 64ab...)" style="font-size:11px;">
+<div style="font-size:9px;color:var(--text3);margin-top:4px;">Créer un compte gratuit sur jsonbin.io → API Keys → Créer un Bin</div>
+</div>
+<div style="display:flex;gap:6px;margin-bottom:10px;">
+<button class="btn btn-b btn-sm btn-full" onclick="saveToCloud()">☁️ Sauvegarder</button>
+<button class="btn btn-o btn-sm btn-full" onclick="loadFromCloud()">⬇️ Restaurer</button>
+</div>
+<div class="cloud-section">
+<div class="cloud-section-title">EXPORT LOCAL</div>
+<div style="display:flex;gap:6px;">
+<button class="btn btn-g btn-sm btn-full" onclick="exportDataCloud()">📤 JSON</button>
+<button class="btn btn-o btn-sm btn-full" onclick="exportCSVFromCloud()">📊 CSV Tests</button>
+</div>
+</div>
+<div id="cloud-status" style="margin-top:10px;font-size:10px;color:var(--text3);text-align:center;"></div>
+<div id="last-export-info" style="margin-top:6px;font-size:9px;color:var(--text3);text-align:center;"></div>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+<div class="tab-pane active" id="tab-vision"></div>
+<div class="tab-pane" id="tab-plan"></div>
+<div class="tab-pane" id="tab-training"></div>
+<div class="tab-pane" id="tab-coach"></div>
+<div class="tab-pane" id="tab-tests"></div>
+<div class="tab-pane" id="tab-profil"></div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div id="nav">
+<button class="nav-btn active" onclick="switchTab('vision',this)"><span class="ni">🎯</span>Vision</button>
+<button class="nav-btn" onclick="switchTab('plan',this)"><span class="ni">📅</span>Plan</button>
+<button class="nav-btn" onclick="switchTab('training',this)"><span class="ni">🏋️</span>Séance</button>
+<button class="nav-btn" onclick="switchTab('coach',this)"><span class="ni">🧠</span>Coach</button>
+<button class="nav-btn" onclick="switchTab('tests',this)"><span class="ni">📊</span>Tests</button>
+<button class="nav-btn" onclick="switchTab('profil',this)"><span class="ni">👤</span>Profil</button>
+</div>
+</div>
+
+<!-- TIMER OVERLAY -->
+<div id="timer-overlay">
+<div id="timer-box">
+<div id="timer-lbl">REPOS</div>
+<div id="timer-ex">—</div>
+<div id="timer-num">00:00</div>
+<div id="timer-prog"><div id="timer-pf" style="width:100%"></div></div>
+<div class="timer-btns">
+<button class="btn btn-sm btn-o" onclick="addTime(30)">+30s</button>
+<button class="btn btn-sm btn-g" onclick="closeTimer()">⏭ Passer</button>
+<button class="btn btn-sm btn-o" onclick="addTime(-15)">-15s</button>
+</div>
+</div>
+</div>
+
+<!-- MODAL -->
+<div id="modal-overlay" onclick="closeModal(event)">
+<div id="modal-box">
+<div id="modal-title">—</div>
+<div id="modal-close" onclick="closeModal()">✕</div>
+<div id="modal-body"></div>
+</div>
+</div>
+
+<!-- NOTIF -->
+<div id="notif"><div id="notif-ico">ℹ️</div><div id="notif-txt"></div></div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// DONNÉES DU PROGRAMME
+// ═══════════════════════════════════════════════════════════════
+const P = {
+athlete:{ nom:'Nadhir', ageDepart:22, poidsDepart:65 },
+objectifs:{
+sprint100m: 10.00,
+detente: 120,
+brasDefer: 'Battre son frère de 120 kg',
+cali: '+50% PC tractions, pompes claquées, muscle-up'
+},
+
+// ── MODIFICATION 3 : Paramètres de projection logarithmique ──
+objectifsRealistes:{
+sprint100m_cible: 10.80,
+detente_cible: 110,
+anneesProgression: 8
+},
+
+macrocycles:[
+{ annee:1,aD:22,aF:23,obj:'Fondations neuromusculaires + force relative',sprint:11.5,det:95,sL:'< 11,5 s',dL:'> 95 cm',sq1:120,tr:20,focus:['Force relative','Technique sprint','Pliométrie basse intensité','Fondamentaux BD']},
+{ annee:2,aD:23,aF:24,obj:'Spécificité sprint, départs, pliométrie modérée',sprint:11.2,det:100,sL:'< 11,2 s',dL:'> 100 cm',sq1:135,tr:28,focus:['Départs explosifs','Plio modérée','Tractions lestées +','Technique BD']},
+{ annee:3,aD:24,aF:25,obj:'Affûtage Vmax, sauts max, bloc hivernal BD',sprint:11.0,det:105,sL:'< 11,0 s',dL:'> 105 cm',sq1:147,tr:36,focus:['Vmax','Sauts maximum','Bras de fer hivernal intensif']},
+{ annee:4,aD:25,aF:26,obj:'Pic vitesse sub-11, force maximale',sprint:10.7,det:108,sL:'10,6–10,8 s',dL:'> 108 cm',sq1:157,tr:42,focus:['Pic de vitesse','Drop jumps 40cm','Force max']},
+{ annee:5,aD:26,aF:27,obj:'Transfert élastique — drop jumps, bonds',sprint:10.5,det:112,sL:'10,4–10,6 s',dL:'> 112 cm',sq1:165,tr:47,focus:['Élasticité maximale','Drop jumps 50cm','Bonds horizontaux']},
+{ annee:6,aD:27,aF:28,obj:'Approche record — 10,2s / 116cm',sprint:10.2,det:116,sL:'< 10,2 s',dL:'> 116 cm',sq1:170,tr:50,focus:['Volume réduit','Qualité technique','Récupération optimale']},
+{ annee:7,aD:28,aF:29,obj:'Apogée sprint/détente — objectif 10,00s / 120cm',sprint:10.0,det:120,sL:'10,0 s',dL:'120 cm (avec élan)',sq1:172,tr:52,focus:['Record 100m 10,00s','Record détente 120cm','Pic de forme absolu']},
+{ annee:8,aD:29,aF:30,obj:'Dernier bloc bras de fer + maintien sprint',sprint:10.1,det:118,sL:'< 10,2 s',dL:'> 118 cm',sq1:168,tr:50,focus:['BD final — battre frère 120kg','Maintien sprint','Transition']},
+{ annee:9,aD:30,aF:35,obj:'Maintien minimal (2 séances/semaine)',sprint:10.5,det:110,sL:'< 10,6 s',dL:'> 110 cm',sq1:155,tr:40,focus:['Maintien','Santé','Qualité de vie']},
+{ annee:15,aD:35,aF:37,obj:'Descente contrôlée — transition',sprint:null,det:null,sL:'—',dL:'—',sq1:130,tr:25,focus:['Transition','Santé long terme','Bien-être']},
+],
+
+regles:[
+{ id:'snc',titre:'Auto-régulation SNC',desc:'3 sauts verticaux chaque matin. Si détente < 90% de la moyenne 7j → séance nerveuse annulée.',emoji:'🧠' },
+{ id:'endurance',titre:'Zéro endurance > 30 min',desc:'Aucun cardio > 30 min. Échauffement max 10 min. Récupération active 20 min FC<120 seulement.',emoji:'🚫' },
+{ id:'coudes',titre:'Préservation des coudes',desc:'Jamais tractions lestées ET bras de fer le même jour. Mardi = tractions ; Samedi = BD. Bloc hivernal : squat partiel remplace tractions — pas de conflit.',emoji:'💪' },
+{ id:'sommeil',titre:'Sommeil 8–9h minimum',desc:'Seuil critique 7h30. Si sommeil < 7h30 → séance nerveuse annulée automatiquement.',emoji:'😴' },
+{ id:'plio',titre:'Pas d\'échec en pliométrie',desc:'Arrêt immédiat si perte de hauteur/vitesse > 3–5% sur le saut ou bond.',emoji:'⬆️' },
+{ id:'rpe',titre:'1–2 reps en réserve (RIR)',desc:'Ne jamais aller à l\'échec musculaire. Toujours garder 1–2 reps en réserve.',emoji:'🏋️' },
+{ id:'decharge',titre:'Décharge toutes 8 semaines',desc:'Sprint −30%, plio −40%, charges 60–70%. Tests bimestriels obligatoires.',emoji:'🔄' },
+],
+
+semainetype:[
+{ jour:'Lundi',emoji:'🏁',type:'PISTE',titre:'Accélération + Vmax',col:'g',int:'haute',
+ex:[
+{n:'Échauffement footing',d:'10 min',cat:'warmup',repos:null},
+{n:'Gammes athlétiques',d:'10 min (talons-fesses, genoux hauts, skips A/B)',cat:'warmup',repos:null},
+{n:'Accélérations progressives',d:'3 × 30 m (90–95%)',cat:'sprint',repos:180,sprintCat:'accel'},
+{n:'Sprint Vmax lancé',d:'3–4 × 20–30 m (95–100%)',cat:'sprint',repos:360,sprintCat:'vmax'},
+{n:'Départs explosifs',d:'4 × 10 m (blocks ou départ debout)',cat:'sprint',repos:180,sprintCat:'depart'},
+{n:'Retour au calme + stretching',d:'10 min',cat:'cooldown',repos:null},
+{n:'Spanish squat isométrique',d:'3 × 30 s (protection ischio-jambiers proximaux)',cat:'muscu',repos:90},
+]},
+{ jour:'Mardi',emoji:'💪',type:'MUSCU',titre:'Force max + Tractions lestées',col:'a',int:'haute',
+ex:[
+{n:'Échauffement articulaire',d:'8 min',cat:'warmup',repos:null},
+{n:'Squat barre haute',d:'4 × 3–5 (85–92% 1RM)',cat:'muscu',repos:210,chargeKey:'squat'},
+{n:'Hip Thrust',d:'3 × 6 (80% 1RM)',cat:'muscu',repos:150,chargeKey:'hip'},
+{n:'Tractions lestées',d:'4 × 2–4 (progression +1 kg/semaine)',cat:'muscu',repos:210,chargeKey:'traction'},
+{n:'Nordic Curl',d:'3 × 4–6 excentrique lent',cat:'muscu',repos:120},
+{n:'Gainage planche',d:'3 × 45 s',cat:'muscu',repos:60},
+]},
+{ jour:'Mercredi',emoji:'🌿',type:'RÉCUPÉRATION',titre:'Récupération active',col:'b',int:'basse',
+ex:[
+{n:'Test SNC matinal',d:'3 sauts verticaux → noter hauteur',cat:'snc',repos:null},
+{n:'Marche ou vélo léger',d:'20–30 min (FC < 120)',cat:'recup',repos:null},
+{n:'Mobilité hanche & cheville',d:'15 min (routine complète)',cat:'recup',repos:null},
+{n:'Rouleau mousse / massage',d:'10 min ischio & mollets',cat:'recup',repos:null},
+{n:'Cryothérapie (si disponible)',d:'Bain froid 10–12°C, 10 min',cat:'recup',repos:null},
+]},
+{ jour:'Jeudi',emoji:'⚡',type:'PLIO + PISTE',titre:'Puissance + Sauts + Pompes',col:'a',int:'haute',
+ex:[
+{n:'Échauffement dynamique',d:'10 min + 3 sauts SNC',cat:'warmup',repos:null},
+{n:'Sauts verticaux max',d:'4 × 3 répétitions (repos complet)',cat:'plio',repos:300},
+{n:'Drop jumps',d:'3 × 4 (boîte 30→50 cm selon année)',cat:'plio',repos:180},
+{n:'Pompes claquées',d:'4 séries → RIR 2',cat:'cali',repos:150},
+{n:'Sprint 40–60 m',d:'2–3 × (qualité seulement)',cat:'sprint',repos:300,sprintCat:'specific'},
+{n:'Élastiques cheville',d:'3 × 15 dorsiflexion (prévention)',cat:'prev',repos:null},
+]},
+{ jour:'Vendredi',emoji:'🔥',type:'MUSCU',titre:'Puissance + Chaîne post. (RDL)',col:'a',int:'haute',
+ex:[
+{n:'Échauffement + activation fessiers',d:'10 min',cat:'warmup',repos:null},
+{n:'Power Clean / Trap Bar Jump',d:'4 × 3 (75–80% 1RM)',cat:'muscu',repos:180,chargeKey:'rdl'},
+{n:'RDL (Romanian Deadlift)',d:'4 × 5 (70–75% 1RM)',cat:'muscu',repos:120,chargeKey:'rdl'},
+{n:'Box Jump avec charge',d:'3 × 4 (gilet +10 kg)',cat:'plio',repos:180},
+{n:'Bulgarian Split Squat',d:'3 × 6 chaque jambe',cat:'muscu',repos:90,chargeKey:'split'},
+{n:'Gainage rotatoire',d:'2 × 20 side plank rotations',cat:'muscu',repos:60},
+]},
+{ jour:'Samedi',emoji:'🤼',type:'BRAS DE FER',titre:'Technique BD + Prévention coudes',col:'r',int:'moyenne',
+ex:[
+{n:'Échauffement coudes & poignets',d:'10 min (cercles, mobilité)',cat:'warmup',repos:null},
+{n:'Pronation/Supination lestée',d:'3 × 15 (léger, technique)',cat:'bd',repos:60},
+{n:'Top-roll technique',d:'3 séries (miroir ou partenaire)',cat:'bd',repos:90},
+{n:'Curl marteau',d:'3 × 10 (charge modérée)',cat:'muscu',repos:60,chargeKey:'curl'},
+{n:'Extension poignet excentrique',d:'3 × 12 (prévention épicondylite)',cat:'prev',repos:60},
+{n:'Renforcement coude élastique',d:'3 × 15 chaque sens',cat:'prev',repos:45},
+]},
+{ jour:'Dimanche',emoji:'😴',type:'REPOS',titre:'Repos total',col:'d',int:'repos',
+ex:[
+{n:'Repos complet',d:'0 entraînement',cat:'repos',repos:null},
+{n:'Nutrition récupération',d:'Protéines 2g/kg, glucides complexes',cat:'nutri',repos:null},
+{n:'Sommeil 9h minimum',d:'22h–7h recommandé',cat:'recup',repos:null},
+]},
+],
+
+semainetypeHivernal:[
+{ jour:'Lundi',emoji:'❄️',type:'PISTE HIVERNALE (MAINTIEN VMAX)',titre:'Sprint Vmax maintenu — volume minimal',col:'b',int:'haute',
+ex:[
+{n:'Échauffement footing',d:'10 min',cat:'warmup',repos:null},
+{n:'Gammes athlétiques',d:'8 min',cat:'warmup',repos:null},
+{n:'Sprint lancé Vmax',d:'3–4 × 20 m à 93–96% — maintien coordination neuromusculaire',cat:'sprint',repos:300,sprintCat:'vmax'},
+{n:'Départs debout explosifs',d:'3 × 10 m — explosivité initiale',cat:'sprint',repos:180,sprintCat:'depart'},
+{n:'Drills dorsiflexion',d:'5 min (ankling, A-skip)',cat:'prev',repos:null},
+{n:'Retour au calme + stretching',d:'8 min',cat:'cooldown',repos:null},
+]},
+{ jour:'Mardi',emoji:'💪',type:'BD LOURD (SÉANCE 1)',titre:'Bras de fer lourd — Force isométrique',col:'r',int:'haute',
+ex:[
+{n:'Échauffement coudes & poignets',d:'10 min (cercles, mobilité)',cat:'warmup',repos:null},
+{n:'Isométrie table BD',d:'5 × 5 s à 80% effort max',cat:'bd',repos:120,chargeKey:'bd_hiv'},
+{n:'Curl marteau lourd',d:'4 × 6 à 80% 1RM — force pure',cat:'muscu',repos:150,chargeKey:'bd_hiv'},
+{n:'Pronation lestée lourde',d:'4 × 8 à 80% capacité',cat:'bd',repos:120},
+{n:'Extension poignet excentrique',d:'3 × 10 lent (prévention)',cat:'prev',repos:60},
+{n:'Gainage planche',d:'3 × 45 s',cat:'muscu',repos:60},
+]},
+{ jour:'Mercredi',emoji:'🌿',type:'RÉCUPÉRATION',titre:'Récupération active',col:'b',int:'basse',
+ex:[
+{n:'Test SNC matinal',d:'3 sauts verticaux → noter hauteur',cat:'snc',repos:null},
+{n:'Marche ou vélo léger',d:'20–30 min (FC < 120)',cat:'recup',repos:null},
+{n:'Mobilité hanche & cheville',d:'15 min (routine complète)',cat:'recup',repos:null},
+{n:'Rouleau mousse / massage',d:'10 min ischio & mollets',cat:'recup',repos:null},
+{n:'Cryothérapie (si disponible)',d:'Bain froid 10–12°C, 10 min',cat:'recup',repos:null},
+]},
+{ jour:'Jeudi',emoji:'🦾',type:'FORCE JAMBES + BD (SÉANCE 2)',titre:'Squat partiel + Bras de fer lourd',col:'r',int:'haute',
+ex:[
+{n:'Échauffement articulaire',d:'10 min',cat:'warmup',repos:null},
+{n:'Squat partiel (0–60°)',d:'4 × 3–4 à 85–90% — maintien force max sans impact',cat:'muscu',repos:180,chargeKey:'squat'},
+{n:'Trap bar deadlift lent',d:'4 × 4 — chaîne postérieure sans impact plio',cat:'muscu',repos:150,chargeKey:'rdl'},
+{n:'Isométrie table BD',d:'5 × 5 s à 80% effort max',cat:'bd',repos:120,chargeKey:'bd_hiv'},
+{n:'Curl marteau lourd',d:'4 × 6 à 80% 1RM',cat:'muscu',repos:150,chargeKey:'bd_hiv'},
+{n:'Nordic curl excentrique',d:'3 × 4–6 lent (protection ischio)',cat:'muscu',repos:120},
+]},
+{ jour:'Vendredi',emoji:'⚡',type:'PLIOMÉTRIE + SPRINT COURT',titre:'Drop jumps 35–40 cm + Accélérations',col:'a',int:'haute',
+ex:[
+{n:'Échauffement dynamique',d:'10 min',cat:'warmup',repos:null},
+{n:'Drop jumps',d:'3 × 4 — boîte 35–40 cm (maintien raideur musculo-tendineuse)',cat:'plio',repos:180},
+{n:'Sauts verticaux max',d:'3 × 3 (repos complet)',cat:'plio',repos:300},
+{n:'Sprint accélération',d:'3 × 25 m à 88–92% — qualité technique',cat:'sprint',repos:240,sprintCat:'accel'},
+{n:'Élastiques dorsiflexion',d:'3 × 15 (prévention)',cat:'prev',repos:null},
+{n:'Retour au calme',d:'8 min',cat:'cooldown',repos:null},
+]},
+{ jour:'Samedi',emoji:'🤼',type:'BRAS DE FER TECHNIQUE',titre:'Technique BD + Prévention coudes',col:'r',int:'moyenne',
+ex:[
+{n:'Échauffement coudes & poignets',d:'10 min (cercles, mobilité)',cat:'warmup',repos:null},
+{n:'Pronation/Supination lestée',d:'3 × 15 (léger, technique)',cat:'bd',repos:60},
+{n:'Top-roll technique',d:'3 séries (miroir ou partenaire)',cat:'bd',repos:90},
+{n:'Curl marteau',d:'3 × 10 (charge modérée)',cat:'muscu',repos:60,chargeKey:'curl'},
+{n:'Extension poignet excentrique',d:'3 × 12 (prévention épicondylite)',cat:'prev',repos:60},
+{n:'Renforcement coude élastique',d:'3 × 15 chaque sens',cat:'prev',repos:45},
+]},
+{ jour:'Dimanche',emoji:'😴',type:'REPOS',titre:'Repos total',col:'d',int:'repos',
+ex:[
+{n:'Repos complet',d:'0 entraînement',cat:'repos',repos:null},
+{n:'Nutrition récupération',d:'Protéines 2g/kg, glucides complexes',cat:'nutri',repos:null},
+{n:'Sommeil 9h minimum',d:'22h–7h recommandé',cat:'recup',repos:null},
+]},
+],
+
+blocHivernal:{
+sprint:'2 séances/semaine (Lun Vmax + Ven accélérations)',
+brasDefer:'2 séances lourdes (Mar + Jeu) + 1 technique (Sam)',
+interdit:'Tractions lestées remplacées par Squat partiel (Jeu) — pas de conflit coudes',
+},
+
+tests:[
+{id:'detente',nom:'Détente verticale (avec élan)',unite:'cm',emoji:'⬆️'},
+{id:'squat1rm',nom:'Squat 1RM estimé',unite:'kg',emoji:'🏋️'},
+{id:'tractionMax',nom:'Tractions lestées max',unite:'kg lest',emoji:'🔝'},
+{id:'sprint100m',nom:'100 m chrono',unite:'s',emoji:'🏁'},
+{id:'brasDefer',nom:'Bras de fer vs frère 120kg',unite:'résultat',emoji:'💪'},
+{id:'curl3rm',nom:'Curl marteau 3RM',unite:'kg',emoji:'💪'},
+{id:'prehension',nom:'Force de préhension',unite:'kg',emoji:'✊'},
+{id:'pronationIso',nom:'Pronation isométrique (80%)',unite:'s',emoji:'⏱'},
+],
+
+nutrition:{
+proteines:{ lbl:'🥩 Protéines', val:'2,0 g/kg/j (max 2,2 g blocs force)' },
+glucides:{ lbl:'🍚 Glucides', val:'4–6 g/kg (entraîn.) / 3–4 g/kg (repos)' },
+hydratation:{ lbl:'💧 Hydratation', val:'35–40 mL/kg/j + 600 mL/h entraîn.' },
+creatine:{ lbl:'⚗️ Créatine', val:'5 g/j dans boisson (maintenance)' },
+omega3:{ lbl:'🐟 Oméga-3', val:'2–3 g/j EPA+DHA (anti-inflammatoire)' },
+pre:{ lbl:'⚡ Pré-workout', val:'−1h30 : riz + poulet / avoine + œufs' },
+post:{ lbl:'🔄 Post-workout', val:'−30min : 35g protéines + glucides rapides' },
+}
+};
+
+// ═══════════════════════════════════════════════════════════════
+// DB & STATE
+// ═══════════════════════════════════════════════════════════════
+const DB = {
+s(k,v){ try{localStorage.setItem('ndhr_'+k,JSON.stringify(v));}catch(e){} },
+l(k,d=null){ try{const v=localStorage.getItem('ndhr_'+k);return v!==null?JSON.parse(v):d;}catch(e){return d;} }
+};
+
+let S = {
+yr: DB.l('yr',1),
+wk: DB.l('wk',1),
+profil: DB.l('profil',{age:22,poids:65,taille:175,BF:12,squat1RM:100,rdl1RM:85,tractionMax:0,curl3RM:20,prehension:40,startDate:new Date().toISOString().split('T')[0],voix:false}),
+sncData: DB.l('sncData',[]),
+sessions: DB.l('sessions',{}),
+tests: DB.l('tests',[]),
+suggestions: DB.l('suggestions',[]),
+coachMsgs: DB.l('coachMsgs',[]),
+lastExport: DB.l('lastExport',null),
+cloudKey: DB.l('cloudKey',''),
+cloudBinId: DB.l('cloudBinId',''),
+};
+
+function save(){
+DB.s('yr',S.yr);DB.s('wk',S.wk);DB.s('profil',S.profil);
+DB.s('sncData',S.sncData);DB.s('sessions',S.sessions);
+DB.s('tests',S.tests);DB.s('suggestions',S.suggestions);
+DB.s('coachMsgs',S.coachMsgs);DB.s('lastExport',S.lastExport);
+DB.s('cloudKey',S.cloudKey);DB.s('cloudBinId',S.cloudBinId);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// UTILS
+// ═══════════════════════════════════════════════════════════════
+const td = ()=>new Date().toISOString().split('T')[0];
+const pct=(v,mx)=>Math.min(100,Math.max(0,(v/mx)*100));
+const dl=(d)=>new Date(d).toLocaleDateString('fr-FR',{day:'2-digit',month:'short',year:'numeric'});
+const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+const fmtTime=(s)=>`${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;
+const JOURS_FR=['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+
+function getMacro(yr){ const m=P.macrocycles.find(m=>m.annee===yr);if(m)return m;if(yr>=9&&yr<=14)return{...P.macrocycles[8],annee:yr};return P.macrocycles[P.macrocycles.length-1]; }
+function currMacro(){ return getMacro(S.yr); }
+function getAge(yr){ return P.athlete.ageDepart+(yr-1); }
+function meso(){ return S.wk%8||8; }
+function isHivernal(){ const m=new Date().getMonth()+1;return m===1||m===2; }
+
+function getMesoPhase(sw){
+if(sw<=2)return'prep';
+if(sw<=5)return'charge';
+if(sw<=7)return'pic';
+return'dech';
+}
+
+function getMesoLabel(sw){
+const ph=getMesoPhase(sw);
+if(ph==='prep')return{icon:'💪',label:'ACCUMULATION',cls:'phase-prep'};
+if(ph==='charge')return{icon:'🔥',label:'SURCHARGE',cls:'phase-charge'};
+if(ph==='pic')return{icon:'🚀',label:'INTENSIFICATION',cls:'phase-pic'};
+return{icon:'⚡',label:'SEMAINE DE DÉCHARGE',cls:'phase-dech'};
+}
+
+function calcCharge(key,sw){
+const p=S.profil;
+const coeffs=[0,0.80,0.85,0.90,0.95,0.95,1.00,1.00,0.65];
+const c=coeffs[Math.min(sw,8)];
+if(key==='squat')return Math.round(p.squat1RM*c);
+if(key==='hip')return Math.round((p.squat1RM*0.85)*c);
+if(key==='traction'){const base=p.tractionMax||5;return base+(sw-1);}
+if(key==='rdl')return Math.round((p.rdl1RM||p.squat1RM*0.85)*c);
+if(key==='split')return Math.round(p.squat1RM*0.35*c);
+if(key==='bd_hiv')return Math.round((p.tractionMax||20)*0.80);
+if(key==='curl')return Math.round((p.curl3RM||20)*0.75);
+return 0;
+}
+
+function applyDechargeToEx(ex){
+if(ex.cat!=='muscu'&&ex.cat!=='plio'&&ex.cat!=='sprint'&&ex.cat!=='cali')return null;
+let d=ex.d;
+const ratio=ex.cat==='plio'?0.6:0.7;
+d=d.replace(/(\d+)\s*×/g,(match,p1)=>{
+const reduced=Math.max(1,Math.floor(parseInt(p1)*ratio));
+return`${reduced} ×`;
+});
+return d+' <span style="color:var(--red);font-size:9px;">(décharge)</span>';
+}
+
+// ═══════════════════════════════════════════════════════════════
+// MODIFICATION 3 : PROJECTIONS LOGARITHMIQUES
+// ═══════════════════════════════════════════════════════════════
+
+/**
+* Projection logarithmique du 100m (décroissant)
+* depart : temps de départ (ex: 12.65s)
+* cible : temps cible (ex: 10.80s)
+* anneesTotales : sur combien d'années (ex: 8)
+* annee : année demandée (1..N)
+*/
+function projectSprintLog(depart, cible, anneesTotales, annee){
+if(annee<=0) return depart;
+const a=clamp(annee,1,anneesTotales);
+return depart - (depart - cible) * Math.log(a + 1) / Math.log(anneesTotales + 1);
+}
+
+/**
+* Projection logarithmique de la détente (croissant)
+* depart : détente de départ (ex: 85cm)
+* cible : détente cible (ex: 110cm)
+*/
+function projectDetenteLog(depart, cible, anneesTotales, annee){
+if(annee<=0) return depart;
+const a=clamp(annee,1,anneesTotales);
+return depart + (cible - depart) * Math.log(a + 1) / Math.log(anneesTotales + 1);
+}
+
+/**
+* Retourne le macrocycle de base avec les objectifs sprint/détente
+* recalculés dynamiquement à partir du premier test enregistré.
+* Si aucun test : valeurs par défaut du macrocycle.
+*/
+function getProjectedMacro(yr){
+const base = getMacro(yr);
+const tests = S.tests;
+
+// Trouver le premier test avec au moins une mesure sprint ou détente
+const firstWithSprint = tests.find(t=>t.sprint100m);
+const firstWithDet = tests.find(t=>t.detente);
+
+if(!firstWithSprint && !firstWithDet) return base;
+
+const or = P.objectifsRealistes;
+const anneesTotales = or.anneesProgression; // 8
+
+// Calcul de l'année relative au premier test
+// L'année du premier test est l'année de départ
+const debutAnnee = firstWithSprint ? (firstWithSprint.annee||1) : (firstWithDet ? (firstWithDet.annee||1) : 1);
+const anneeRelative = Math.max(1, yr - debutAnnee + 1);
+
+const result = {...base};
+
+// Sprint : si le macrocycle d'origine a une valeur sprint
+if(base.sprint !== null && firstWithSprint){
+const departSprint = firstWithSprint.sprint100m;
+const projetSprint = projectSprintLog(departSprint, or.sprint100m_cible, anneesTotales, anneeRelative);
+result.sprint = Math.round(projetSprint * 100) / 100;
+// Reconstruire sL lisible
+const s = result.sprint;
+if(s > 11.2) result.sL = `< ${s.toFixed(2)} s`;
+else if(s > 10.5) result.sL = `< ${s.toFixed(2)} s`;
+else result.sL = `${s.toFixed(2)} s`;
+}
+
+// Détente : si le macrocycle d'origine a une valeur det
+if(base.det !== null && firstWithDet){
+const departDet = firstWithDet.detente;
+const projetDet = projectDetenteLog(departDet, or.detente_cible, anneesTotales, anneeRelative);
+result.det = Math.round(projetDet);
+result.dL = `> ${result.det} cm`;
+}
+
+return result;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SNC MODULE
+// ═══════════════════════════════════════════════════════════════
+function sncMoy7(){
+const d=S.sncData.slice(-7);
+if(!d.length)return null;
+return d.map(x=>(x.s1+x.s2+x.s3)/3).reduce((a,b)=>a+b,0)/d.length;
+}
+function sncToday(){ const d=S.sncData.find(x=>x.date===td());return d?(d.s1+d.s2+d.s3)/3:null; }
+function sncStatus(){
+const moy=sncMoy7(),tv=sncToday();
+if(!moy||!tv)return{st:'unknown',ratio:null,moy,tv};
+const r=tv/moy;
+return{st:r>=0.90?'ok':r>=0.85?'warn':'bad',ratio:r,moy,tv};
+}
+function sleepToday(){ const d=S.sncData.find(x=>x.date===td());return d?d.sleep:null; }
+function seanceAutorisee(){
+const snc=sncStatus();const slp=sleepToday();const reasons=[];
+if(snc.st==='bad')reasons.push('SNC < 90% moyenne 7j');
+if(slp!==null&&slp<7.5)reasons.push(`Sommeil ${slp}h < seuil 7h30`);
+return{ok:reasons.length===0,reasons};
+}
+
+// ═══════════════════════════════════════════════════════════════
+// MODULE AJUSTEMENT LIVE SNC
+// ═══════════════════════════════════════════════════════════════
+function getSNCRatio(){
+const snc=sncStatus();
+return snc.ratio!==null ? snc.ratio : 1.0;
+}
+
+function adjustSprintExercice(ex, sw, ratio){
+if(ex.cat!=='sprint') return null;
+if(sw===8){
+return{consigne:'2 × 40 m (70% — décharge obligatoire)',badge:'⚡ DÉCHARGE',cssClass:'ex-reduced',niveau:'down'};
+}
+if(ratio<0.90) return null;
+if(sw<=2){
+return{consigne:'2 × 40 m à 90–95%',badge:'💪 ACCUMULATION',cssClass:'',niveau:'std'};
+}
+if(sw<=5){
+if(ratio>=0.95){
+return{consigne:'3 × 50 m à 95% — SNC optimal',badge:'🔥 VOLUME+',cssClass:'ex-adjusted',niveau:'up'};
+} else {
+return{consigne:'2 × 40 m — SNC modéré (ratio '+Math.round(ratio*100)+'%)',badge:'⚡ STANDARD',cssClass:'',niveau:'std'};
+}
+}
+if(sw<=7){
+if(ratio>=1.00){
+return{consigne:'3 × 60 m à 100% — SNC au top !',badge:'🚀 PIC MAX',cssClass:'ex-adjusted',niveau:'up'};
+} else if(ratio>=0.95){
+return{consigne:'2 × 50 m à 97–100%',badge:'🔥 PIC STD',cssClass:'ex-adjusted',niveau:'std'};
+} else {
+return{consigne:'2 × 40 m — SNC vigilance ('+Math.round(ratio*100)+'%)',badge:'⚡ RÉDUIT',cssClass:'ex-reduced',niveau:'down'};
+}
+}
+return null;
+}
+
+function adjustPlioExercice(ex, sw, ratio){
+if(ex.cat!=='plio') return null;
+if(sw===8) return{consigne:ex.d.replace(/(\d+)\s*×/g,(m,p)=>`${Math.max(1,Math.floor(parseInt(p)*0.6))} ×`)+' (décharge −40%)',badge:'⚡ DÉCHARGE',cssClass:'ex-reduced',niveau:'down'};
+if(ratio<0.90) return null;
+if(ratio<0.95){
+const consigne=ex.d.replace(/(\d+)\s*×/g,(m,p)=>`${Math.max(1,Math.floor(parseInt(p)*0.75))} ×`)
++` (−25% SNC ${Math.round(ratio*100)}%)`;
+return{consigne,badge:'⚡ RÉDUIT',cssClass:'ex-reduced',niveau:'down'};
+}
+return{consigne:ex.d,badge:'✅ STANDARD',cssClass:'',niveau:'std'};
+}
+
+function getMusculaireWarning(sw, ratio){
+if(ratio>=0.95||sw===8) return null;
+if(ratio>=0.85&&ratio<0.95){
+return'⚠️ SNC vigilance ('+Math.round(ratio*100)+'%) : garde +1 rep en réserve. Charge maintenue.';
+}
+return null;
+}
+
+function getDecisionBannerHTML(sw, ratio, seanceOk, reasons){
+let cls, icon, title, sub;
+if(!seanceOk){
+cls='dec-bad'; icon='🚫';
+title='SÉANCE HAUTE INTENSITÉ ANNULÉE';
+sub=`Raison : ${reasons.join(' • ')} → Mobilité + marche 20 min`;
+} else if(ratio!==null&&ratio>=1.00){
+cls='dec-ok'; icon='🚀';
+title=`SNC OPTIMAL — ${Math.round(ratio*100)}%`;
+sub=`Sem.${sw} · Programme ${sw<=2?'standard':sw<=5?'volume maximisé':sw<=7?'pic de performance':'décharge'}`;
+} else if(ratio!==null&&ratio>=0.95){
+cls='dec-ok'; icon='✅';
+title=`SNC NOMINAL — ${Math.round(ratio*100)}%`;
+sub=`Programme standard sem.${sw} — performance optimale attendue`;
+} else if(ratio!==null&&ratio>=0.90){
+cls='dec-warn'; icon='⚡';
+title=`SNC BAS — ${Math.round(ratio*100)}%`;
+sub=`Volume sprint réduit, plio −25%. Charges muscu maintenues.`;
+} else {
+cls='dec-warn'; icon='❓';
+title='TEST SNC NON EFFECTUÉ';
+sub='Effectue le test matinal (haut droite) pour l\'ajustement automatique';
+}
+return`<div class="decision-banner ${cls}">
+<div class="dec-icon">${icon}</div>
+<div class="dec-content">
+<div class="dec-title">${title}</div>
+<div class="dec-sub">${sub}</div>
+</div>
+</div>`;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// MODULE NUTRITION
+// ═══════════════════════════════════════════════════════════════
+function calcNutritionJour(poids, intensite, sw){
+const isDecharge = sw===8;
+const isBasse = intensite==='basse'||intensite==='repos';
+const isHaute = intensite==='haute';
+const prot = isDecharge ? poids*2.0 : (sw<=5 ? poids*2.2 : poids*2.0);
+let glucMin, glucMax;
+if(isDecharge||isBasse){ glucMin=3.0; glucMax=4.0; }
+else if(isHaute){ glucMin=5.0; glucMax=6.0; }
+else { glucMin=4.0; glucMax=5.0; }
+const gluc = poids*(glucMin+glucMax)/2;
+const lip = poids*1.1;
+const kcal = Math.round(prot*4 + gluc*4 + lip*9);
+return{prot:Math.round(prot), gluc:Math.round(gluc), lip:Math.round(lip), kcal,
+glucRange:`${glucMin}–${glucMax}g/kg`,
+phase: isDecharge?'Décharge':isBasse?'Repos actif':isHaute?'Haute intensité':'Modéré'};
+}
+
+function renderNutritionWidgetHTML(){
+const poids=S.profil.poids||65;
+const sw=meso();
+const hivernal=isHivernal();
+const semaine=hivernal?P.semainetypeHivernal:P.semainetype;
+const dayOfWeek=(new Date().getDay()||7)-1;
+const seanceDuJour=semaine[Math.min(dayOfWeek,6)];
+const n=calcNutritionJour(poids,seanceDuJour.int,sw);
+return`<div class="nutri-widget">
+<div class="nutri-title">🍽 BESOINS DU JOUR</div>
+<div class="nutri-grid">
+<div class="nutri-box"><div class="nutri-val" style="color:var(--red);">${n.kcal}</div><div class="nutri-lbl">KCAL</div></div>
+<div class="nutri-box"><div class="nutri-val" style="color:var(--blue);">${n.prot}g</div><div class="nutri-lbl">PROTÉINES</div></div>
+<div class="nutri-box"><div class="nutri-val" style="color:var(--amber);">${n.gluc}g</div><div class="nutri-lbl">GLUCIDES</div></div>
+</div>
+<div class="nutri-phase">Phase : <strong>${n.phase}</strong> · Glucides ${n.glucRange} · Lipides ${n.lip}g</div>
+<div style="font-size:9px;color:var(--text3);text-align:center;margin-top:4px;">Calculé sur ${poids}kg · Adapté à la séance du jour</div>
+</div>`;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// MODULE CLOUD
+// ═══════════════════════════════════════════════════════════════
+function checkExportBadge(){
+const badge=document.getElementById('cloud-badge');
+if(!badge) return;
+if(!S.lastExport){ badge.classList.add('show'); return; }
+const daysSince=(Date.now()-new Date(S.lastExport).getTime())/(1000*60*60*24);
+badge.classList.toggle('show', daysSince>7);
+}
+
+function updateCloudPopupInfo(){
+const el=document.getElementById('last-export-info');
+if(!el) return;
+if(S.lastExport){
+const daysSince=Math.floor((Date.now()-new Date(S.lastExport).getTime())/(1000*60*60*24));
+el.textContent=`Dernière sauvegarde : il y a ${daysSince} jour${daysSince>1?'s':''}`;
+el.style.color=daysSince>7?'var(--red)':'var(--green)';
+} else {
+el.textContent='Aucune sauvegarde enregistrée';
+el.style.color='var(--amber)';
+}
+const keyEl=document.getElementById('jsonbin-key');
+const binEl=document.getElementById('jsonbin-binid');
+if(keyEl&&S.cloudKey) keyEl.value=S.cloudKey;
+if(binEl&&S.cloudBinId) binEl.value=S.cloudBinId;
+}
+
+async function saveToCloud(){
+const keyEl=document.getElementById('jsonbin-key');
+const binEl=document.getElementById('jsonbin-binid');
+const apiKey=keyEl?keyEl.value.trim():S.cloudKey;
+const binId=binEl?binEl.value.trim():S.cloudBinId;
+if(!apiKey||!binId){ notify('⚠️ Remplis la clé API et le Bin ID JSONBin','warn'); return; }
+S.cloudKey=apiKey; S.cloudBinId=binId; save();
+const data={profil:S.profil,yr:S.yr,wk:S.wk,sncData:S.sncData,sessions:S.sessions,tests:S.tests,suggestions:S.suggestions,coachMsgs:S.coachMsgs,exportDate:new Date().toISOString(),version:'6.1'};
+const statusEl=document.getElementById('cloud-status');
+if(statusEl){statusEl.textContent='⏳ Synchronisation en cours...';statusEl.style.color='var(--text2)';}
+try{
+const res=await fetch(`https://api.jsonbin.io/v3/b/${binId}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':apiKey},body:JSON.stringify(data)});
+if(!res.ok) throw new Error('HTTP '+res.status);
+S.lastExport=new Date().toISOString(); save();
+if(statusEl){statusEl.textContent='✅ Sauvegardé sur JSONBin !';statusEl.style.color='var(--green)';}
+checkExportBadge(); updateCloudPopupInfo();
+notify('☁️ Données sauvegardées sur le cloud !','success');
+if(S.profil.voix) speak('Sauvegarde cloud effectuée avec succès.');
+}catch(e){
+if(statusEl){statusEl.textContent='❌ Erreur : '+e.message;statusEl.style.color='var(--red)';}
+notify('❌ Échec cloud : '+e.message,'error');
+exportDataCloud();
+notify('📤 Export JSON local effectué en fallback','warn');
+}
+}
+
+async function loadFromCloud(){
+const keyEl=document.getElementById('jsonbin-key');
+const binEl=document.getElementById('jsonbin-binid');
+const apiKey=keyEl?keyEl.value.trim():S.cloudKey;
+const binId=binEl?binEl.value.trim():S.cloudBinId;
+if(!apiKey||!binId){ notify('⚠️ Remplis la clé API et le Bin ID JSONBin','warn');return; }
+const statusEl=document.getElementById('cloud-status');
+if(statusEl){statusEl.textContent='⏳ Récupération...';statusEl.style.color='var(--text2)';}
+try{
+const res=await fetch(`https://api.jsonbin.io/v3/b/${binId}/latest`,{headers:{'X-Master-Key':apiKey}});
+if(!res.ok) throw new Error('HTTP '+res.status);
+const json=await res.json();
+const d=json.record;
+if(d.profil) S.profil={...S.profil,...d.profil};
+if(d.yr) S.yr=d.yr; if(d.wk) S.wk=d.wk;
+if(d.sncData) S.sncData=d.sncData;
+if(d.sessions) S.sessions=d.sessions;
+if(d.tests) S.tests=d.tests;
+if(d.suggestions) S.suggestions=d.suggestions;
+if(d.coachMsgs) S.coachMsgs=d.coachMsgs;
+save(); updateSNCWidget();
+if(statusEl){statusEl.textContent='✅ Données restaurées !';statusEl.style.color='var(--green)';}
+notify('✅ Données restaurées depuis le cloud','success');
+({vision:renderVision,plan:renderPlan,training:renderTraining,coach:renderCoach,tests:renderTests,profil:renderProfil}[curTab])();
+}catch(e){
+if(statusEl){statusEl.textContent='❌ Erreur : '+e.message;statusEl.style.color='var(--red)';}
+notify('❌ Échec restauration : '+e.message,'error');
+}
+}
+
+function exportDataCloud(){
+const data={profil:S.profil,yr:S.yr,wk:S.wk,sncData:S.sncData,sessions:S.sessions,tests:S.tests,suggestions:S.suggestions,coachMsgs:S.coachMsgs,exportDate:new Date().toISOString()};
+const a=document.createElement('a');
+a.href='data:application/json;charset=utf-8,'+encodeURIComponent(JSON.stringify(data,null,2));
+a.download=`nadhir_backup_${td()}.json`; a.click();
+S.lastExport=new Date().toISOString(); save();
+checkExportBadge(); updateCloudPopupInfo();
+notify('📤 Backup JSON exporté','success');
+}
+
+function exportCSVFromCloud(){
+if(!S.tests.length){notify('Aucun test à exporter','warn');return;}
+const cols=['date','annee','sem','sprint100m','detente','squat1rm','tractionMax','brasDefer','curl3rm','prehension','pronationIso'];
+const rows=S.tests.map(t=>cols.map(c=>t[c]||'').join(','));
+const csv=cols.join(',')+'\n'+rows.join('\n');
+const a=document.createElement('a');
+a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+a.download=`nadhir_tests_${td()}.csv`; a.click();
+notify('📤 CSV exporté','success');
+}
+
+let cloudPopupOpen=false;
+function toggleCloudPopup(){
+cloudPopupOpen=!cloudPopupOpen;
+const popup=document.getElementById('cloud-popup');
+popup.classList.toggle('show',cloudPopupOpen);
+if(cloudPopupOpen) updateCloudPopupInfo();
+}
+function closeCloudPopup(){cloudPopupOpen=false;document.getElementById('cloud-popup').classList.remove('show');}
+
+// ═══════════════════════════════════════════════════════════════
+// SNC — SAVE & WIDGET
+// ═══════════════════════════════════════════════════════════════
+function saveSNC(){
+const s1=parseFloat(document.getElementById('snc1').value);
+const s2=parseFloat(document.getElementById('snc2').value);
+const s3=parseFloat(document.getElementById('snc3').value);
+const slp=parseFloat(document.getElementById('sleep-h').value);
+if(isNaN(s1)||isNaN(s2)||isNaN(s3)){notify('⚠️ Remplis les 3 sauts !','warn');return;}
+S.sncData=S.sncData.filter(d=>d.date!==td());
+S.sncData.push({date:td(),s1,s2,s3,sleep:isNaN(slp)?null:slp});
+if(S.sncData.length>60)S.sncData.shift();
+save();
+const m7=sncMoy7(),avg=(s1+s2+s3)/3,ratio=m7?avg/m7:1;
+let msg='',type='ok';
+if(ratio<0.90){type='bad';msg=`SNC à ${(ratio*100).toFixed(0)}% de la moyenne 7 jours. Seuil 90% non atteint. Séance nerveuse annulée.`;}
+else if(ratio<0.95){type='warn';msg=`SNC légèrement bas à ${(ratio*100).toFixed(0)}%. Volume sprint réduit automatiquement. Reste vigilant Nadhir.`;}
+else{msg=`SNC nominal à ${(ratio*100).toFixed(0)}%. Nadhir, tu es prêt à performer aujourd'hui !`;}
+if(!isNaN(slp)&&slp<7.5){msg+=` Sommeil insuffisant à ${slp}h.`;type='bad';}
+addCoachMsg(msg,type==='bad'?'alert':type==='warn'?'warn':'ok');
+document.getElementById('snc-result').innerHTML=`<div style="color:${type==='bad'?'var(--red)':type==='warn'?'var(--amber)':'var(--green)'};font-weight:600;margin-bottom:4px;">Moy: ${avg.toFixed(1)} cm | Moy 7j: ${m7?m7.toFixed(1):'—'} cm | Ratio: ${(ratio*100).toFixed(0)}%</div><div style="font-size:10px;line-height:1.6;">${msg}</div>`;
+updateSNCWidget();
+notify(type==='bad'?'🚫 Séance nerveuse annulée':'✅ Test SNC enregistré',type==='bad'?'error':'success');
+if(S.profil.voix) speakSNCReport(ratio,slp,m7);
+}
+
+function speakSNCReport(ratio, slp, m7){
+if(!S.profil.voix) return;
+const sw=meso();
+const hivernal=isHivernal();
+const semaine=hivernal?P.semainetypeHivernal:P.semainetype;
+const dayOfWeek=(new Date().getDay()||7)-1;
+const seance=semaine[Math.min(dayOfWeek,6)];
+let msg=`Bonjour Nadhir. SNC à ${Math.round(ratio*100)} pourcent de ta moyenne 7 jours. `;
+if(ratio<0.90){
+msg+='Séance haute intensité annulée. Remplacée par mobilité et marche.';
+} else {
+msg+=`Programme du jour : ${seance.type}. `;
+const sprintEx=seance.ex.filter(e=>e.cat==='sprint');
+if(sprintEx.length){
+const adj=adjustSprintExercice(sprintEx[0],sw,ratio);
+if(adj) msg+=`Sprint : ${adj.consigne}. `;
+}
+const squatEx=seance.ex.find(e=>e.chargeKey==='squat');
+if(squatEx){ const charge=calcCharge('squat',sw); msg+=`Squat : ${charge} kilogrammes. `; }
+if(sw===8) msg+='Semaine de décharge : volume réduit obligatoire.';
+else if(ratio>=1.00) msg+='SNC au top ! Force maximale autorisée.';
+else if(ratio<0.95) msg+='Volume légèrement réduit pour préserver ta récupération.';
+}
+if(slp&&slp<7.5) msg+=` Attention : sommeil à ${slp} heures seulement.`;
+speak(msg);
+}
+
+function updateSNCWidget(){
+const tv=sncToday(),m7=sncMoy7();
+const el=document.getElementById('snc-display'),w=document.getElementById('snc-widget');
+w.className='';
+if(tv){
+el.textContent=tv.toFixed(0)+' cm';
+const r=m7?tv/m7:1;
+if(r>=0.90) w.classList.add('snc-ok');
+else if(r>=0.85) w.classList.add('snc-warn');
+else w.classList.add('snc-bad');
+}else{
+el.textContent='—';
+}
+}
+
+let sncPopupOpen=false;
+function toggleSNCPopup(){sncPopupOpen=!sncPopupOpen;document.getElementById('snc-popup').classList.toggle('show',sncPopupOpen);}
+function closeSNCPopup(){sncPopupOpen=false;document.getElementById('snc-popup').classList.remove('show');}
+
+// ═══════════════════════════════════════════════════════════════
+// SYNTHÈSE VOCALE
+// ═══════════════════════════════════════════════════════════════
+function speak(txt){
+if(!S.profil.voix) return;
+if(!('speechSynthesis' in window)||!txt) return;
+window.speechSynthesis.cancel();
+const u=new SpeechSynthesisUtterance(txt);
+u.lang='fr-FR'; u.rate=1.0; u.pitch=1.0; u.volume=1.0;
+const voices=window.speechSynthesis.getVoices();
+const frVoice=voices.find(v=>v.lang.startsWith('fr'));
+if(frVoice) u.voice=frVoice;
+window.speechSynthesis.speak(u);
+}
+if('speechSynthesis' in window){ window.speechSynthesis.onvoiceschanged=function(){}; }
+
+// ═══════════════════════════════════════════════════════════════
+// COACH IA
+// ═══════════════════════════════════════════════════════════════
+function addCoachMsg(txt,type='ok'){
+S.coachMsgs.unshift({txt,type,date:new Date().toISOString()});
+if(S.coachMsgs.length>60)S.coachMsgs.pop();
+save();
+}
+
+function analyzeProgression(){
+// MODIFICATION 3 : utilise getProjectedMacro
+const macro=getProjectedMacro(S.yr),tests=S.tests,last=tests.length?tests[tests.length-1]:null,prev=tests.length>1?tests[tests.length-2]:null;
+if(!last)return[];
+const msgs=[];
+if(last.sprint100m){
+const d=last.sprint100m-(macro.sprint||11.5);
+if(d>0.3){ msgs.push(`⚠️ Nadhir, ton 100m (${last.sprint100m}s) est en retard de ${d.toFixed(2)}s sur l'objectif Année ${S.yr}.`); addSuggestion('sprint_vol','+Volume Sprint','Augmenter de 1 répétition par séance Vmax pendant 4 semaines.');}
+else if(d<0){ msgs.push(`🔥 100m ${last.sprint100m}s — objectif dépassé ! Excellente trajectoire !`); }
+else{ msgs.push(`✅ 100m ${last.sprint100m}s dans la cible (${macro.sL}).`); }
+if(prev&&prev.sprint100m&&Math.abs(last.sprint100m-prev.sprint100m)<0.05){ msgs.push(`💡 Plateau 100m détecté. Varier la spécificité ou ajouter une séance technique départs.`); addSuggestion('sprint_tech','Séance technique départs','Ajouter 1 séance départs 10m chaque mercredi (basse intensité).'); }
+}
+if(last.detente){
+if(last.detente<(macro.det||95)-5){ msgs.push(`⚠️ Détente ${last.detente}cm en retard vs objectif ${macro.det}cm.`); addSuggestion('drop_jump','Progression Drop Jumps',`Passer drop jumps à ${S.yr<5?'40':'50'} cm dès la prochaine séance.`); }
+else if(last.detente>=(macro.det||95)){ msgs.push(`🚀 Détente ${last.detente}cm — objectif annuel atteint !`); }
+}
+if(last.curl3rm){
+const curl=last.curl3rm;
+if(curl<(S.profil.curl3RM||0)+2) msgs.push(`💡 Curl 3RM stagne à ${curl}kg. Progresser de 1,25kg/séance recommandé.`);
+else msgs.push(`✅ Curl 3RM ${curl}kg — progression BD sur la bonne voie !`);
+}
+if(last.prehension&&last.prehension<50){ msgs.push(`⚠️ Force de préhension à ${last.prehension}kg. Objectif : >55kg avant défi frère.`); addSuggestion('prehension','Renforcement préhension','Ajouter pinch grip 3×30s après chaque séance BD.'); }
+if(last.brasDefer==='Défaite'||last.brasDefer==='défaite'){
+msgs.push(`💪 Bras de fer : défaite. Focus sur le prochain bloc hivernal !`);
+if(prev&&(prev.brasDefer==='Défaite'||prev.brasDefer==='défaite')){ addSuggestion('bd_anticipe','Anticiper bloc hivernal','2 défaites consécutives. Recommandé : démarrer bloc hivernal BD immédiatement.'); }
+}
+msgs.forEach(m=>addCoachMsg(m));
+save();
+return msgs;
+}
+
+function addSuggestion(id,titre,corps){
+if(!S.suggestions.find(x=>x.id===id)){S.suggestions.push({id,titre,corps,validee:false,date:new Date().toISOString()});save();}
+}
+
+function validateSugg(id){
+const s=S.suggestions.find(x=>x.id===id);
+if(s){ s.validee=true; addCoachMsg('✅ Recommandation appliquée : "'+s.titre+'"'); if(S.profil.voix) speak('Recommandation appliquée : '+s.titre); save();renderCoach();notify('✅ Recommandation appliquée !','success'); }
+}
+function dismissSugg(id){S.suggestions=S.suggestions.filter(x=>x.id!==id);save();renderCoach();}
+
+// ═══════════════════════════════════════════════════════════════
+// TIMER
+// ═══════════════════════════════════════════════════════════════
+let timerInt=null,timerTot=0,timerRem=0;
+
+function startTimer(sec,name){
+timerTot=sec;timerRem=sec;
+document.getElementById('timer-ex').textContent=name;
+document.getElementById('timer-overlay').classList.add('show');
+updateTimerUI();
+if(timerInt)clearInterval(timerInt);
+timerInt=setInterval(()=>{
+timerRem--;
+if(timerRem<=0){clearInterval(timerInt);timerRem=0;beep();const msg='Repos terminé, en piste Nadhir !';notify('⏱ '+msg,'success');if(S.profil.voix)speak(msg);}
+updateTimerUI();
+},1000);
+}
+function updateTimerUI(){
+const pf=timerTot>0?(timerRem/timerTot)*100:0;
+document.getElementById('timer-num').textContent=fmtTime(timerRem);
+document.getElementById('timer-pf').style.width=pf+'%';
+const col=pf>50?'var(--green)':pf>20?'var(--amber)':'var(--red)';
+document.getElementById('timer-num').style.color=col;
+}
+function addTime(d){timerRem=Math.max(0,timerRem+d);timerTot=Math.max(timerTot,timerRem);updateTimerUI();}
+function closeTimer(){if(timerInt)clearInterval(timerInt);document.getElementById('timer-overlay').classList.remove('show');}
+function beep(){
+try{const ac=new AudioContext(),o=ac.createOscillator(),g=ac.createGain();o.connect(g);g.connect(ac.destination);o.frequency.value=880;g.gain.setValueAtTime(0.25,ac.currentTime);g.gain.exponentialRampToValueAtTime(0.001,ac.currentTime+0.7);o.start();o.stop(ac.currentTime+0.7);}catch(e){}
+}
+
+// ═══════════════════════════════════════════════════════════════
+// MODAL & NOTIF
+// ═══════════════════════════════════════════════════════════════
+function openModal(title,html){document.getElementById('modal-title').textContent=title;document.getElementById('modal-body').innerHTML=html;document.getElementById('modal-overlay').classList.add('show');}
+function closeModal(e){if(!e||e.target===document.getElementById('modal-overlay'))document.getElementById('modal-overlay').classList.remove('show');}
+let nt=null;
+function notify(msg,type='success'){
+const el=document.getElementById('notif');
+const icons={success:'✅',warn:'⚠️',error:'🚫',info:'ℹ️'};
+document.getElementById('notif-ico').textContent=icons[type]||'ℹ️';
+document.getElementById('notif-txt').textContent=msg;
+el.className='show '+type;
+if(nt)clearTimeout(nt);
+nt=setTimeout(()=>{el.className='';},3500);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════════════════════
+let curTab='vision';
+function switchTab(tab,btn){
+document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+document.getElementById('tab-'+tab).classList.add('active');
+if(btn)btn.classList.add('active');
+document.getElementById('main').scrollTop=0;
+curTab=tab;
+({vision:renderVision,plan:renderPlan,training:renderTraining,coach:renderCoach,tests:renderTests,profil:renderProfil}[tab])();
+closeSNCPopup();closeCloudPopup();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// TAB: VISION — avec Stats Rapides (modif 2) + Projections log (modif 3)
+// ═══════════════════════════════════════════════════════════════
+function renderVision(){
+// MODIFICATION 3 : utilise getProjectedMacro à la place de currMacro
+const macro=getProjectedMacro(S.yr);
+const tests=S.tests;
+const last=tests.length?tests[tests.length-1]:null;
+const age=getAge(S.yr);
+const yearPct=((S.wk-1)/52)*100;
+const sa=seanceAutorisee();
+const snc=sncStatus();
+const sw=meso();
+const hivernal=isHivernal();
+const phase=getMesoLabel(sw);
+const lastSprint=last?last.sprint100m:null;
+const lastDet=last?last.detente:null;
+
+// Objectifs finaux et progression
+const sprintFinalTarget=10.00;
+const detFinalTarget=120;
+const sprintProgFinal=lastSprint?Math.max(0,Math.min(100,(1-(lastSprint-sprintFinalTarget)/(12.65-sprintFinalTarget))*100)):0;
+const detProgFinal=lastDet?Math.max(0,Math.min(100,(lastDet/detFinalTarget)*100)):0;
+const sprintStart=lastSprint||12.65;
+const macroSprint=macro.sprint||11.5;
+const sprintProgAnnee=lastSprint&&macroSprint?Math.max(0,Math.min(100,(1-(lastSprint-macroSprint)/(12.65-macroSprint))*100)):0;
+
+function linReg(pts){const n=pts.length;if(n<2)return null;const mx=pts.reduce((a,b)=>a+b.x,0)/n;const my=pts.reduce((a,b)=>a+b.y,0)/n;const num=pts.reduce((a,b)=>a+(b.x-mx)*(b.y-my),0);const den=pts.reduce((a,b)=>a+(b.x-mx)**2,0);if(den===0)return null;const slope=num/den;const intercept=my-slope*mx;return{slope,intercept};}
+function projectSprint(){const sp=tests.filter(t=>t.sprint100m&&t.annee).map(t=>({x:t.annee,y:t.sprint100m}));if(sp.length<2)return null;const reg=linReg(sp);if(!reg||reg.slope>=0)return null;const targetYr=(sprintFinalTarget-reg.intercept)/reg.slope;return Math.ceil(Math.min(15,Math.max(S.yr,targetYr)));}
+function projectDetente(){const dt=tests.filter(t=>t.detente&&t.annee).map(t=>({x:t.annee,y:t.detente}));if(dt.length<2)return null;const reg=linReg(dt);if(!reg||reg.slope<=0)return null;const targetYr=(detFinalTarget-reg.intercept)/reg.slope;return Math.ceil(Math.min(15,Math.max(S.yr,targetYr)));}
+function fallbackSprintEst(){if(!lastSprint||lastSprint<=sprintFinalTarget)return null;return Math.min(15,Math.ceil(S.yr+(lastSprint-sprintFinalTarget)/0.15));}
+function fallbackDetEst(){if(!lastDet||lastDet>=detFinalTarget)return null;return Math.min(15,Math.ceil(S.yr+(detFinalTarget-lastDet)/4));}
+
+const sprintTestCount=tests.filter(t=>t.sprint100m).length;
+const detTestCount=tests.filter(t=>t.detente).length;
+const sprintEstYear=projectSprint()||fallbackSprintEst();
+const detEstYear=projectDetente()||fallbackDetEst();
+
+const dayOfWeek=(new Date().getDay()||7)-1;
+const semaine=hivernal?P.semainetypeHivernal:P.semainetype;
+const seanceDuJour=semaine[Math.min(dayOfWeek,6)];
+const jourNom=JOURS_FR[new Date().getDay()];
+
+let sncLabel='Non testé';
+let sncColor='var(--text3)';
+if(snc.st==='ok'){sncLabel=`✅ Nominal (${(snc.ratio*100).toFixed(0)}%)`;sncColor='var(--green)';}
+else if(snc.st==='warn'){sncLabel=`⚡ Bas (${(snc.ratio*100).toFixed(0)}%)`;sncColor='var(--amber)';}
+else if(snc.st==='bad'){sncLabel=`🚫 Trop bas (${(snc.ratio*100).toFixed(0)}%)`;sncColor='var(--red)';}
+
+const today_sessions_count=()=>{const k=`${S.yr}_w${S.wk}`;const log=S.sessions[k]||{};return Object.keys(log).length;};
+
+const dotTypes=['prep','prep','charge','charge','charge','pic','pic','dech'];
+const mesoDotsHtml=dotTypes.map((ph,i)=>{const num=i+1;const isCur=num===sw;return`<div class="meso-dot ${ph} ${isCur?'current':''}" title="Sem. ${num}">${num}</div>`;}).join('');
+
+// Info projection logarithmique
+const hasFirstTest=tests.find(t=>t.sprint100m||t.detente);
+const projInfoHtml=hasFirstTest?`<div style="font-size:9px;color:var(--blue);text-align:center;margin-top:4px;">📐 Objectifs recalculés via projection logarithmique depuis ton 1er test</div>`:'';
+
+let html='';
+html+=renderNutritionWidgetHTML();
+
+html+=`<div class="daily-card ${!sa.ok?'cancelled':''}">
+<div class="daily-greeting">BONJOUR</div>
+<div class="daily-day">${jourNom.toUpperCase()}</div>
+<div class="daily-seance">${!sa.ok?'<span style="color:var(--red)">🚫 Séance annulée</span>':seanceDuJour.emoji+' '+seanceDuJour.type+' — '+seanceDuJour.titre}</div>
+<div class="daily-snc" style="color:${sncColor};">SNC : ${sncLabel}</div>
+${!sa.ok?`<div class="daily-alert">→ Mobilité + Marche 20 min<br><small style="color:var(--text3);">Raison : ${sa.reasons.join(' • ')}</small></div>`:''}
+${hivernal?`<div class="daily-info">❄️ Bloc hivernal optimisé v6 — Sprint Vmax + BD + Plio maintenu</div>`:''}
+${sw===8&&sa.ok?`<div class="daily-info">⚡ Semaine de décharge — Volume réduit obligatoire</div>`:''}
+</div>`;
+
+// ── MODIFICATION 2 : Carte Stats Rapides ──
+html+=`<div class="quick-stats-card">
+<div class="quick-stats-title">⚡ STATS RAPIDES</div>
+<div class="quick-stats-grid">
+<div class="quick-stat-item">
+<span class="quick-stat-lbl">POIDS (kg)</span>
+<input class="quick-stat-inp" type="number" id="q_poids" value="${S.profil.poids||65}" step="0.1" min="40" max="200">
+</div>
+<div class="quick-stat-item">
+<span class="quick-stat-lbl">SQUAT 1RM (kg)</span>
+<input class="quick-stat-inp" type="number" id="q_squat" value="${S.profil.squat1RM||100}" min="0" max="500">
+</div>
+<div class="quick-stat-item">
+<span class="quick-stat-lbl">LEST TRACTIONS (kg)</span>
+<input class="quick-stat-inp" type="number" id="q_traction" value="${S.profil.tractionMax||0}" min="0" max="100">
+</div>
+<div class="quick-stat-item">
+<span class="quick-stat-lbl">CURL 3RM (kg)</span>
+<input class="quick-stat-inp" type="number" id="q_curl" value="${S.profil.curl3RM||20}" step="0.5" min="0" max="200">
+</div>
+</div>
+<button class="btn btn-a btn-sm btn-full" onclick="saveQuickStats()">💾 Enregistrer</button>
+</div>`;
+
+html+=`<div class="card" style="margin-bottom:14px;">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+<div style="font-size:11px;color:var(--text3);letter-spacing:1px;">MÉSOCYCLE EN COURS</div>
+<div class="badge ba">Sem. ${sw}/8</div>
+</div>
+<div class="meso-dots">${mesoDotsHtml}</div>
+<div style="display:flex;gap:12px;font-size:9px;color:var(--text3);flex-wrap:wrap;margin-top:6px;">
+<span><span style="color:var(--green)">●</span> Préparation</span><span><span style="color:var(--amber)">●</span> Surcharge</span><span><span style="color:var(--red)">●</span> Pic</span><span><span style="color:var(--text4)">●</span> Décharge</span>
+</div>
+</div>
+
+<div class="card card-green">
+<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+<div><div style="font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:4px;line-height:1;">ANNÉE ${S.yr}</div><div style="color:var(--text2);font-size:12px;margin-top:1px;">${age} ans → ${age+1} ans</div></div>
+<div class="badge ${S.yr<=7?'bg':'ba'}">${S.yr<=8?'🔥 Progression':'🔄 Maintien'}</div>
+</div>
+<div style="font-size:13px;color:var(--text);margin-bottom:12px;">${macro.obj}</div>
+<div class="prog-wrap"><div class="prog-lbl"><span>Progression annuelle</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--green);">Sem. ${S.wk}/52</span></div><div class="prog-bar"><div class="prog-fill pf-g" style="width:${yearPct.toFixed(0)}%"></div></div></div>
+<div style="font-size:11px;color:var(--text3);">✅ Séances cette semaine : ${today_sessions_count()}</div>
+</div>
+
+<div class="stats-grid">
+<div class="stat-box"><div class="stat-val">${lastSprint||'—'}</div><div class="stat-lbl">🏁 100 M (s)</div><div class="stat-sub">Objectif : ${macro.sL}</div></div>
+<div class="stat-box"><div class="stat-val">${lastDet||'—'}</div><div class="stat-lbl">⬆️ DÉTENTE (cm)</div><div class="stat-sub">Objectif : ${macro.dL}</div></div>
+<div class="stat-box"><div class="stat-val">${S.profil.squat1RM}</div><div class="stat-lbl">🏋️ SQUAT 1RM (kg)</div><div class="stat-sub">Cible : ${macro.sq1||'—'} kg</div></div>
+<div class="stat-box"><div class="stat-val">+${S.profil.tractionMax||0}</div><div class="stat-lbl">🔝 LEST TRACTIONS</div><div class="stat-sub">Cible : +${macro.tr||'—'} kg</div></div>
+</div>
+
+<div class="card">
+<div class="card-title">PROGRESSION OBJECTIFS FINAUX</div>
+<div class="prog-wrap"><div class="prog-lbl"><span>🏁 100m → <strong style="color:var(--green)">10,00 s</strong></span><span>${lastSprint?lastSprint+'s':'—'}</span></div><div class="prog-bar"><div class="prog-fill pf-g" style="width:${sprintProgFinal.toFixed(0)}%"></div></div></div>
+<div class="prog-wrap"><div class="prog-lbl"><span>⬆️ Détente → <strong style="color:var(--amber)">120 cm</strong></span><span>${lastDet?lastDet+'cm':'—'}</span></div><div class="prog-bar"><div class="prog-fill pf-a" style="width:${detProgFinal.toFixed(0)}%"></div></div></div>
+<div class="prog-wrap"><div class="prog-lbl"><span>🏁 Objectif annuel An.${S.yr} <span style="color:var(--blue);font-size:9px;">(proj. log)</span></span><span>${lastSprint?lastSprint+'s':'—'} / ${macro.sL}</span></div><div class="prog-bar"><div class="prog-fill pf-b" style="width:${sprintProgAnnee.toFixed(0)}%"></div></div></div>
+${projInfoHtml}
+<div style="margin-top:14px;padding:12px;background:var(--glass2);border:1px solid var(--border2);border-radius:10px;">
+<div style="font-size:10px;color:var(--amber);letter-spacing:1px;font-weight:700;margin-bottom:10px;">📊 PROJECTIONS (régression réelle)</div>
+${sprintTestCount>=2?`<div style="font-size:12px;color:var(--text2);line-height:1.8;margin-bottom:6px;">🏁 <strong style="color:var(--green)">100m 10,00s</strong> estimé Année <strong style="color:var(--green)">${sprintEstYear||'?'}</strong></div>`:sprintEstYear?`<div style="font-size:12px;color:var(--text2);line-height:1.8;margin-bottom:6px;">🏁 100m estimé vers Année ${sprintEstYear} (2 tests min. pour régression)</div>`:`<div style="font-size:12px;color:var(--text3);margin-bottom:6px;">🏁 100m : En attente de 2 tests minimum</div>`}
+${detTestCount>=2?`<div style="font-size:12px;color:var(--text2);line-height:1.8;">⬆️ <strong style="color:var(--amber)">Détente 120cm</strong> estimée Année <strong style="color:var(--amber)">${detEstYear||'?'}</strong></div>`:detEstYear?`<div style="font-size:12px;color:var(--text2);line-height:1.8;">⬆️ Détente estimée vers Année ${detEstYear}</div>`:`<div style="font-size:12px;color:var(--text3);">⬆️ Détente : En attente de 2 tests minimum</div>`}
+</div>
+</div>
+
+<div class="card"><div class="card-title">OBJECTIFS ULTIMES</div>
+${[['🏁','100 m','10,00 s',lastSprint?(lastSprint<=10.2?'bg':lastSprint<=11.0?'ba':'br'):'bb',lastSprint?lastSprint+'s':'—'],['⬆️','Détente (avec élan)','120 cm',lastDet?(lastDet>=115?'bg':lastDet>=100?'ba':'br'):'bb',lastDet?lastDet+'cm':'—'],['🤼','Bras de fer','Battre frère 120 kg','ba',last?(last.brasDefer||'—'):'—'],['🤸','Callisthénie','Muscle-up + tractions +50%PC','bp','—']].map(([e,n,t,cls,v])=>`<div class="test-row"><div class="test-info"><div class="test-name">${e} ${n}</div><div class="test-target">${t}</div></div><div class="badge ${cls}">${v}</div></div>`).join('')}
+</div>
+
+<div class="card"><div class="card-title">FOCUS ANNÉE ${S.yr}</div>
+${macro.focus.map(f=>`<div style="display:flex;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;"><span style="color:var(--green);font-size:10px;">▶</span>${f}</div>`).join('')}
+</div>`;
+
+document.getElementById('tab-vision').innerHTML=html;
+}
+
+// ── MODIFICATION 2 : Fonction saveQuickStats ──
+function saveQuickStats(){
+const poids=parseFloat(document.getElementById('q_poids').value);
+const squat=parseInt(document.getElementById('q_squat').value);
+const traction=parseInt(document.getElementById('q_traction').value);
+const curl=parseFloat(document.getElementById('q_curl').value);
+if(!isNaN(poids)&&poids>0) S.profil.poids=poids;
+if(!isNaN(squat)&&squat>0) S.profil.squat1RM=squat;
+if(!isNaN(traction)&&traction>=0) S.profil.tractionMax=traction;
+if(!isNaN(curl)&&curl>0) S.profil.curl3RM=curl;
+save();
+notify('✅ Stats rapides enregistrées !','success');
+if(S.profil.voix) speak('Stats mises à jour !');
+renderVision();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// TAB: PLAN
+// ═══════════════════════════════════════════════════════════════
+let previewYr=S.yr;
+
+function renderPlan(){
+const months=[{n:'Jan',type:'hiv'},{n:'Fév',type:'hiv'},{n:'Mar',type:'prep'},{n:'Avr',type:'prep'},{n:'Mai',type:'comp'},{n:'Juin',type:'comp'},{n:'Juil',type:'comp'},{n:'Août',type:'dech'},{n:'Sep',type:'prep'},{n:'Oct',type:'prep'},{n:'Nov',type:'comp'},{n:'Déc',type:'dech'}];
+const calHTML=months.map(m=>`<div class="cal-month"><div class="cal-m-name">${m.n}</div><div class="cal-m-badge ${({hiv:'cal-hiv',prep:'cal-prep',comp:'cal-comp',dech:'cal-dech'})[m.type]}">${({hiv:'❄️',prep:'💪',comp:'🏁',dech:'⚡'})[m.type]}</div></div>`).join('');
+
+document.getElementById('tab-plan').innerHTML=`
+<div class="card">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+<div><div style="font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:4px;color:var(--green);">ANNÉE <span id="yr-disp">${previewYr}</span></div><div style="font-size:12px;color:var(--text2);" id="age-disp">${getAge(previewYr)} → ${getAge(previewYr)+1} ans</div></div>
+<button class="btn btn-sm btn-g" onclick="goToYear(parseInt(document.getElementById('yr-range').value))">✓ Aller</button>
+</div>
+<input type="range" id="yr-range" min="1" max="15" value="${previewYr}" oninput="previewYear(this.value)">
+<div id="yr-preview" class="year-preview" style="margin-top:10px;"></div>
+</div>
+
+<div class="card"><div class="card-title">CALENDRIER ANNUEL TYPE</div>
+<div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:10px;font-size:10px;">
+<span>❄️ <span style="color:var(--blue)">Bloc hivernal BD</span></span><span>💪 <span style="color:var(--green)">Préparation</span></span><span>🏁 <span style="color:var(--amber)">Compétition</span></span><span>⚡ <span style="color:var(--red)">Décharge</span></span>
+</div>
+<div class="cal-grid">${calHTML}</div>
+</div>
+
+<div class="card"><div class="card-title">CALENDRIER 15 ANS</div><div class="timeline" id="tl-wrap"></div></div>
+
+<div class="card"><div class="card-title">RÈGLES IMMUABLES</div>
+${P.regles.map(r=>`<div style="padding:9px 0;border-bottom:1px solid var(--border);"><div style="font-weight:600;font-size:12px;color:var(--green);margin-bottom:2px;">${r.emoji} ${r.titre}</div><div style="font-size:11px;color:var(--text2);line-height:1.5;">${r.desc}</div></div>`).join('')}
+</div>
+
+<div class="card card-blue"><div class="card-title">❄️ BLOC HIVERNAL OPTIMISÉ v6 (JAN–FÉV)</div>
+<div style="font-size:11px;color:var(--text2);margin-bottom:10px;">8 semaines — Sprint Vmax maintenu + BD développé + Pliométrie 35–40 cm conservée</div>
+${[['🏁','Sprint',P.blocHivernal.sprint],['💪','Bras de fer',P.blocHivernal.brasDefer],['✅','Coudes',P.blocHivernal.interdit]].map(([e,n,v])=>`<div class="ex-item"><div class="ex-name">${e} ${n}</div><div style="font-size:11px;color:var(--text2);text-align:right;max-width:200px;line-height:1.4;">${v}</div></div>`).join('')}
+</div>`;
+
+renderTimeline();previewYear(previewYr);
+}
+
+function previewYear(yr){
+yr=parseInt(yr);previewYr=yr;
+const d=document.getElementById('yr-disp'),a=document.getElementById('age-disp'),p=document.getElementById('yr-preview');
+if(d)d.textContent=yr;if(a)a.textContent=`${getAge(yr)} → ${getAge(yr)+1} ans`;
+// MODIFICATION 3 : utilise getProjectedMacro
+const m=getProjectedMacro(yr);
+if(p)p.innerHTML=`<div style="font-size:13px;font-weight:600;margin-bottom:7px;">${m.obj}</div><div style="display:flex;gap:6px;flex-wrap:wrap;"><span class="badge bg">🏁 ${m.sL}</span><span class="badge ba">⬆️ ${m.dL}</span>${(m.focus||[]).slice(0,2).map(f=>`<span class="badge bb">${f}</span>`).join('')}</div>`;
+}
+
+function goToYear(yr){S.yr=clamp(yr,1,15);save();const sl=document.getElementById('yr-range');if(sl){sl.value=S.yr;previewYear(S.yr);}renderVision();notify(`📅 Année ${S.yr} sélectionnée`,'info');}
+
+function renderTimeline(){
+const wrap=document.getElementById('tl-wrap');if(!wrap)return;
+wrap.innerHTML=P.macrocycles.map(m=>{
+const done=m.annee<S.yr,cur=m.annee===S.yr;
+// MODIFICATION 3 : utilise getProjectedMacro pour les labels timeline
+const pm=getProjectedMacro(m.annee);
+return`<div class="tl-item tl-item-clickable" onclick="goToYear(${m.annee})">
+<div class="tl-dot ${cur?'da':done?'dd':''}"></div>
+<div class="tl-y">AN. ${m.annee} — ${m.aD}→${m.aF} ans${cur?' ← ACTUEL':''}</div>
+<div class="tl-title">${m.obj}</div>
+<div class="tl-tags"><span class="badge ${cur?'ba':done?'bdim':'bb'}">${pm.sL}</span><span class="badge ${cur?'ba':done?'bdim':'bb'}">${pm.dL}</span><span class="badge bb" style="font-size:9px;">→ Aller</span></div>
+</div>`;
+}).join('');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// TAB: TRAINING
+// ═══════════════════════════════════════════════════════════════
+let expandedDay=(new Date().getDay()||7)-1;
+
+function checkCoudesConflict(dayIdx,logKey){
+const log=S.sessions[logKey]||{};
+const hivernal=isHivernal();
+if(hivernal){ return null; }
+if(dayIdx===1&&log[5])return'⚠️ Règle coudes : BD Samedi déjà validé cette semaine.';
+if(dayIdx===5&&log[1])return'⚠️ Règle coudes : Tractions Mardi déjà validées cette semaine.';
+return null;
+}
+
+function hasCoudesAlert(dayIdx,logKey){
+const log=S.sessions[logKey]||{};
+const hivernal=isHivernal();
+if(hivernal) return false;
+if(dayIdx===1&&log[5])return true;
+if(dayIdx===5&&log[1])return true;
+return false;
+}
+
+function renderTraining(){
+const sa=seanceAutorisee();
+const logKey=`${S.yr}_w${S.wk}`;
+const log=S.sessions[logKey]||{};
+const sw=meso();
+const isDecharge=sw===8;
+const hivernal=isHivernal();
+const semaine=hivernal?P.semainetypeHivernal:P.semainetype;
+const phase=getMesoLabel(sw);
+const ratio=getSNCRatio();
+const sncSt=sncStatus();
+
+const jours=['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+const pills=semaine.map((s,i)=>{const done=!!log[i];return`<button class="pill ${i===expandedDay?'ap':''} ${done?'ag':''}" onclick="expandDay(${i})">${jours[i]}${done?' ✓':''}</button>`;}).join('');
+
+const s=semaine[expandedDay];
+const isDone=!!log[expandedDay];
+const isRest=s.int==='repos';
+const isNerveuse=s.int==='haute';
+
+const charges={};
+s.ex.forEach(ex=>{
+if(ex.chargeKey){
+const v=calcCharge(ex.chargeKey,sw);
+if(ex.chargeKey==='traction') charges[ex.n]={label:`+${v} kg`,detail:`4×${sw<=4?'4':'2'} — sem.${sw}: base+${sw-1}kg`};
+else if(ex.chargeKey==='squat') charges[ex.n]={label:`${v} kg`,detail:`4×${sw<=4?'5':'3'}`};
+else if(ex.chargeKey==='hip') charges[ex.n]={label:`${v} kg`,detail:'3×6'};
+else if(ex.chargeKey==='rdl') charges[ex.n]={label:`${v} kg`,detail:`4×${ex.n.includes('Power')||ex.n.includes('Trap')?'3':'5'}`};
+else if(ex.chargeKey==='split') charges[ex.n]={label:`${v} kg`,detail:'3×6/jambe'};
+else if(ex.chargeKey==='bd_hiv') charges[ex.n]={label:`${v} kg`,detail:'80% capacité'};
+else if(ex.chargeKey==='curl') charges[ex.n]={label:`${v} kg`,detail:'3×10 technique'};
+}
+});
+
+const catColor={warmup:'var(--text3)',sprint:'var(--green)',muscu:'var(--amber)',plio:'var(--blue)',cali:'var(--green)',bd:'var(--red)',recup:'var(--blue)',snc:'var(--green)',cooldown:'var(--text3)',prev:'var(--amber)',repos:'var(--text4)',nutri:'var(--text3)'};
+
+const alertSNC=isNerveuse&&!sa.ok
+?`<div class="cm cm-alert" style="margin-bottom:10px;"><p>🚫 Séance haute intensité déconseillée : ${sa.reasons.join(' • ')}.<br>→ Mobilité + marche 20 min recommandées.</p></div>`:'';
+
+const coudesAlert=hasCoudesAlert(expandedDay,logKey)
+?`<div class="coudes-alert"><div class="coudes-dot"></div><div class="coudes-txt">⚠️ Règle coudes — Conflit détecté cette semaine</div></div>`:'';
+
+let alertCoudes='';
+if(!hivernal&&expandedDay===1) alertCoudes=`<div class="cm cm-warn" style="margin-top:10px;"><p>Rappel coudes : Tractions aujourd'hui → pas de bras de fer samedi. ${log[5]?'<strong style="color:var(--red)">⚠️ Samedi BD déjà validé !</strong>':''}</p></div>`;
+else if(!hivernal&&expandedDay===5) alertCoudes=`<div class="cm cm-warn" style="margin-top:10px;"><p>Rappel coudes : BD aujourd'hui → aucune traction lestée supplémentaire. ${log[1]?'<strong style="color:var(--amber)">ℹ️ Mardi tractions validées.</strong>':''}</p></div>`;
+
+const hivBanner=hivernal?`<div class="cm cm-warn" style="margin-bottom:12px;"><p>❄️ <strong>Bloc hivernal optimisé v6</strong> (Jan–Fév) : Sprint Vmax conservé (Lun), Plio 35–40 cm (Ven), 2 séances BD lourdes (Mar+Jeu), tractions remplacées par Squat partiel → <strong style="color:var(--green)">zéro conflit coudes</strong>.</p></div>`:'';
+
+const muscuWarn=getMusculaireWarning(sw,sncSt.ratio);
+
+const exHtml=s.ex.map((ex)=>{
+const ch=charges[ex.n];
+const col=catColor[ex.cat]||'var(--text2)';
+const reposSec=ex.repos;
+let displayDesc=ex.d;
+let adjBadge='';
+let adjClass='';
+
+if(sa.ok){
+if(ex.cat==='sprint'&&!isDecharge){
+const adj=adjustSprintExercice(ex,sw,sncSt.ratio!==null?sncSt.ratio:1.0);
+if(adj){displayDesc=adj.consigne;adjBadge=adj.badge;adjClass=adj.cssClass;}
+else if(isDecharge){const d=applyDechargeToEx(ex);if(d)displayDesc=d;}
+} else if(ex.cat==='plio'){
+const adj=adjustPlioExercice(ex,sw,sncSt.ratio!==null?sncSt.ratio:1.0);
+if(adj){displayDesc=adj.consigne;adjBadge=adj.badge;adjClass=adj.cssClass;}
+} else if(isDecharge&&(ex.cat==='sprint'||ex.cat==='muscu'||ex.cat==='cali')){
+const d=applyDechargeToEx(ex);if(d)displayDesc=d;
+adjBadge='⚡ DÉCHARGE';adjClass='ex-reduced';
+}
+}
+
+return`<div class="ex-item ${adjClass}">
+<div style="flex:1;">
+<div class="ex-name">${ex.n}</div>
+<div style="font-size:10px;color:${adjClass?'var(--green)':col};margin-top:2px;line-height:1.4;">${displayDesc}</div>
+${adjBadge?`<span class="ex-adj-badge ${adjClass==='ex-adjusted'?'ex-adj-up':adjClass==='ex-reduced'?'ex-adj-down':'ex-adj-std'}">${adjBadge}</span>`:''}
+${ch?`<span class="charge-big">${ch.label} × ${ch.detail}</span>`:''}
+${ex.cat==='muscu'&&muscuWarn?`<div style="font-size:9px;color:var(--amber);margin-top:2px;">${muscuWarn}</div>`:''}
+</div>
+${reposSec?`<button class="btn btn-sm btn-o" style="margin-left:8px;flex-shrink:0;" onclick="startTimer(${reposSec},'${ex.n.replace(/'/g,"\\'")}')">⏱ ${fmtTime(reposSec)}</button>`:''}
+</div>`;
+}).join('');
+
+const decisionBanner=getDecisionBannerHTML(sw, sncSt.ratio, sa.ok, sa.reasons);
+const phaseBannerHtml=`<div class="phase-banner ${hivernal?'phase-hiv':phase.cls}"><span>${hivernal?'❄️':phase.icon}</span><span>${hivernal?'BLOC HIVERNAL V6':phase.label}</span></div>`;
+
+// ── MODIFICATION 1 : bouton Annuler la séance validée ──
+const validerBtnHtml=!isDone&&!isRest
+?`<button class="btn btn-g btn-sm" onclick="validateSession(${expandedDay})">✓ Valider la séance</button>`:'';
+const doneHtml=isDone
+?`<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+<div class="badge bg">✅ Séance validée</div>
+<button class="btn btn-sm btn-r" style="padding:4px 10px;font-size:10px;" onclick="invaliderSession(${expandedDay})" title="Annuler la validation">✕ Annuler</button>
+</div>`:'';
+const reposDoneHtml=isRest?`<div class="badge bdim">😴 Repos mérité</div>`:'';
+const mobBtnHtml=isNerveuse&&!sa.ok&&!isDone
+?`<button class="btn btn-sm btn-o" onclick="validateSessionMob(${expandedDay})">✓ Mobilité faite</button>`:'';
+
+document.getElementById('tab-training').innerHTML=`
+<div class="week-info">
+<div><div class="week-num">SEMAINE ${S.wk}</div><div class="week-sub">Année ${S.yr}${hivernal?' · ❄️ HIVERNAL V6':''}</div></div>
+<div class="week-nav"><button class="btn btn-sm btn-o" onclick="changeWeek(-1)">◀</button><button class="btn btn-sm btn-o" onclick="changeWeek(1)">▶</button></div>
+</div>
+
+<div class="week-slider-wrap">
+<div class="week-slider-row">
+<input type="range" id="wk-slider" min="1" max="52" value="${S.wk}" oninput="slideWeek(this.value)">
+<div class="week-num-badge" id="wk-badge">S${S.wk}</div>
+</div>
+</div>
+
+${phaseBannerHtml}
+${hivBanner}
+${decisionBanner}
+
+<div class="pill-row">${pills}</div>
+
+${coudesAlert}
+${alertSNC}
+
+<div class="sc ${s.col}">
+<div class="sc-hd">
+<div><div class="sc-day">${s.emoji} ${s.jour.toUpperCase()}</div><div class="sc-type">${s.type}</div></div>
+<div class="badge ${s.int==='haute'?'br':s.int==='moyenne'?'ba':s.int==='basse'?'bb':'bdim'}">${s.int.toUpperCase()}</div>
+</div>
+<div class="sc-title">${s.titre}${isDecharge?' <span style="font-size:10px;color:var(--red);">⚡ décharge</span>':''}</div>
+<div class="div"></div>
+${exHtml}
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;">
+${validerBtnHtml}
+${doneHtml}
+${reposDoneHtml}
+${mobBtnHtml}
+</div>
+</div>
+
+${alertCoudes}
+
+<div class="card" style="margin-top:14px;">
+<div class="card-title">RÉCAP SEMAINE</div>
+<div style="display:flex;gap:14px;flex-wrap:wrap;font-size:12px;">
+<span>✅ Séances : <strong style="color:var(--green)">${Object.keys(log).length}/6</strong></span>
+<span>📅 Mésocycle : <strong style="color:var(--amber)">Sem. ${sw}/8</strong></span>
+<span>💪 Charge : <strong style="color:var(--blue)">${Math.round([0,0.80,0.85,0.90,0.95,0.95,1.00,1.00,0.65][Math.min(sw,8)]*100)}% 1RM</strong></span>
+</div>
+${hivernal?`<div style="font-size:10px;color:var(--blue);margin-top:8px;">❄️ v6 : BD Lourd Mar+Jeu · Sprint Vmax Lun · Plio 35–40cm Ven · Technique Sam · Zéro conflit coudes</div>`:''}
+</div>`;
+
+if(S.profil.voix&&sncSt.ratio!==null){
+const msg=`Séance du jour : ${s.type}. SNC à ${Math.round(sncSt.ratio*100)} pourcent. ${sa.ok?'Entraînement autorisé.':'Séance haute intensité annulée.'}`;
+setTimeout(()=>speak(msg),400);
+}
+}
+
+function slideWeek(v){v=parseInt(v);S.wk=clamp(v,1,52);const badge=document.getElementById('wk-badge');if(badge)badge.textContent='S'+v;save();requestAnimationFrame(()=>renderTraining());}
+function expandDay(i){expandedDay=i;renderTraining();}
+function changeWeek(d){S.wk=clamp(S.wk+d,1,52);save();renderTraining();}
+
+function validateSession(di){
+const k=`${S.yr}_w${S.wk}`;const conflict=checkCoudesConflict(di,k);
+if(conflict){openModal('⚠️ Vérification règle coudes',`<p style="color:var(--text2);margin-bottom:16px;font-size:12px;">${conflict}</p><div style="display:flex;gap:8px;"><button class="btn btn-o btn-full" onclick="closeModal()">Annuler</button><button class="btn btn-g btn-full" onclick="confirmValidateSession(${di})">Confirmer quand même</button></div>`);return;}
+confirmValidateSession(di);
+}
+function confirmValidateSession(di){
+const k=`${S.yr}_w${S.wk}`;closeModal();
+if(!S.sessions[k])S.sessions[k]={};
+S.sessions[k][di]={date:td(),type:'complete'};
+save();const msg='Séance validée ! Bravo Nadhir, continue comme ça !';
+notify('✅ '+msg,'success');if(S.profil.voix)speak(msg);renderTraining();
+}
+function validateSessionMob(di){
+const k=`${S.yr}_w${S.wk}`;if(!S.sessions[k])S.sessions[k]={};
+S.sessions[k][di]={date:td(),type:'mobility'};save();notify('✅ Séance mobilité validée','success');renderTraining();
+}
+
+// ── MODIFICATION 1 : invaliderSession ──
+function invaliderSession(di){
+const k=`${S.yr}_w${S.wk}`;
+if(S.sessions[k]){
+delete S.sessions[k][di];
+// Nettoyer la clé si elle est vide
+if(Object.keys(S.sessions[k]).length===0) delete S.sessions[k];
+}
+save();
+notify('↩️ Séance dévalidée','warn');
+renderTraining();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// TAB: COACH IA
+// ═══════════════════════════════════════════════════════════════
+function renderCoach(){
+// MODIFICATION 3 : utilise getProjectedMacro
+const macro=getProjectedMacro(S.yr),snc=sncStatus();
+const sOpen=S.suggestions.filter(x=>!x.validee);
+const msgs=S.coachMsgs.slice(0,10);
+const yr=S.yr;
+const potSprint=Math.max(9.90,11.5-Math.log(yr+1)*0.60);
+const potDet=Math.min(124,82+Math.log(yr+1)*17);
+const tests=S.tests;
+
+document.getElementById('tab-coach').innerHTML=`
+<div class="card card-green">
+<div class="card-title">🧠 ANALYSE TEMPS RÉEL</div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+<div style="font-size:11px;color:var(--text2);">Année ${S.yr} · Sem. ${S.wk} · ${getAge(S.yr)} ans</div>
+<button class="btn btn-sm btn-g" onclick="runAnalysis()">🔄 Analyser</button>
+</div>
+<div class="stats-grid">
+<div class="stat-box"><div class="stat-val" style="font-size:20px;">${potSprint.toFixed(2)}s</div><div class="stat-lbl">POTENTIEL SPRINT</div><div class="stat-sub">Modèle logarithmique</div></div>
+<div class="stat-box"><div class="stat-val" style="font-size:20px;">${potDet.toFixed(0)}cm</div><div class="stat-lbl">POTENTIEL DÉTENTE</div><div class="stat-sub">Modèle logarithmique</div></div>
+</div>
+<div style="font-size:10px;color:var(--text3);">* Objectifs finaux : 100m 10,00s · Détente 120cm · BD vs frère 120kg</div>
+</div>
+
+${tests.length>1?`<div class="card"><div class="card-title">📈 COURBES DE PROGRESSION</div>
+${tests.some(t=>t.sprint100m)?renderMiniChart(tests.filter(t=>t.sprint100m).map(t=>({v:t.sprint100m,l:dl(t.date)})),'100 m (secondes)','g',true):''}
+${tests.some(t=>t.detente)?renderMiniChart(tests.filter(t=>t.detente).map(t=>({v:t.detente,l:dl(t.date)})),'Détente verticale (cm)','a',false):''}
+${tests.some(t=>t.squat1rm)?renderMiniChart(tests.filter(t=>t.squat1rm).map(t=>({v:t.squat1rm,l:dl(t.date)})),'Squat 1RM (kg)','b',false):''}
+${tests.some(t=>t.curl3rm)?renderMiniChart(tests.filter(t=>t.curl3rm).map(t=>({v:t.curl3rm,l:dl(t.date)})),'Curl marteau 3RM (kg)','r',false):''}
+${tests.some(t=>t.prehension)?renderMiniChart(tests.filter(t=>t.prehension).map(t=>({v:t.prehension,l:dl(t.date)})),'Force préhension (kg)','p',false):''}
+</div>`:''}
+
+<div class="card"><div class="card-title">🧬 AUTO-RÉGULATION SNC</div>
+${snc.ratio!==null?`<div class="stats-grid" style="margin-bottom:10px;">
+<div class="stat-box"><div class="stat-val" style="color:${snc.st==='ok'?'var(--green)':snc.st==='warn'?'var(--amber)':'var(--red)'};">${(snc.ratio*100).toFixed(0)}%</div><div class="stat-lbl">RATIO SNC</div></div>
+<div class="stat-box"><div class="stat-val">${snc.moy?snc.moy.toFixed(1):'—'}</div><div class="stat-lbl">MOYENNE 7J (cm)</div></div>
+</div>
+<div class="badge ${snc.st==='ok'?'bg':snc.st==='warn'?'ba':'br'}" style="margin-bottom:10px;">${snc.st==='ok'?'✅ SNC nominal':snc.st==='warn'?'⚡ SNC bas — Volume sprint réduit':'🚫 SNC trop bas — Séance annulée'}</div>
+${renderSNCHistory()}`:`<div class="empty"><div class="empty-ico">🧠</div><div class="empty-txt">Effectue le test SNC matinal (bouton haut droite)</div></div>`}
+</div>
+
+${sOpen.length?`<div class="card"><div class="card-title">💡 RECOMMANDATIONS IA</div>
+${sOpen.map(s=>`<div class="sug"><div class="sug-title">${s.titre}</div><div class="sug-body">${s.corps}</div><div class="sug-foot"><button class="btn btn-sm btn-g" onclick="validateSugg('${s.id}')">✓ Appliquer</button><button class="btn btn-sm btn-o" onclick="dismissSugg('${s.id}')">✕ Ignorer</button></div></div>`).join('')}
+</div>`:''}
+
+<div class="card"><div class="card-title">📝 JOURNAL COACH</div>
+${msgs.length?msgs.map(m=>`<div class="cm ${m.type==='alert'?'cm-alert':m.type==='warn'?'cm-warn':''}"><p>${m.txt}</p><div class="ct">${dl(m.date)}</div></div>`).join(''):`<div class="empty"><div class="empty-ico">💬</div><div class="empty-txt">Les analyses apparaîtront ici au fil du temps</div></div>`}
+</div>
+
+<div class="card"><div class="card-title">📋 STATUT RÈGLES</div>
+${P.regles.map(r=>{const ok=checkRule(r.id);return`<div class="hr"><div><div style="font-weight:600;font-size:12px;">${r.emoji} ${r.titre}</div></div><div class="badge ${ok?'bg':'br'}">${ok?'✅ OK':'⚠️ Vérifie'}</div></div>`;}).join('')}
+</div>
+
+<div class="card"><div class="card-title">🥗 NUTRITION</div>
+${Object.values(P.nutrition).map(n=>`<div class="ex-item"><div class="ex-name">${n.lbl}</div><div style="font-size:10px;color:var(--text2);text-align:right;max-width:180px;line-height:1.4;">${n.val}</div></div>`).join('')}
+</div>`;
+}
+
+function renderSNCHistory(){
+const last7=S.sncData.slice(-7);if(!last7.length)return'';
+const avg7=last7.map(d=>(d.s1+d.s2+d.s3)/3);
+const gMax=Math.max(...avg7)+5,gMin=Math.min(...avg7)-5;
+const W=260,H=60,p=8;
+const pts=avg7.map((v,i)=>{const x=p+(i/(avg7.length-1||1))*(W-p*2);const y=H-p-((v-gMin)/(gMax-gMin||1))*(H-p*2);return`${x},${y}`;}).join(' ');
+return`<div style="margin-top:8px;font-size:10px;color:var(--text3);margin-bottom:4px;">Historique 7 jours (cm)</div>
+<svg width="${W}" height="${H}" class="chart-svg"><polyline points="${pts}" fill="none" stroke="var(--green)" stroke-width="2" stroke-linejoin="round"/>${avg7.map((v,i)=>{const x=p+(i/(avg7.length-1||1))*(W-p*2);const y=H-p-((v-gMin)/(gMax-gMin||1))*(H-p*2);return`<circle cx="${x}" cy="${y}" r="3" fill="var(--green)"/><text x="${x}" y="${y-5}" text-anchor="middle" fill="var(--green)" font-size="8">${v.toFixed(0)}</text>`;}).join('')}</svg>`;
+}
+
+function checkRule(id){
+if(id==='snc')return sncToday()!==null;
+if(id==='sommeil'){const s=sleepToday();return s===null||s>=7.5;}
+return true;
+}
+
+function runAnalysis(){
+const msgs=analyzeProgression();
+if(msgs&&msgs.length){notify('🧠 '+msgs.length+' observation'+( msgs.length>1?'s':'')+' générée'+(msgs.length>1?'s':''),'success');if(S.profil.voix&&msgs.length)speak(msgs[0]);}
+else{const msg='Nadhir, trajectoire conforme au plan. Aucun écart majeur détecté. Continue !';addCoachMsg(msg);notify('✅ Trajectoire conforme','success');if(S.profil.voix)speak(msg);}
+renderCoach();
+}
+
+function renderMiniChart(data,label,color,invert=false){
+if(data.length<2)return'';
+const W=270,H=65,p=10;
+const vals=data.map(d=>d.v);
+const mn=Math.min(...vals)-2,mx=Math.max(...vals)+2;
+const pts=data.map((d,i)=>{const x=p+(i/(data.length-1))*(W-p*2);const y=invert?p+((d.v-mn)/(mx-mn||1))*(H-p*2):H-p-((d.v-mn)/(mx-mn||1))*(H-p*2);return`${x},${y}`;}).join(' ');
+const clr={'g':'var(--green)','a':'var(--amber)','b':'var(--blue)','r':'var(--red)','p':'var(--purple)'}[color]||'var(--green)';
+return`<div style="margin-bottom:14px;"><div style="font-size:10px;color:var(--text2);margin-bottom:4px;">${label}</div>
+<div class="chart-wrap"><svg width="${W}" height="${H}" class="chart-svg">
+<defs><linearGradient id="cg${color}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${clr}" stop-opacity=".2"/><stop offset="100%" stop-color="${clr}" stop-opacity="0"/></linearGradient></defs>
+<polygon points="${pts} ${p+(data.length-1)/(data.length-1)*(W-p*2)+p},${H-p} ${p},${H-p}" fill="url(#cg${color})"/>
+<polyline points="${pts}" fill="none" stroke="${clr}" stroke-width="2" stroke-linejoin="round"/>
+${data.map((d,i)=>{const x=p+(i/(data.length-1))*(W-p*2);const y=invert?p+((d.v-mn)/(mx-mn||1))*(H-p*2):H-p-((d.v-mn)/(mx-mn||1))*(H-p*2);return`<circle cx="${x}" cy="${y}" r="3" fill="${clr}"/><text x="${x}" y="${y-6}" text-anchor="middle" fill="${clr}" font-size="8">${d.v}</text>`;}).join('')}
+</svg></div></div>`;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// TAB: TESTS — avec projections log (modif 3)
+// ═══════════════════════════════════════════════════════════════
+function renderTests(){
+// MODIFICATION 3 : utilise getProjectedMacro
+const macro=getProjectedMacro(S.yr),tests=S.tests;
+const bestSprint=tests.length?Math.min(...tests.filter(t=>t.sprint100m).map(t=>t.sprint100m)):null;
+const bestDet=tests.length?Math.max(...tests.filter(t=>t.detente).map(t=>t.detente)):null;
+const bestCurl=tests.length?Math.max(...tests.filter(t=>t.curl3rm).map(t=>t.curl3rm)):null;
+const bestPreh=tests.length?Math.max(...tests.filter(t=>t.prehension).map(t=>t.prehension)):null;
+
+document.getElementById('tab-tests').innerHTML=`
+${bestSprint||bestDet||bestCurl?`<div class="card card-green" style="margin-bottom:14px;"><div class="card-title">🏆 RECORDS PERSONNELS</div>
+<div class="stats-grid">
+${bestSprint?`<div class="stat-box"><div class="stat-val">${bestSprint}s</div><div class="stat-lbl">🏁 MEILLEUR 100M</div><div class="stat-sub">Objectif : 10,00 s</div></div>`:''}
+${bestDet?`<div class="stat-box"><div class="stat-val">${bestDet}cm</div><div class="stat-lbl">⬆️ MEILLEURE DÉTENTE</div><div class="stat-sub">Objectif : 120 cm</div></div>`:''}
+${bestCurl?`<div class="stat-box"><div class="stat-val">${bestCurl}kg</div><div class="stat-lbl">💪 CURL 3RM</div><div class="stat-sub">BD force</div></div>`:''}
+${bestPreh?`<div class="stat-box"><div class="stat-val">${bestPreh}kg</div><div class="stat-lbl">✊ PRÉHENSION</div><div class="stat-sub">Objectif : >55kg</div></div>`:''}
+</div>
+</div>`:''}
+
+<div class="card"><div class="card-title">📋 TEST BIMESTRIEL</div>
+<div style="font-size:11px;color:var(--text2);margin-bottom:12px;">À effectuer chaque fin de semaine de décharge (sem. 8, 16, 24…)</div>
+${P.tests.slice(0,5).map(t=>`<div class="test-row">
+<div class="test-info"><div class="test-name">${t.emoji} ${t.nom}</div><div class="test-target">Objectif An.${S.yr}: ${t.id==='detente'?macro.dL:t.id==='sprint100m'?macro.sL:t.id==='brasDefer'?'Battre frère 120 kg':'—'}</div></div>
+<div class="test-inp-w">${t.id==='brasDefer'?`<select class="inp" id="t_${t.id}" style="padding:7px 10px;font-size:11px;"><option value="">—</option><option>Victoire</option><option>Défaite</option><option>Match nul</option></select>`:`<input class="inp" type="number" id="t_${t.id}" placeholder="${t.unite}" step="${t.id==='sprint100m'?'0.01':'1'}" min="0">`}</div>
+</div>`).join('')}
+<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">
+<div style="font-size:10px;color:var(--red);font-weight:700;letter-spacing:1px;margin-bottom:8px;">💪 MÉTRIQUES BRAS DE FER</div>
+${P.tests.slice(5).map(t=>`<div class="test-row">
+<div class="test-info"><div class="test-name">${t.emoji} ${t.nom}</div><div class="test-target">${t.id==='curl3rm'?'Objectif : progression +1,25kg/séance':t.id==='prehension'?'Objectif : >55kg avant défi':t.id==='pronationIso'?'Objectif : >30s à 80%':'—'}</div></div>
+<div class="test-inp-w"><input class="inp" type="number" id="t_${t.id}" placeholder="${t.unite}" step="${t.id==='pronationIso'?'1':'0.5'}" min="0"></div>
+</div>`).join('')}
+</div>
+<div style="margin-top:12px;display:flex;gap:8px;">
+<button class="btn btn-g btn-full" onclick="saveTest()">📊 Enregistrer test</button>
+<button class="btn btn-sm btn-o" onclick="exportCSVFromCloud()" style="white-space:nowrap;">📤 CSV</button>
+</div>
+</div>
+
+${tests.length>1?`<div class="card"><div class="card-title">📈 GRAPHIQUES PROGRESSION</div>
+${renderMiniChart(tests.filter(t=>t.sprint100m).map(t=>({v:t.sprint100m,l:dl(t.date)})),'100 m (s)','g',true)}
+${renderMiniChart(tests.filter(t=>t.detente).map(t=>({v:t.detente,l:dl(t.date)})),'Détente (cm)','a',false)}
+${renderMiniChart(tests.filter(t=>t.squat1rm).map(t=>({v:t.squat1rm,l:dl(t.date)})),'Squat 1RM (kg)','b',false)}
+${tests.some(t=>t.curl3rm)?renderMiniChart(tests.filter(t=>t.curl3rm).map(t=>({v:t.curl3rm,l:dl(t.date)})),'Curl marteau 3RM (kg)','r',false):''}
+${tests.some(t=>t.prehension)?renderMiniChart(tests.filter(t=>t.prehension).map(t=>({v:t.prehension,l:dl(t.date)})),'Force préhension (kg)','p',false):''}
+${tests.some(t=>t.pronationIso)?renderMiniChart(tests.filter(t=>t.pronationIso).map(t=>({v:t.pronationIso,l:dl(t.date)})),'Pronation iso. (s)','a',false):''}
+</div>`:''}
+
+<div class="card"><div class="card-title">📋 HISTORIQUE TESTS</div>
+${tests.length?[...tests].reverse().map(t=>`<div class="hr">
+<div><div style="font-weight:600;font-size:12px;">${dl(t.date)}</div><div style="font-size:10px;color:var(--text2);">An.${t.annee||'?'} · Sem.${t.sem||'?'}</div></div>
+<div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;">
+${t.detente?`<span class="badge ba">⬆️ ${t.detente}cm</span>`:''}
+${t.sprint100m?`<span class="badge bg">🏁 ${t.sprint100m}s</span>`:''}
+${t.squat1rm?`<span class="badge bb">🏋️ ${t.squat1rm}kg</span>`:''}
+${t.curl3rm?`<span class="badge br">💪 ${t.curl3rm}kg</span>`:''}
+${t.prehension?`<span class="badge bp">✊ ${t.prehension}kg</span>`:''}
+${t.brasDefer?`<span class="badge ${t.brasDefer==='Victoire'?'bg':'br'}">🤼 ${t.brasDefer}</span>`:''}
+<button class="btn btn-sm btn-o" style="padding:2px 6px;font-size:9px;" onclick="deleteTest('${t.date}')">✕</button>
+</div>
+</div>`).join(''):`<div class="empty"><div class="empty-ico">📊</div><div class="empty-txt">Aucun test enregistré. Effectue ton premier test bimestriel !</div></div>`}
+</div>
+
+<div class="card"><div class="card-title">CIBLES PAR ANNÉE <span style="font-size:10px;color:var(--blue);font-family:'DM Sans',sans-serif;">(proj. log.)</span></div>
+${P.macrocycles.slice(0,8).map(m=>{
+const t=tests.filter(tt=>tt.annee===m.annee);const last=t.length?t[t.length-1]:null;
+const sp=last?last.sprint100m:null,dt=last?last.detente:null;
+// MODIFICATION 3 : utilise getProjectedMacro pour les cibles
+const pm=getProjectedMacro(m.annee);
+const spOk=sp?sp<=pm.sprint:null,dtOk=dt?dt>=(pm.det||0):null;
+return`<div class="hr"><div><div style="font-size:12px;font-weight:600;">Année ${m.annee} (${m.aD} ans)</div><div style="font-size:10px;color:var(--text3);">${m.obj}</div><div style="font-size:9px;color:var(--blue);margin-top:2px;">Cible : ${pm.sL} · ${pm.dL}</div></div><div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;"><span class="badge ${spOk===null?'bb':spOk?'bg':'br'}">🏁 ${sp||'—'}</span><span class="badge ${dtOk===null?'bb':dtOk?'bg':'br'}">⬆️ ${dt||'—'}</span></div></div>`;
+}).join('')}
+</div>`;
+}
+
+function saveTest(){
+const entry={date:td(),annee:S.yr,sem:S.wk};
+P.tests.forEach(t=>{
+const el=document.getElementById('t_'+t.id);
+if(!el||el.value==='')return;
+entry[t.id]=t.id==='brasDefer'?el.value:parseFloat(el.value);
+});
+if(Object.keys(entry).length<=3){notify('⚠️ Remplis au moins un résultat','warn');return;}
+S.tests.push(entry);
+if(entry.squat1rm) S.profil.squat1RM=Math.round(entry.squat1rm);
+if(entry.tractionMax) S.profil.tractionMax=Math.round(entry.tractionMax);
+if(entry.curl3rm) S.profil.curl3RM=Math.round(entry.curl3rm);
+if(entry.prehension) S.profil.prehension=Math.round(entry.prehension);
+save();
+const msgs=analyzeProgression();
+notify('📊 Test enregistré ! Analyse IA lancée…','success');
+setTimeout(()=>{if(S.coachMsgs.length>0&&S.profil.voix)speak(S.coachMsgs[0].txt);},600);
+renderTests();
+}
+
+function deleteTest(date){openModal('Supprimer ce test ?',`<p style="color:var(--text2);margin-bottom:16px;">Cette action est irréversible.</p><div style="display:flex;gap:8px;"><button class="btn btn-o btn-full" onclick="closeModal()">Annuler</button><button class="btn btn-r btn-full" onclick="confirmDeleteTest('${date}')">Supprimer</button></div>`);}
+function confirmDeleteTest(date){S.tests=S.tests.filter(t=>t.date!==date);save();closeModal();renderTests();notify('🗑 Test supprimé','warn');}
+function exportCSV(){ exportCSVFromCloud(); }
+
+// ═══════════════════════════════════════════════════════════════
+// TAB: PROFIL
+// ═══════════════════════════════════════════════════════════════
+function renderProfil(){
+const p=S.profil;
+const totalSessions=Object.values(S.sessions).reduce((a,v)=>a+Object.keys(v).length,0);
+const totalTests=S.tests.length;
+const voixOn=p.voix;
+const daysSinceExport=S.lastExport?Math.floor((Date.now()-new Date(S.lastExport).getTime())/(1000*60*60*24)):null;
+
+document.getElementById('tab-profil').innerHTML=`
+<div class="card card-green" style="margin-bottom:14px;"><div class="card-title">📊 STATISTIQUES GLOBALES</div>
+<div class="stats-grid">
+<div class="stat-box"><div class="stat-val">${totalSessions}</div><div class="stat-lbl">SÉANCES VALIDÉES</div></div>
+<div class="stat-box"><div class="stat-val">${totalTests}</div><div class="stat-lbl">TESTS BIMESTRIELS</div></div>
+<div class="stat-box"><div class="stat-val">${S.sncData.length}</div><div class="stat-lbl">TESTS SNC</div></div>
+<div class="stat-box"><div class="stat-val">${S.yr}</div><div class="stat-lbl">ANNÉE EN COURS</div></div>
+</div>
+</div>
+
+${daysSinceExport!==null&&daysSinceExport>7?`<div class="cm cm-alert" style="margin-bottom:14px;"><p>⚠️ Dernière sauvegarde il y a <strong>${daysSinceExport} jours</strong>. Pense à exporter tes données ou à synchroniser via le cloud (☁️ en haut).</p></div>`:''}
+
+<div class="card"><div class="card-title">👤 PROFIL ATHLÈTE</div>
+<div class="inp-row">
+<div class="ig"><label class="il">Âge (ans)</label><input class="inp" type="number" id="p_age" value="${p.age}"></div>
+<div class="ig"><label class="il">Poids (kg)</label><input class="inp" type="number" id="p_poids" value="${p.poids}" step="0.1"></div>
+</div>
+<div class="inp-row">
+<div class="ig"><label class="il">Taille (cm)</label><input class="inp" type="number" id="p_taille" value="${p.taille||175}"></div>
+<div class="ig"><label class="il">% Masse grasse</label><input class="inp" type="number" id="p_bf" value="${p.BF||12}" step="0.1"></div>
+</div>
+<button class="btn btn-g btn-full" style="margin-top:4px;" onclick="saveProfil()">💾 Sauvegarder profil</button>
+</div>
+
+<div class="card"><div class="card-title">💪 1RM & PROGRESSION</div>
+<div class="inp-row">
+<div class="ig"><label class="il">Squat 1RM (kg)</label><input class="inp" type="number" id="p_sq" value="${p.squat1RM}"></div>
+<div class="ig"><label class="il">RDL 1RM (kg)</label><input class="inp" type="number" id="p_rdl" value="${p.rdl1RM||85}"></div>
+</div>
+<div class="inp-row">
+<div class="ig"><label class="il">Lest tractions base (kg)</label><input class="inp" type="number" id="p_tr" value="${p.tractionMax||0}"></div>
+<div class="ig"><label class="il">Curl marteau 3RM (kg)</label><input class="inp" type="number" id="p_curl" value="${p.curl3RM||20}"></div>
+</div>
+<div class="inp-row">
+<div class="ig"><label class="il">Préhension (kg)</label><input class="inp" type="number" id="p_preh" value="${p.prehension||40}"></div>
+<div class="ig"><label class="il">Année en cours</label><input class="inp" type="number" id="p_yr" value="${S.yr}" min="1" max="15"></div>
+</div>
+<div class="ig"><label class="il">Semaine en cours</label><input class="inp" type="number" id="p_wk" value="${S.wk}" min="1" max="52"></div>
+<div style="font-size:10px;color:var(--text3);margin-bottom:10px;">ℹ️ Tractions : sem.${meso()} = base+${meso()-1}kg = <strong style="color:var(--amber)">${(p.tractionMax||0)+(meso()-1)} kg</strong></div>
+<button class="btn btn-a btn-full" style="margin-top:4px;" onclick="saveRM()">💾 Sauvegarder 1RM & position</button>
+</div>
+
+<div class="card"><div class="card-title">⚙️ PARAMÈTRES</div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);">
+<div><div style="font-size:13px;font-weight:600;">🔊 Voix du coach</div><div style="font-size:10px;color:var(--text3);">Lecture audio des recommandations IA</div><div style="font-size:9px;color:${voixOn?'var(--green)':'var(--text4)'};margin-top:3px;font-weight:700;">${voixOn?'● ACTIVÉE':'● DÉSACTIVÉE'}</div></div>
+<div class="toggle-track ${voixOn?'on':'off'}" id="toggle-voix" onclick="toggleVoix()"><div class="toggle-knob"></div></div>
+</div>
+<div style="padding:10px 0;">
+<div style="font-size:11px;font-weight:600;color:var(--text2);margin-bottom:4px;">📐 Projection logarithmique</div>
+<div style="font-size:10px;color:var(--text3);line-height:1.6;">Cible sprint : <strong style="color:var(--green)">${P.objectifsRealistes.sprint100m_cible}s</strong> · Cible détente : <strong style="color:var(--amber)">${P.objectifsRealistes.detente_cible}cm</strong> · Durée : <strong>${P.objectifsRealistes.anneesProgression} ans</strong><br>Les objectifs annuels sont recalculés automatiquement depuis le 1er test enregistré.</div>
+</div>
+</div>
+
+<div class="card"><div class="card-title">☁️ SAUVEGARDE & CLOUD</div>
+<div style="font-size:11px;color:var(--text2);margin-bottom:10px;">${daysSinceExport!==null?`Dernière sauvegarde : il y a <strong style="color:${daysSinceExport>7?'var(--red)':'var(--green)'}">${daysSinceExport} jours</strong>`:'Aucune sauvegarde enregistrée'}</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+<button class="btn btn-b" onclick="exportDataCloud()">📤 Exporter JSON</button>
+<button class="btn btn-o" onclick="document.getElementById('imp-file').click()">📥 Importer JSON</button>
+<input type="file" id="imp-file" style="display:none" accept=".json" onchange="importData(this)">
+</div>
+<div style="font-size:10px;color:var(--text3);margin-bottom:8px;">☁️ Synchronisation cloud via JSONBin : utilise le bouton ☁️ Sync en haut de l'écran</div>
+<button class="btn btn-o" style="border-color:rgba(255,82,82,.3);color:var(--red);" onclick="confirmReset()">🗑 Réinitialiser toutes les données</button>
+</div>
+
+<div style="text-align:center;padding:20px;color:var(--text3);font-size:10px;letter-spacing:1px;">
+PROTOCOLE NADHIR v6.1 — 15 ANS<br>
+Objectif : 100m 10,00s · Détente 120cm · BD vs frère 120kg<br>
+<span style="color:var(--blue);font-size:9px;">Bloc hivernal optimisé · Stats rapides · Projection logarithmique · Dévalidation séance</span>
+</div>`;
+}
+
+function saveProfil(){
+S.profil.age=parseInt(document.getElementById('p_age').value)||S.profil.age;
+S.profil.poids=parseFloat(document.getElementById('p_poids').value)||S.profil.poids;
+S.profil.taille=parseInt(document.getElementById('p_taille').value)||S.profil.taille;
+S.profil.BF=parseFloat(document.getElementById('p_bf').value)||S.profil.BF;
+save();notify('✅ Profil sauvegardé','success');
+}
+
+function saveRM(){
+S.profil.squat1RM=parseInt(document.getElementById('p_sq').value)||S.profil.squat1RM;
+S.profil.rdl1RM=parseInt(document.getElementById('p_rdl').value)||S.profil.rdl1RM;
+S.profil.tractionMax=parseInt(document.getElementById('p_tr').value)||0;
+S.profil.curl3RM=parseFloat(document.getElementById('p_curl').value)||S.profil.curl3RM||20;
+S.profil.prehension=parseFloat(document.getElementById('p_preh').value)||S.profil.prehension||40;
+S.yr=clamp(parseInt(document.getElementById('p_yr').value)||S.yr,1,15);
+S.wk=clamp(parseInt(document.getElementById('p_wk').value)||S.wk,1,52);
+save();notify('✅ 1RM et position sauvegardés','success');
+}
+
+function toggleVoix(){
+S.profil.voix=!S.profil.voix;save();
+renderProfil();
+notify(S.profil.voix?'🔊 Voix activée':'🔇 Voix désactivée','info');
+if(S.profil.voix)speak('Voix du coach activée. Bonjour Nadhir !');
+}
+
+function importData(input){
+const file=input.files[0];if(!file)return;
+const r=new FileReader();
+r.onload=(e)=>{
+try{
+const d=JSON.parse(e.target.result);
+if(d.profil)S.profil={...S.profil,...d.profil};if(d.yr)S.yr=d.yr;if(d.wk)S.wk=d.wk;
+if(d.sncData)S.sncData=d.sncData;if(d.sessions)S.sessions=d.sessions;
+if(d.tests)S.tests=d.tests;if(d.suggestions)S.suggestions=d.suggestions;
+if(d.coachMsgs)S.coachMsgs=d.coachMsgs;
+save();updateSNCWidget();
+({vision:renderVision,plan:renderPlan,training:renderTraining,coach:renderCoach,tests:renderTests,profil:renderProfil}[curTab])();
+notify('✅ Données importées','success');
+}catch(err){notify('❌ Erreur JSON — fichier invalide','error');}
+};
+r.readAsText(file);
+}
+
+function confirmReset(){
+openModal('⚠️ RÉINITIALISER TOUTES LES DONNÉES',`<p style="color:var(--text2);margin-bottom:16px;font-size:12px;">Cette action efface TOUTES les données. Irréversible.</p><div style="display:flex;gap:8px;"><button class="btn btn-o btn-full" onclick="closeModal()">Annuler</button><button class="btn btn-r btn-full" onclick="resetAll()">🗑 Tout effacer</button></div>`);
+}
+function resetAll(){
+localStorage.clear();
+S={yr:1,wk:1,profil:{age:22,poids:65,taille:175,BF:12,squat1RM:100,rdl1RM:85,tractionMax:0,curl3RM:20,prehension:40,startDate:td(),voix:false},sncData:[],sessions:{},tests:[],suggestions:[],coachMsgs:[],lastExport:null,cloudKey:'',cloudBinId:''};
+save();closeModal();
+({vision:renderVision,plan:renderPlan,training:renderTraining,coach:renderCoach,tests:renderTests,profil:renderProfil}[curTab])();
+notify('🔄 Données réinitialisées','warn');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════
+document.addEventListener('click',e=>{
+if(!e.target.closest('#snc-popup')&&!e.target.closest('#snc-widget'))closeSNCPopup();
+if(!e.target.closest('#cloud-popup')&&!e.target.closest('#cloud-btn'))closeCloudPopup();
+});
+
+updateSNCWidget();
+checkExportBadge();
+renderVision();
+
+setTimeout(()=>{
+if(S.tests.length)analyzeProgression();
+if(!sncToday()){
+setTimeout(()=>notify('☀️ Nadhir, effectue ton test SNC matinal (haut droite) !','info'),1000);
+}
+if(S.lastExport){
+const days=Math.floor((Date.now()-new Date(S.lastExport).getTime())/(1000*60*60*24));
+if(days>7) setTimeout(()=>notify(`☁️ Dernière sauvegarde il y a ${days} jours — pense à synchroniser !`,'warn'),2500);
+}
+},400);
+</script>
+</body>
+</html>
