@@ -228,6 +228,36 @@ body::after {
   font-family:'Share Tech Mono', monospace;
 }
 
+/* HERO DIAGNOSTIC BOX */
+.hero-diagnostic {
+  margin-top:1rem;
+  max-width:500px;
+  width:100%;
+  border:1px solid rgba(255,34,68,0.45);
+  border-radius:6px;
+  background:rgba(255,34,68,0.06);
+  padding:0.7rem 0.9rem;
+  text-align:left;
+}
+
+.hero-diagnostic .diag-title {
+  font-family:'Share Tech Mono', monospace;
+  font-size:0.6rem;
+  color:#ff6688;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  margin-bottom:0.4rem;
+}
+
+.hero-diagnostic .diag-body {
+  font-size:0.72rem;
+  line-height:1.55;
+  color:var(--text);
+}
+
+.hero-diagnostic .diag-body strong { color:var(--red); }
+.hero-diagnostic .diag-body em { color:var(--g); font-style:normal; font-weight:700; }
+
 /* SCROLL CTA */
 .scroll-cta {
   position:absolute;
@@ -688,6 +718,139 @@ main {
   margin-top:0.6rem;
 }
 
+/* NOUVEAU BADGE */
+.new-badge {
+  display:inline-block;
+  background:rgba(0,255,136,0.18);
+  border:1px solid var(--g);
+  color:var(--g);
+  font-family:'Share Tech Mono', monospace;
+  font-size:0.55rem;
+  letter-spacing:0.1em;
+  padding:0.1rem 0.4rem;
+  border-radius:2px;
+  margin-left:0.3rem;
+  vertical-align:middle;
+}
+
+/* RAPPEL BADGE */
+.rappel-badge {
+  display:inline-block;
+  background:rgba(255,215,0,0.18);
+  border:1px solid var(--gold);
+  color:var(--gold);
+  font-family:'Share Tech Mono', monospace;
+  font-size:0.55rem;
+  letter-spacing:0.1em;
+  padding:0.1rem 0.4rem;
+  border-radius:2px;
+  margin-left:0.3rem;
+  vertical-align:middle;
+}
+
+/* ══════════════════════════════════
+   ROADMAP 30M — TABLEAU PROGRESSION
+══════════════════════════════════ */
+.roadmap-table {
+  width:100%;
+  border-collapse:collapse;
+  margin-bottom:1rem;
+}
+
+.roadmap-table th {
+  font-family:'Share Tech Mono', monospace;
+  font-size:0.58rem;
+  color:var(--g2);
+  letter-spacing:0.15em;
+  text-align:left;
+  padding:0.35rem 0.6rem;
+  border-bottom:1px solid var(--border);
+  background:rgba(0,255,136,0.03);
+  text-transform:uppercase;
+}
+
+.roadmap-table td {
+  font-size:0.72rem;
+  padding:0.4rem 0.6rem;
+  border-bottom:1px solid rgba(0,255,136,0.06);
+  vertical-align:middle;
+}
+
+.roadmap-table tr:last-child td { border-bottom:none; }
+
+.roadmap-table tr:hover td { background:rgba(0,255,136,0.03); }
+
+.roadmap-table .rw-week {
+  font-family:'Orbitron', monospace;
+  font-size:0.7rem;
+  font-weight:700;
+  color:var(--g);
+  white-space:nowrap;
+}
+
+.roadmap-table .rw-time {
+  font-family:'Share Tech Mono', monospace;
+  font-size:0.78rem;
+  color:#fff;
+  font-weight:700;
+}
+
+.roadmap-table .rw-delta {
+  font-family:'Share Tech Mono', monospace;
+  font-size:0.65rem;
+  color:var(--g2);
+}
+
+.roadmap-table .rw-label {
+  font-size:0.65rem;
+  color:var(--dim);
+  font-style:italic;
+}
+
+.roadmap-table tr.rw-current td { background:rgba(255,34,68,0.06); }
+.roadmap-table tr.rw-current .rw-week { color:var(--red); }
+.roadmap-table tr.rw-current .rw-time { color:var(--red); }
+
+.roadmap-table tr.rw-decharge td { background:rgba(255,215,0,0.04); }
+.roadmap-table tr.rw-decharge .rw-week { color:var(--gold); }
+
+.roadmap-table tr.rw-peak td { background:rgba(0,255,136,0.06); }
+.roadmap-table tr.rw-peak .rw-week { color:var(--g); }
+.roadmap-table tr.rw-peak .rw-time { color:var(--g); }
+
+.roadmap-projection {
+  border:1px solid var(--border2);
+  border-radius:6px;
+  background:rgba(255,215,0,0.04);
+  padding:0.9rem 1rem;
+  text-align:center;
+  margin-top:0.8rem;
+}
+
+.roadmap-projection .proj-label {
+  font-family:'Share Tech Mono', monospace;
+  font-size:0.6rem;
+  color:var(--dim);
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  margin-bottom:0.3rem;
+}
+
+.roadmap-projection .proj-value {
+  font-family:'Orbitron', monospace;
+  font-size:1.8rem;
+  font-weight:900;
+  color:var(--gold);
+}
+
+.roadmap-projection .proj-sub {
+  font-family:'Share Tech Mono', monospace;
+  font-size:0.6rem;
+  color:var(--dim);
+  letter-spacing:0.15em;
+  margin-top:0.2rem;
+}
+
 /* ══════════════════════════════════
    RÈGLES HUD PANEL
 ══════════════════════════════════ */
@@ -948,7 +1111,7 @@ footer {
   <div class="bracket bracket-br"></div>
 
   <div class="hero-content">
-    <div class="system-id">// SYSTÈME ÉLITE — CHARGEMENT PROGRAMME v2.2 + BERLIN //</div>
+    <div class="system-id">// SYSTÈME ÉLITE — CHARGEMENT PROGRAMME v2.3 HYBRIDE //</div>
     <div class="hero-name">NADHIR</div>
     <div class="hero-subtitle">L'Enfant de la Victoire</div>
     <div class="hero-divider"></div>
@@ -967,13 +1130,21 @@ footer {
       </div>
       <div class="stat-item">
         <div class="stat-label">Objectif compet.</div>
-        <div class="stat-value">64<span class="stat-unit">kg</span></div>
+        <div class="stat-value">66<span class="stat-unit">kg</span></div>
+      </div>
+    </div>
+
+    <!-- DIAGNOSTIC BLOC -->
+    <div class="hero-diagnostic">
+      <div class="diag-title">⚠ DIAGNOSTIC — POINT FAIBLE IDENTIFIÉ</div>
+      <div class="diag-body">
+        <strong>Départ 30m arrêté : 4.51s</strong> — c'est le maillon faible. La phase d'accélération (0–30m) est nettement en retard par rapport à la vitesse lancée (30–60m à ~3.09s, point fort). Le programme v2.3 adopte une <em>approche hybride modérée</em> : volume d'accélération augmenté sur les séances lundi et jeudi, sans modifier les autres séances (force, plio, bras de fer). Objectif : progresser sur le départ sans risque de blessure.
       </div>
     </div>
 
     <div class="pulse-badge">
       <span class="pulse-dot"></span>
-      COMPÉTITION — 30 JUILLET 2026
+      COMPÉTITION — 1ER AOÛT 2026
     </div>
   </div>
 
@@ -988,6 +1159,7 @@ footer {
     <button class="nav-btn active" onclick="navScrollTo('#objectifs')">Objectifs</button>
     <button class="nav-btn" onclick="navScrollTo('#analyse')">Analyse</button>
     <button class="nav-btn" onclick="navScrollTo('#programme')">Programme</button>
+    <button class="nav-btn" onclick="navScrollTo('#roadmap')">Roadmap 30m</button>
     <button class="nav-btn" onclick="navScrollTo('#regles')">Règles</button>
     <button class="nav-btn" onclick="navScrollTo('#nutrition')">Nutrition</button>
     <button class="nav-btn" onclick="navScrollTo('#macrocycle')">Macrocycle</button>
@@ -1092,7 +1264,7 @@ footer {
         Viser 64 kg (−4 kg) à 8% BF depuis 14–15% BF en 12 semaines, tout en progressant en force et vitesse = <strong>conflit métabolique réel</strong>. À −400 kcal/j, les adaptations neuromusculaires du Bloc 1 seront suboptimales.
         <div class="fix">
           <span class="fix-icon">→</span>
-          <span><strong>Correction :</strong> Blocs 1–2 à maintenance (~2500 kcal). Déficit seulement au Bloc 3 (affûtage). Pertes de force évitées.</span>
+          <span><strong>Correction :</strong> Maintenance 2700–3000 kcal jusqu'à S11. Pas de déficit avant S11. Pertes de force évitées sur les 8 premières semaines critiques.</span>
         </div>
       </div>
     </div>
@@ -1141,7 +1313,7 @@ footer {
         <span class="analysis-title-text">Structure 3 Blocs — Périodisation correcte</span>
       </div>
       <div class="analysis-body">
-        Accumulation → Transformation → Affûtage est <strong>la structure juste</strong> pour un pic le 30 juillet. Décharges semaines 4/8/12 correctes. La réduction de volume Bloc 3 tout en maintenant l'intensité respecte la science du tapering.
+        Accumulation → Transformation → Affûtage est <strong>la structure juste</strong> pour un pic le 1er août. Décharges semaines 4/8/12 correctes. La réduction de volume Bloc 3 tout en maintenant l'intensité respecte la science du tapering.
       </div>
     </div>
 
@@ -1180,17 +1352,27 @@ footer {
           <tr><th>Exercice</th><th>Bloc 1</th><th>Bloc 2</th><th>Bloc 3</th></tr>
           <tr><td>Échauffement</td><td colspan="3">Footing 10' + gammes 10' + Wall drill 5'</td></tr>
           <tr><td>Départs 4 points</td><td>4×10m résisté</td><td>3×20m résisté + 2×10m libre</td><td>4×10m libre signal</td></tr>
-          <tr><td>Sprint technique</td><td>3×30m à 95%</td><td>3×60m à 98–100%</td><td>2×80m à 100%</td></tr>
           <tr>
-            <td>★ Berlin Achille <span style="color:#88aaff;font-size:0.6rem;">[AJOUT MÉTHODE BERLIN]</span><br><span style="color:var(--dim);font-size:0.6rem;">Talon sur step, genou tendu — poussée isométrique vers le bas contre sol/mur</span></td>
+            <td>
+              Sprint technique
+              <span class="new-badge">★ NOUVEAU</span><br>
+              <span style="color:var(--g);font-size:0.6rem;font-weight:700;">Volume accru — cibler l'accélération</span>
+            </td>
+            <td><strong style="color:var(--g);">5×30m à 98–100% chronométré obligatoire — repos 5 min</strong></td>
+            <td><strong style="color:var(--g);">4×30m à 100% chrono obligatoire + 1×60m à 98%</strong></td>
+            <td><strong style="color:var(--g);">3×30m à 100% chrono obligatoire + 1×80m à 98%</strong></td>
+          </tr>
+          <tr>
+            <td>★ Berlin Achille <span style="color:#88aaff;font-size:0.6rem;">[MÉTHODE BERLIN]</span><br><span style="color:var(--dim);font-size:0.6rem;">Talon sur step, genou tendu — poussée isométrique vers le bas contre sol/mur</span></td>
             <td>5×4 reps (3s ON / 3s OFF) — repos 60s/série</td>
             <td>5×4 reps (3s ON / 3s OFF) — repos 60s/série</td>
             <td>5×3 reps (3s ON / 3s OFF) — repos 60s/série</td>
           </tr>
           <tr><td>Pliométrie basse</td><td>Pogo 3×20 + sauts joints 3×6</td><td>idem</td><td>−30% vol.</td></tr>
-          <tr><td>Volume sprint total</td><td>~210m</td><td>~250m</td><td>~180m</td></tr>
+          <tr><td>Volume sprint total</td><td>~300m</td><td>~240m</td><td>~200m</td></tr>
         </table>
-        <div class="day-note">Séance technique pure : départs, mécanique, accélération. Repos 3–4 min entre séries. Annulation si SNC &lt;85%.</div>
+        <div class="day-note"><strong style="color:var(--g);">★ NOUVEAU — Volume accru pour cibler l'accélération :</strong> 5×30m à 98–100% <em>chronométrés obligatoirement</em>, repos 5 minutes complets entre chaque répétition. Comparer les temps à la cible Roadmap 30m. Annulation si SNC &lt;85%.</div>
+        <div class="day-note">Séance technique pure : départs, mécanique, accélération. Repos 3–4 min entre séries. Le reste de la séance (départs résistés, Berlin, plio basse) reste inchangé.</div>
         <div class="day-note"><strong style="color:#88aaff;">⚡ Méthode Berlin :</strong> Face à un mur, talon posé sur bord de step (pied à 90°, genou tendu). Pousser le talon vers le bas en isométrie maximale 3s, relâcher 3s = 1 rep. Aucun mouvement visible. Durée ajoutée : ~8 min. Inséré AVANT la pliométrie pour potentialiser l'élasticité du tendon.</div>
         <div class="day-warning">⚠ Douleur Achille &gt;3/10 à l'échauffement → Berlin annulé ce jour, pliométrie maintenue à −50% volume.</div>
       </div>
@@ -1208,9 +1390,9 @@ footer {
         <table class="ex-table">
           <tr><th>Exercice</th><th>Bloc 1</th><th>Bloc 2</th><th>Bloc 3</th></tr>
           <tr><td>★ Saut max élan <span style="color:var(--gold);font-size:0.6rem;">[DÉPLACÉ ICI]</span></td><td colspan="3">4–6 sauts max 100% — noté avant tout effort</td></tr>
-          <tr><td>Squat profond</td><td>4×5 65–70 kg</td><td>4×4 72–76 kg</td><td>3×3 77–81 kg</td></tr>
+          <tr><td>Squat profond</td><td>4×5 70–75 kg</td><td>4×4 80–88 kg</td><td>3×3 90–100 kg</td></tr>
           <tr><td>Hip thrust explosif</td><td>4×6 72–76 kg</td><td>4×4 76–81 kg</td><td>3×3 79–83 kg</td></tr>
-          <tr><td>Trap Bar Deadlift</td><td>3×5 85–90 kg</td><td>3×3 90–95 kg</td><td>2×3 95 kg</td></tr>
+          <tr><td>Trap Bar Deadlift</td><td>3×5 88–95 kg</td><td>3×3 98–110 kg</td><td>2×3 108–118 kg</td></tr>
           <tr><td>★ Nordic RÉGRESSÉ <span style="color:var(--g);font-size:0.6rem;">[CORRIGÉ]</span></td><td>4×3 bande élastique (descente 5s)</td><td>4×4 amplitude 60% (3s)</td><td>3×4 amplitude pleine (2s)</td></tr>
           <tr><td>Fentes bulgares</td><td>3×6/jambe 20–25 kg</td><td>3×5/jambe 25–30 kg</td><td>2×5/jambe 30 kg</td></tr>
           <tr><td>Isométrie mollets</td><td colspan="3">Genou tendu 2×30s + genou fléchi 2×30s</td></tr>
@@ -1219,7 +1401,7 @@ footer {
       </div>
     </div>
 
-    <!-- MERCREDI — BRAS DE FER A (FORCE MAX TOP-ROLL) — NOUVELLE VERSION -->
+    <!-- MERCREDI -->
     <div class="day-card">
       <div class="day-header" onclick="toggleDay(this)">
         <span class="day-label">MER</span>
@@ -1286,10 +1468,28 @@ footer {
         <table class="ex-table">
           <tr><th>Exercice</th><th>Bloc 1</th><th>Bloc 2</th><th>Bloc 3</th></tr>
           <tr><td>Départs résistés</td><td>4×10m</td><td>3×15m</td><td>3×10m libre</td></tr>
-          <tr><td>★ Flying 20–30m <span style="color:var(--g);font-size:0.6rem;">[AJOUT CORRIGÉ]</span></td><td>3×20m volant</td><td>4×25m volant</td><td>3×30m volant (100%)</td></tr>
-          <tr><td>Sprint 60m (chrono)</td><td>2×60m 95%</td><td>2×60m 100%</td><td>2×60m 100%</td></tr>
           <tr>
-            <td>★ Berlin Achille <span style="color:#88aaff;font-size:0.6rem;">[AJOUT MÉTHODE BERLIN]</span><br><span style="color:var(--dim);font-size:0.6rem;">Même protocole que Lundi — talon step, isométrie maximale</span></td>
+            <td>
+              ★ Flying 20m
+              <span class="new-badge">★ NOUVEAU</span><br>
+              <span style="color:var(--g);font-size:0.6rem;">Volume flying accru</span>
+            </td>
+            <td><strong style="color:var(--g);">4×20m volant (élan 30m)</strong></td>
+            <td>4×25m volant</td>
+            <td>3×30m volant (100%)</td>
+          </tr>
+          <tr>
+            <td>
+              Sprint 60m
+              <span class="new-badge">★ NOUVEAU</span><br>
+              <span style="color:var(--g);font-size:0.6rem;">Volume réduit — qualité maximale</span>
+            </td>
+            <td><strong style="color:var(--g);">2×60m à 95–98%, repos 6–8 min</strong></td>
+            <td><strong style="color:var(--g);">2×60m à 95–98%, repos 6–8 min</strong></td>
+            <td><strong style="color:var(--g);">2×60m à 98–100%, repos 6–8 min</strong></td>
+          </tr>
+          <tr>
+            <td>★ Berlin Achille <span style="color:#88aaff;font-size:0.6rem;">[MÉTHODE BERLIN]</span><br><span style="color:var(--dim);font-size:0.6rem;">Même protocole que Lundi — talon step, isométrie maximale</span></td>
             <td>5×4 reps (3s ON / 3s OFF) — repos 60s/série</td>
             <td>5×4 reps (3s ON / 3s OFF) — repos 60s/série</td>
             <td>5×3 reps (3s ON / 3s OFF) — repos 60s/série</td>
@@ -1297,8 +1497,10 @@ footer {
           <tr><td>Bonds horizontaux (5B)</td><td>3 séries</td><td>4 séries</td><td>3 séries qualité</td></tr>
           <tr><td>Hops unipodaux bas</td><td colspan="3">2×15/jambe, cheville verrouillée</td></tr>
           <tr><td>Drill cadence <span style="color:var(--g);font-size:0.6rem;">[AJOUT]</span></td><td colspan="3">Mini-haies 2×20m ou fréquence drill 3×10s</td></tr>
+          <tr><td>Volume sprint total</td><td>~250m</td><td>~240m</td><td>~200m</td></tr>
         </table>
-        <div class="day-note">Flying = élan de 30m puis sprint mesuré sur 20–30m. Cible la vitesse de pointe, pas l'accélération.</div>
+        <div class="day-note"><strong style="color:var(--g);">Volume réduit sur 60m — qualité prioritaire :</strong> 2×60m au lieu de 3, repos 6–8 min. Volume jeudi B1 ~250m. Le flying (4×20m volant) reste inchangé pour cibler la vitesse de pointe.</div>
+        <div class="day-note">Flying = élan de 30m puis sprint mesuré sur 20m. Cible la vitesse de pointe, pas l'accélération. Le reste de la séance (départs résistés, Berlin, bonds, drills) reste inchangé.</div>
         <div class="day-note"><strong style="color:#88aaff;">⚡ Méthode Berlin (2ème session) :</strong> Placé après les sprints, avant les bonds — tendon chaud mais pas épuisé. C'est l'ordre optimal : stimulus tendineux isométrique → transfert immédiat en élasticité sur les bonds horizontaux. Durée ajoutée : ~8 min.</div>
         <div class="day-warning">⚠ Douleur Achille &gt;3/10 → Berlin annulé. Ne jamais cumuler Berlin + intensité pliométrique élevée le même jour si douleur présente.</div>
       </div>
@@ -1319,14 +1521,21 @@ footer {
           <tr><td>Trap Bar Jumps</td><td>5×3 30–35 kg</td><td>5×2 35–40 kg</td><td>4×2 35–40 kg</td></tr>
           <tr><td>Squat sauté</td><td>3×5 20 kg</td><td>4×4 25 kg</td><td>3×4 20 kg</td></tr>
           <tr><td>Pompes claquées</td><td>3×6</td><td>3×8</td><td>3×6</td></tr>
+          <tr>
+            <td>★ Rappel Squat léger <span class="rappel-badge">[RAPPEL]</span><br><span style="color:var(--dim);font-size:0.6rem;">Volume additionnel — charge modérée, pas d'échec — repos 2–3 min</span></td>
+            <td>3×5 65–70 kg</td>
+            <td>3×5 70–80 kg</td>
+            <td>2×5 75–85 kg</td>
+          </tr>
           <tr><td>Isométrie mollets</td><td colspan="3">Genou tendu 2×30s + genou fléchi 2×30s</td></tr>
         </table>
         <div class="day-note">Drop jumps : temps de contact cible &lt;0,2s. Si &gt;0,25s sur 3 séries de suite → stop, fatigue réelle. Repos 4–5 min entre séries de choc.</div>
         <div class="day-warning">⚠ Vendredi = pliométrie pure, pas de sprint. Ne pas ajouter de sprint ce jour-là : cumul choc + vitesse = risque ischios élevé.</div>
+        <div class="day-note"><strong>Rappel squat du vendredi :</strong> Séance légère, loin de l'échec. Objectif = volume additionnel pour renforcer le pattern moteur et stimuler la force sans impacter la récupération. Si fatigue élevée, réduire à 2×5.</div>
       </div>
     </div>
 
-    <!-- SAMEDI — BRAS DE FER B (ENDURANCE / TENDONS) — NOUVELLE VERSION -->
+    <!-- SAMEDI -->
     <div class="day-card">
       <div class="day-header" onclick="toggleDay(this)">
         <span class="day-label">SAM</span>
@@ -1375,7 +1584,7 @@ footer {
       </div>
     </div>
 
-    <!-- DIMANCHE — BRAS DE FER C (TECHNIQUE LÉGÈRE & MOBILITÉ) — NOUVELLE SÉANCE -->
+    <!-- DIMANCHE -->
     <div class="day-card">
       <div class="day-header" onclick="toggleDay(this)">
         <span class="day-label">DIM</span>
@@ -1425,10 +1634,96 @@ footer {
   </div>
 </div>
 
+<!-- ROADMAP 30M -->
+<div class="section" id="roadmap">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <span class="section-icon">📊</span>
+    <span class="section-title">Roadmap 30m — Cibles Semaine par Semaine</span>
+  </div>
+
+  <div class="day-note" style="margin-bottom:1rem;">
+    <strong style="color:var(--red);">Point faible prioritaire : 30m départ arrêté actuellement à 4.51s.</strong> Ce tableau de bord fixe les cibles chronométrées semaine par semaine. Chaque lundi (5×30m), noter le meilleur temps et comparer.
+  </div>
+
+  <table class="roadmap-table">
+    <tr>
+      <th>Semaine</th>
+      <th>Cible 30m</th>
+      <th>Delta</th>
+      <th>Statut</th>
+    </tr>
+    <tr class="rw-current">
+      <td class="rw-week">S4 — Actuel</td>
+      <td class="rw-time">4.51s</td>
+      <td class="rw-delta">—</td>
+      <td class="rw-label">📍 Semaine en cours</td>
+    </tr>
+    <tr>
+      <td class="rw-week">S5</td>
+      <td class="rw-time">4.45s</td>
+      <td class="rw-delta">−0.06s</td>
+      <td class="rw-label">Accélération B1</td>
+    </tr>
+    <tr>
+      <td class="rw-week">S6</td>
+      <td class="rw-time">4.40s</td>
+      <td class="rw-delta">−0.05s</td>
+      <td class="rw-label">Accélération B1</td>
+    </tr>
+    <tr>
+      <td class="rw-week">S7</td>
+      <td class="rw-time">4.35s</td>
+      <td class="rw-delta">−0.05s</td>
+      <td class="rw-label">Transition B2</td>
+    </tr>
+    <tr class="rw-decharge">
+      <td class="rw-week">S8 — Décharge</td>
+      <td class="rw-time">4.33s</td>
+      <td class="rw-delta">−0.02s</td>
+      <td class="rw-label">⚡ Semaine allégée — supercompensation</td>
+    </tr>
+    <tr>
+      <td class="rw-week">S9</td>
+      <td class="rw-time">4.30s</td>
+      <td class="rw-delta">−0.03s</td>
+      <td class="rw-label">Transformation B2</td>
+    </tr>
+    <tr>
+      <td class="rw-week">S10</td>
+      <td class="rw-time">4.28s</td>
+      <td class="rw-delta">−0.02s</td>
+      <td class="rw-label">Transformation B2</td>
+    </tr>
+    <tr>
+      <td class="rw-week">S11 — Pic</td>
+      <td class="rw-time">4.25s</td>
+      <td class="rw-delta">−0.03s</td>
+      <td class="rw-label">🔥 Pic intensité — test chronométré</td>
+    </tr>
+    <tr class="rw-peak">
+      <td class="rw-week">S12 — Compét.</td>
+      <td class="rw-time">4.22–4.25s</td>
+      <td class="rw-delta">−0.26–0.29s</td>
+      <td class="rw-label">🏆 1er août 2026 — Compétition</td>
+    </tr>
+  </table>
+
+  <div class="roadmap-projection">
+    <div class="proj-label">Projection 100m finale — 1er août 2026</div>
+    <div class="proj-value">12.1–12.2s</div>
+    <div class="proj-sub">AMÉLIORATION NETTE DE 0.4–0.5S — SANS BLESSURE — APPROCHE HYBRIDE MODÉRÉE</div>
+  </div>
+
+  <div class="day-note" style="margin-top:0.8rem;">
+    <strong>Règle de lecture :</strong> Si le chrono du lundi (5×30m) est en avance sur la cible de la semaine → progression confirmée, maintenir le volume. Si retard &gt;0.10s sur 2 semaines consécutives → revoir la récupération ou le volume d'accélération.
+  </div>
+</div>
+
 <!-- RÈGLES -->
 <div class="section" id="regles">
   <div class="section-header">
-    <span class="section-num">04</span>
+    <span class="section-num">05</span>
     <span class="section-icon">🧠</span>
     <span class="section-title">Règles d'Auto-Régulation</span>
   </div>
@@ -1436,28 +1731,30 @@ footer {
   <div class="rules-grid">
     <div class="rule-card" style="--delay:0s">
       <div class="rule-icon">🛌</div>
-      <div class="rule-title">Protocole SNC</div>
-      <div class="rule-body">3 sauts verticaux au réveil + durée sommeil. Si moyenne 7j &lt;85% ou nuit &lt;7h30 → séance haute intensité annulée sans exception.</div>
+      <div class="rule-title">Protocole SNC Quotidien</div>
+      <div class="rule-body">3 sauts verticaux au réveil + durée sommeil. Si moyenne 7j &lt;85% ou nuit &lt;7h30 → séance haute intensité annulée sans exception. Test obligatoire avant chaque séance sprint.</div>
     </div>
     <div class="rule-card" style="--delay:0.5s">
       <div class="rule-icon">📉</div>
-      <div class="rule-title">Règle 3–5%</div>
-      <div class="rule-body">Chute de vitesse ou hauteur de saut &gt;3–5% sur 3 répétitions consécutives → arrêt immédiat de la série. Qualité &gt; quantité toujours.</div>
+      <div class="rule-title">Règle des 5%</div>
+      <div class="rule-body">Chute de vitesse ou hauteur de saut &gt;5% sur 3 répétitions consécutives → arrêt immédiat de la série. S'applique aussi aux chronos 30m : si &gt;5% au-dessus de la cible → arrêt sprint.</div>
     </div>
     <div class="rule-card" style="--delay:1s">
       <div class="rule-icon">⏱</div>
       <div class="rule-title">Repos Strict</div>
-      <div class="rule-body">Sprints Vmax : 6–10 min. Force lourde : 3–4 min. Pliométrie de choc : 4–5 min. Jamais de sprint sur fatigue résiduelle.</div>
+      <div class="rule-body">Sprints 30m / Vmax : 5–8 min. Sprints 60m : 6–8 min. Force lourde : 3–4 min. Pliométrie de choc : 4–5 min. Jamais de sprint sur fatigue résiduelle.</div>
     </div>
     <div class="rule-card" style="--delay:1.5s">
       <div class="rule-icon">🦵</div>
       <div class="rule-title">Tendon Radar</div>
-      <div class="rule-body">Douleur coude, achille ou rotule &gt;3/10 pendant l'échauffement → modification immédiate. LCL gauche : pas de course en virage S1–S4.</div>
+      <div class="rule-body">Douleur coude, achille ou rotule &gt;3/10 pendant l'échauffement → modification immédiate. LCL gauche : pas de course en virage S1–S4. Alerte tendon prioritaire sur tout planning.</div>
     </div>
     <div class="rule-card" style="--delay:2s; grid-column:1/-1;">
       <div class="rule-icon">🔒</div>
-      <div class="rule-title">Règle Coude Sacré</div>
-      <div class="rule-body">Jamais tractions lestées + bras de fer le même jour. Samedi bras de fer supprimé aux semaines 3, 7, 11. Montée de charge bras de fer plafonnée à +1,25–2,5 kg par 2 semaines max.</div>
+      <div class="rule-title">Règle Coude Sacré & Bras de Fer</div>
+      <div class="rule-body">
+        <strong>Maximum 2 séances bras de fer par semaine</strong> (mercredi + samedi). Arrêt immédiat si coude sensible &gt;3/10. Jamais tractions lestées + bras de fer le même jour. Samedi bras de fer supprimé aux semaines 3, 7, 11. Montée de charge bras de fer plafonnée à +1,25–2,5 kg par 2 semaines max. La séance du dimanche (BF C) est symbolique et ne compte pas comme séance structurelle.
+      </div>
     </div>
   </div>
 </div>
@@ -1465,14 +1762,14 @@ footer {
 <!-- NUTRITION -->
 <div class="section" id="nutrition">
   <div class="section-header">
-    <span class="section-num">05</span>
+    <span class="section-num">06</span>
     <span class="section-icon">🍽</span>
     <span class="section-title">Nutrition — Stratégie Corrigée</span>
   </div>
 
   <div class="kcal-display" style="margin-bottom:1rem;">
-    <div class="kcal-num">2 500</div>
-    <div class="kcal-unit">KCAL / JOUR — BLOCS 1 & 2 (MAINTENANCE)</div>
+    <div class="kcal-num">2 700–3 000</div>
+    <div class="kcal-unit">KCAL / JOUR — MAINTENANCE (JOURS D'ENTRAÎNEMENT)</div>
   </div>
 
   <div class="macro-bars">
@@ -1483,38 +1780,41 @@ footer {
     </div>
     <div class="macro-row">
       <div class="macro-label">GLUCIDES</div>
-      <div class="macro-bar-wrap"><div class="macro-bar-fill carb" style="width:65%"></div></div>
-      <div class="macro-val">260–280g</div>
+      <div class="macro-bar-wrap"><div class="macro-bar-fill carb" style="width:82%"></div></div>
+      <div class="macro-val">350–400g</div>
     </div>
     <div class="macro-row">
       <div class="macro-label">LIPIDES</div>
-      <div class="macro-bar-wrap"><div class="macro-bar-fill fat" style="width:40%"></div></div>
-      <div class="macro-val">55–65g</div>
+      <div class="macro-bar-wrap"><div class="macro-bar-fill fat" style="width:42%"></div></div>
+      <div class="macro-val">60–70g</div>
     </div>
   </div>
 
   <div style="margin-top:1.2rem; display:grid; gap:0.5rem;">
     <div class="day-note">
-      <strong style="color:var(--gold);">★ Stratégie corrigée :</strong> Blocs 1 et 2 à maintenance (2500 kcal). Déficit −300 kcal uniquement en Bloc 3 (affûtage). Les gains de force et de vitesse sont préservés sur les 8 premières semaines critiques.
+      <strong style="color:var(--gold);">★ Stratégie corrigée :</strong> Maintenance 2700–3000 kcal sur les jours d'entraînement. Glucides montés à 350–400g les jours d'entraînement pour soutenir le volume sprint accru. <strong style="color:var(--red);">Pas de déficit avant S11.</strong> Les gains de force et de vitesse sont intégralement préservés sur les 10 premières semaines.
     </div>
     <div class="day-note">
       <strong>Sources :</strong> Patates douces / pommes de terre (glucides), poulet / colin / œufs / whey (protéines), huile d'olive crue + œufs (lipides). Bsissa 1× semaine.
     </div>
     <div class="day-note">
-      <strong>Marche inclinée :</strong> 25–30 min/jour = ~200 kcal additionnelles brûlées. Permet 2700 kcal effectives à maintenance pendant les blocs de force.
+      <strong>Marche inclinée :</strong> 25–30 min/jour = ~200 kcal additionnelles brûlées. Permet d'atteindre 2700–3000 kcal effectives à maintenance pendant les blocs de force sans surplus.
+    </div>
+    <div class="day-note">
+      <strong>Jours de repos :</strong> Réduire glucides à 250–280g. Maintenir protéines et lipides identiques.
     </div>
   </div>
 
   <div class="kcal-display" style="margin-top:1rem; border-color:rgba(255,34,68,0.3); background:rgba(255,34,68,0.04);">
-    <div class="kcal-num" style="color:var(--red); font-size:1.5rem;">2 200</div>
-    <div class="kcal-unit" style="color:#ff8899;">KCAL / JOUR — BLOC 3 SEULEMENT (AFFÛTAGE)</div>
+    <div class="kcal-num" style="color:var(--red); font-size:1.5rem;">2 300–2 400</div>
+    <div class="kcal-unit" style="color:#ff8899;">KCAL / JOUR — BLOC 3 SEULEMENT, À PARTIR DE S11 (AFFÛTAGE)</div>
   </div>
 </div>
 
 <!-- MACROCYCLE -->
 <div class="section" id="macrocycle">
   <div class="section-header">
-    <span class="section-num">06</span>
+    <span class="section-num">07</span>
     <span class="section-icon">📈</span>
     <span class="section-title">Macrocycle 2026–2031</span>
   </div>
@@ -1523,9 +1823,10 @@ footer {
 
     <div class="timeline-item">
       <div class="timeline-dot"></div>
-      <div class="timeline-year">2026 — Fondations</div>
+      <div class="timeline-year">2026 — Fondations (1er août 2026)</div>
       <div class="timeline-stats">
         <span class="t-stat">100m → 12.0–12.2s</span>
+        <span class="t-stat">30m → 4.22–4.25s</span>
         <span class="t-stat">Détente → 85–90cm</span>
         <span class="t-stat">Top-roll efficace</span>
       </div>
@@ -1584,8 +1885,8 @@ footer {
 </main>
 
 <footer>
-  <div class="footer-logo">// NADHIR ELITE SYSTEM — PROGRAMME v2.2 + MÉTHODE BERLIN //</div>
-  <div class="footer-date">GÉNÉRÉ LE 21 MAI 2026 — COMPÉTITION 30 JUILLET 2026</div>
+  <div class="footer-logo">// NADHIR ELITE SYSTEM — PROGRAMME v2.3 + MÉTHODE BERLIN + HYBRIDE ACCÉLÉRATION //</div>
+  <div class="footer-date">MIS À JOUR 29 MAI 2026 — COMPÉTITION 1ER AOÛT 2026</div>
   <div class="pulse-badge" id="countdownBadge" style="margin-top:1rem;">
     <span class="pulse-dot"></span>
     <span id="countdownText">SYSTÈME ACTIF</span>
@@ -1599,7 +1900,7 @@ function toggleDay(header) {
   card.classList.toggle('open');
 }
 
-// Scroll to section (renamed to avoid conflict with window.scrollTo)
+// Scroll to section
 function navScrollTo(id) {
   const el = document.querySelector(id);
   if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
@@ -1613,7 +1914,7 @@ window.addEventListener('scroll', () => {
 });
 
 // Intersection observer for section reveals + nav highlight
-const sectionIds = ['objectifs','analyse','programme','regles','nutrition','macrocycle'];
+const sectionIds = ['objectifs','analyse','programme','roadmap','regles','nutrition','macrocycle'];
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -1642,12 +1943,14 @@ const macroObs = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.macro-bars').forEach(el => macroObs.observe(el));
 
-// Countdown — update all badges
+// Countdown — cible le 1er août 2026
 function updateCountdown() {
-  const comp = new Date('2026-07-30T00:00:00');
+  const comp = new Date('2026-08-01T00:00:00');
   const now = new Date();
   const days = Math.ceil((comp - now) / (1000 * 60 * 60 * 24));
-  const txt = days > 0 ? `SYSTÈME ACTIF — ${days} JOURS AVANT COMPÉTITION` : 'COMPÉTITION AUJOURD\'HUI — GO !';
+  const txt = days > 0
+    ? `SYSTÈME ACTIF — ${days} JOURS AVANT COMPÉTITION`
+    : "COMPÉTITION AUJOURD'HUI — GO !";
   // Hero badge
   const heroBadge = document.querySelector('.hero .pulse-badge');
   if (heroBadge) heroBadge.innerHTML = `<span class="pulse-dot"></span> ${txt}`;
