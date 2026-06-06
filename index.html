@@ -749,6 +749,134 @@ main {
 }
 
 /* ══════════════════════════════════
+   GTG — GREASE THE GROOVE BLOCKS
+══════════════════════════════════ */
+.gtg-block {
+  margin-top:0.6rem;
+  border:1px solid rgba(0,200,255,0.25);
+  border-radius:6px;
+  overflow:hidden;
+  background:rgba(0,180,255,0.03);
+}
+.gtg-block.gtg-bdf {
+  border-color:rgba(255,140,0,0.3);
+  background:rgba(255,140,0,0.03);
+}
+.gtg-header {
+  display:flex;
+  align-items:center;
+  gap:0.5rem;
+  padding:0.4rem 0.7rem;
+  background:rgba(0,180,255,0.07);
+  border-bottom:1px solid rgba(0,180,255,0.15);
+}
+.gtg-block.gtg-bdf .gtg-header {
+  background:rgba(255,140,0,0.07);
+  border-bottom-color:rgba(255,140,0,0.15);
+}
+.gtg-badge {
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.55rem;
+  font-weight:700;
+  padding:0.12rem 0.45rem;
+  border-radius:2px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  border:1px solid transparent;
+}
+.gtg-bs-badge {
+  background:rgba(0,200,255,0.2);
+  color:#00ddff;
+  border-color:rgba(0,200,255,0.4);
+}
+.gtg-bdf-badge {
+  background:rgba(255,140,0,0.2);
+  color:#ffaa44;
+  border-color:rgba(255,140,0,0.35);
+}
+.gtg-optional-badge {
+  background:rgba(120,120,120,0.2);
+  color:#999;
+  border:1px solid rgba(120,120,120,0.35);
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.5rem;
+  padding:0.1rem 0.4rem;
+  border-radius:2px;
+  letter-spacing:0.1em;
+  display:inline-block;
+  vertical-align:middle;
+  margin-left:0.3rem;
+}
+.gtg-title {
+  font-family:'Orbitron',monospace;
+  font-size:0.65rem;
+  font-weight:700;
+  color:#00ddff;
+  letter-spacing:0.1em;
+  flex:1;
+}
+.gtg-block.gtg-bdf .gtg-title { color:#ffaa44; }
+.gtg-body {
+  padding:0.55rem 0.7rem;
+  font-size:0.7rem;
+  line-height:1.6;
+  color:var(--text);
+}
+.gtg-body ul {
+  list-style:none;
+  padding:0;
+  margin:0.3rem 0 0;
+  display:grid;
+  gap:0.25rem;
+}
+.gtg-body ul li {
+  padding-left:1.1rem;
+  position:relative;
+}
+.gtg-body ul li::before {
+  content:'▸';
+  position:absolute;
+  left:0;
+  color:#00ddff;
+}
+.gtg-block.gtg-bdf .gtg-body ul li::before { color:#ffaa44; }
+.gtg-cond {
+  display:flex;
+  align-items:flex-start;
+  gap:0.4rem;
+  margin-top:0.45rem;
+  padding:0.35rem 0.55rem;
+  background:rgba(255,34,68,0.05);
+  border-left:2px solid rgba(255,34,68,0.5);
+  border-radius:0 3px 3px 0;
+  font-size:0.65rem;
+  color:#ffaaaa;
+  font-family:'Share Tech Mono',monospace;
+  letter-spacing:0.03em;
+  line-height:1.45;
+}
+.gtg-rule {
+  display:flex;
+  align-items:flex-start;
+  gap:0.4rem;
+  margin-top:0.4rem;
+  padding:0.35rem 0.55rem;
+  background:rgba(0,200,255,0.04);
+  border-left:2px solid rgba(0,200,255,0.3);
+  border-radius:0 3px 3px 0;
+  font-size:0.65rem;
+  color:#99ddff;
+  font-family:'Share Tech Mono',monospace;
+  letter-spacing:0.03em;
+  line-height:1.45;
+}
+.gtg-block.gtg-bdf .gtg-rule {
+  background:rgba(255,140,0,0.04);
+  border-left-color:rgba(255,140,0,0.3);
+  color:#ffcc88;
+}
+
+/* ══════════════════════════════════
    ROADMAP 30M — TABLEAU PROGRESSION
 ══════════════════════════════════ */
 .roadmap-table {
@@ -1111,7 +1239,7 @@ footer {
   <div class="bracket bracket-br"></div>
 
   <div class="hero-content">
-    <div class="system-id">// SYSTÈME ÉLITE — CHARGEMENT PROGRAMME v2.3 HYBRIDE //</div>
+    <div class="system-id">// SYSTÈME ÉLITE — CHARGEMENT PROGRAMME v2.4 HYBRIDE + GTG //</div>
     <div class="hero-name">NADHIR</div>
     <div class="hero-subtitle">L'Enfant de la Victoire</div>
     <div class="hero-divider"></div>
@@ -1138,7 +1266,7 @@ footer {
     <div class="hero-diagnostic">
       <div class="diag-title">⚠ DIAGNOSTIC — POINT FAIBLE IDENTIFIÉ</div>
       <div class="diag-body">
-        <strong>Départ 30m arrêté : 4.51s</strong> — c'est le maillon faible. La phase d'accélération (0–30m) est nettement en retard par rapport à la vitesse lancée (30–60m à ~3.09s, point fort). Le programme v2.3 adopte une <em>approche hybride modérée</em> : volume d'accélération augmenté sur les séances lundi et jeudi, sans modifier les autres séances (force, plio, bras de fer). Objectif : progresser sur le départ sans risque de blessure.
+        <strong>Départ 30m arrêté : 4.51s</strong> — c'est le maillon faible. La phase d'accélération (0–30m) est nettement en retard par rapport à la vitesse lancée (30–60m à ~3.09s, point fort). Le programme v2.4 adopte une <em>approche hybride modérée</em> : volume d'accélération augmenté sur les séances lundi et jeudi, plus deux protocoles GTG (Grease The Groove) pour le départ et le bras de fer. Objectif : progresser sur le départ sans risque de blessure.
       </div>
     </div>
 
@@ -1337,9 +1465,19 @@ footer {
     </div>
   </div>
 
+  <!-- GTG LEGEND -->
+  <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;padding:0.6rem 0.8rem;background:rgba(0,0,0,0.25);border-radius:6px;border:1px solid rgba(255,255,255,0.06);">
+    <span style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:var(--dim);letter-spacing:0.1em;align-self:center;">GTG :</span>
+    <span class="gtg-badge gtg-bs-badge">◈ BLOCK START</span>
+    <span style="font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:var(--dim);">Départ 10m technique, 85–90%, 5–7 min</span>
+    &nbsp;·&nbsp;
+    <span class="gtg-badge gtg-bdf-badge">◈ BRAS DE FER</span>
+    <span style="font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:var(--dim);">Riser isométrique + Pronation légère, &lt;10 min</span>
+  </div>
+
   <div class="days-grid">
 
-    <!-- LUNDI -->
+    <!-- ════ LUNDI ════ -->
     <div class="day-card open">
       <div class="day-header" onclick="toggleDay(this)">
         <span class="day-label">LUN</span>
@@ -1375,10 +1513,29 @@ footer {
         <div class="day-note">Séance technique pure : départs, mécanique, accélération. Repos 3–4 min entre séries. Le reste de la séance (départs résistés, Berlin, plio basse) reste inchangé.</div>
         <div class="day-note"><strong style="color:#88aaff;">⚡ Méthode Berlin :</strong> Face à un mur, talon posé sur bord de step (pied à 90°, genou tendu). Pousser le talon vers le bas en isométrie maximale 3s, relâcher 3s = 1 rep. Aucun mouvement visible. Durée ajoutée : ~8 min. Inséré AVANT la pliométrie pour potentialiser l'élasticité du tendon.</div>
         <div class="day-warning">⚠ Douleur Achille &gt;3/10 à l'échauffement → Berlin annulé ce jour, pliométrie maintenue à −50% volume.</div>
+
+        <!-- GTG BDF — LUNDI -->
+        <div class="gtg-block gtg-bdf">
+          <div class="gtg-header">
+            <span class="gtg-badge gtg-bdf-badge">◈ GTG</span>
+            <span class="gtg-title">GTG Bras de Fer — Lundi</span>
+            <span style="font-family:'Share Tech Mono',monospace;font-size:0.55rem;color:#888;letter-spacing:0.1em;">EN DEHORS DE LA SÉANCE</span>
+          </div>
+          <div class="gtg-body">
+            À effectuer le matin ou en dehors de la séance principale — jamais cumulé avec les sprints.
+            <ul>
+              <li><strong style="color:#ffcc88;">Riser isométrique :</strong> 2–3 séries × 15–20 s — bande élastique fine, main en pronation, élévation radiale (pouce vers le plafond). Effort modéré, pas de brûlure.</li>
+              <li><strong style="color:#ffcc88;">Pronation lente :</strong> 2 séries × 10–12 reps — bande élastique fine, rotation de l'avant-bras (paume vers le bas), contrôle total.</li>
+            </ul>
+            <div class="gtg-rule">⏱ Durée totale : 5–8 min · Repos entre séries : 60 s · Jamais après grip intense</div>
+            <div class="gtg-cond">⚠ Coude droit &gt;3/10 → GTG annulé · Pas d'échec musculaire · Volume très bas</div>
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <!-- MARDI -->
+    <!-- ════ MARDI ════ -->
     <div class="day-card">
       <div class="day-header" onclick="toggleDay(this)">
         <span class="day-label">MAR</span>
@@ -1398,10 +1555,47 @@ footer {
           <tr><td>Isométrie mollets</td><td colspan="3">Genou tendu 2×30s + genou fléchi 2×30s</td></tr>
         </table>
         <div class="day-note">Saut max EN PREMIER — jambes fraîches = données réelles. Repos 3–4 min entre séries de force.</div>
+
+        <!-- GTG BLOCK START — MARDI -->
+        <div class="gtg-block">
+          <div class="gtg-header">
+            <span class="gtg-badge gtg-bs-badge">◈ GTG</span>
+            <span class="gtg-title">GTG Block Start — Mardi</span>
+            <span style="font-family:'Share Tech Mono',monospace;font-size:0.55rem;color:#888;letter-spacing:0.1em;">AVANT LA SÉANCE</span>
+          </div>
+          <div class="gtg-body">
+            À faire le matin ou en tout début d'échauffement, <strong>avant le saut max et la séance de force</strong>.
+            <ul>
+              <li><strong style="color:#99ddff;">2–3 départs 10m en 4 points</strong> à 85–90% — focus technique pure (posture, poussée, bras). Jamais chronométré.</li>
+              <li>Récupération complète entre chaque départ (60–90 s). Aucune sensation de fatigue musculaire.</li>
+            </ul>
+            <div class="gtg-rule">⏱ Durée : 5–7 min · Ce n'est pas une séance de vitesse — c'est du câblage moteur</div>
+            <div class="gtg-cond">⚠ SNC &lt;85% ou sommeil &lt;7h30 → GTG Block Start annulé · Douleur ou perte de coordination → arrêt immédiat</div>
+          </div>
+        </div>
+
+        <!-- GTG BDF — MARDI -->
+        <div class="gtg-block gtg-bdf">
+          <div class="gtg-header">
+            <span class="gtg-badge gtg-bdf-badge">◈ GTG</span>
+            <span class="gtg-title">GTG Bras de Fer — Mardi</span>
+            <span style="font-family:'Share Tech Mono',monospace;font-size:0.55rem;color:#888;letter-spacing:0.1em;">EN DEHORS DE LA SÉANCE</span>
+          </div>
+          <div class="gtg-body">
+            Identique au lundi — matin ou en dehors de la séance force. Pas de cumul séance force + GTG BDF dans la même session.
+            <ul>
+              <li><strong style="color:#ffcc88;">Riser isométrique :</strong> 2–3 séries × 15–20 s — bande élastique fine, main en pronation.</li>
+              <li><strong style="color:#ffcc88;">Pronation lente :</strong> 2 séries × 10–12 reps — bande élastique fine, amplitude contrôlée.</li>
+            </ul>
+            <div class="gtg-rule">⏱ Durée totale : 5–8 min · Volume très bas · Jamais à l'échec</div>
+            <div class="gtg-cond">⚠ Coude droit &gt;3/10 → GTG annulé · Pas le jour du lendemain de pliométrie de choc</div>
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <!-- MERCREDI -->
+    <!-- ════ MERCREDI ════ -->
     <div class="day-card">
       <div class="day-header" onclick="toggleDay(this)">
         <span class="day-label">MER</span>
@@ -1453,10 +1647,13 @@ footer {
           <strong>Durée :</strong> 30–40 min. Volume bas = 2 séries/exercice. Stop 1–2 reps avant l'échec (RPE 8–9). Progression : +1,25–2,5 kg quand 10 reps propres atteintes.
         </div>
         <div class="day-warning">⚠ Gêne coude droit &gt;3/10 → stop immédiat, récupération 48h. Jamais à l'échec sur bras de fer.</div>
+        <div class="day-note" style="border-left-color:rgba(120,120,120,0.5);background:rgba(80,80,80,0.08);">
+          <strong style="color:#888;">— Pas de GTG ce jour —</strong> Mercredi = séance bras de fer intense (BDF A). Les deux protocoles GTG (Block Start et BDF) sont suspendus pour préserver la récupération neuromusculaire du coude et des avant-bras.
+        </div>
       </div>
     </div>
 
-    <!-- JEUDI -->
+    <!-- ════ JEUDI ════ -->
     <div class="day-card">
       <div class="day-header" onclick="toggleDay(this)">
         <span class="day-label">JEU</span>
@@ -1503,10 +1700,47 @@ footer {
         <div class="day-note">Flying = élan de 30m puis sprint mesuré sur 20m. Cible la vitesse de pointe, pas l'accélération. Le reste de la séance (départs résistés, Berlin, bonds, drills) reste inchangé.</div>
         <div class="day-note"><strong style="color:#88aaff;">⚡ Méthode Berlin (2ème session) :</strong> Placé après les sprints, avant les bonds — tendon chaud mais pas épuisé. C'est l'ordre optimal : stimulus tendineux isométrique → transfert immédiat en élasticité sur les bonds horizontaux. Durée ajoutée : ~8 min.</div>
         <div class="day-warning">⚠ Douleur Achille &gt;3/10 → Berlin annulé. Ne jamais cumuler Berlin + intensité pliométrique élevée le même jour si douleur présente.</div>
+
+        <!-- GTG BLOCK START — JEUDI -->
+        <div class="gtg-block">
+          <div class="gtg-header">
+            <span class="gtg-badge gtg-bs-badge">◈ GTG</span>
+            <span class="gtg-title">GTG Block Start — Jeudi</span>
+            <span style="font-family:'Share Tech Mono',monospace;font-size:0.55rem;color:#888;letter-spacing:0.1em;">PENDANT L'ÉCHAUFFEMENT</span>
+          </div>
+          <div class="gtg-body">
+            Intégré <strong>pendant l'échauffement</strong>, après footing et gammes, avant les départs résistés.
+            <ul>
+              <li><strong style="color:#99ddff;">2–3 départs 10m en 4 points</strong> à 85–90% — focus technique pure (posture, poussée initiale, bras). Jamais chronométré.</li>
+              <li>Récupération 60–90 s entre chaque départ. Aucune fatigue cumulée avec la séance principale.</li>
+            </ul>
+            <div class="gtg-rule">⏱ Durée : 5–7 min · S'enchaîne naturellement avec l'échauffement · Volume total journée déjà élevé → limiter à 2 départs si fatigue perceptible</div>
+            <div class="gtg-cond">⚠ SNC &lt;85% ou sommeil &lt;7h30 → GTG Block Start annulé · Douleur ou coordination dégradée → arrêt immédiat</div>
+          </div>
+        </div>
+
+        <!-- GTG BDF — JEUDI -->
+        <div class="gtg-block gtg-bdf">
+          <div class="gtg-header">
+            <span class="gtg-badge gtg-bdf-badge">◈ GTG</span>
+            <span class="gtg-title">GTG Bras de Fer — Jeudi</span>
+            <span style="font-family:'Share Tech Mono',monospace;font-size:0.55rem;color:#888;letter-spacing:0.1em;">EN DEHORS DE LA SÉANCE</span>
+          </div>
+          <div class="gtg-body">
+            Matin ou en dehors de la séance sprint. Ne jamais cumuler avec les sprints dans la même session.
+            <ul>
+              <li><strong style="color:#ffcc88;">Riser isométrique :</strong> 2–3 séries × 15–20 s — bande élastique fine, main en pronation, élévation radiale.</li>
+              <li><strong style="color:#ffcc88;">Pronation lente :</strong> 2 séries × 10–12 reps — bande élastique fine, rotation contrôlée de l'avant-bras.</li>
+            </ul>
+            <div class="gtg-rule">⏱ Durée totale : 5–8 min · Effort léger — sensation de travail musculaire, pas de douleur</div>
+            <div class="gtg-cond">⚠ Coude droit &gt;3/10 → GTG annulé · Jamais après grip intense ou veille de BDF intense</div>
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <!-- VENDREDI -->
+    <!-- ════ VENDREDI ════ -->
     <div class="day-card">
       <div class="day-header" onclick="toggleDay(this)">
         <span class="day-label">VEN</span>
@@ -1532,10 +1766,29 @@ footer {
         <div class="day-note">Drop jumps : temps de contact cible &lt;0,2s. Si &gt;0,25s sur 3 séries de suite → stop, fatigue réelle. Repos 4–5 min entre séries de choc.</div>
         <div class="day-warning">⚠ Vendredi = pliométrie pure, pas de sprint. Ne pas ajouter de sprint ce jour-là : cumul choc + vitesse = risque ischios élevé.</div>
         <div class="day-note"><strong>Rappel squat du vendredi :</strong> Séance légère, loin de l'échec. Objectif = volume additionnel pour renforcer le pattern moteur et stimuler la force sans impacter la récupération. Si fatigue élevée, réduire à 2×5.</div>
+
+        <!-- GTG BDF — VENDREDI -->
+        <div class="gtg-block gtg-bdf">
+          <div class="gtg-header">
+            <span class="gtg-badge gtg-bdf-badge">◈ GTG</span>
+            <span class="gtg-title">GTG Bras de Fer — Vendredi</span>
+            <span style="font-family:'Share Tech Mono',monospace;font-size:0.55rem;color:#888;letter-spacing:0.1em;">EN DEHORS DE LA SÉANCE</span>
+          </div>
+          <div class="gtg-body">
+            Matin ou en dehors de la séance pliométrie. Vendredi = pas de GTG Block Start (lendemain de pliométrie de choc = jambes non disponibles pour départ).
+            <ul>
+              <li><strong style="color:#ffcc88;">Riser isométrique :</strong> 2–3 séries × 15–20 s — bande élastique fine, main en pronation, élévation radiale.</li>
+              <li><strong style="color:#ffcc88;">Pronation lente :</strong> 2 séries × 10–12 reps — bande élastique fine, rotation contrôlée.</li>
+            </ul>
+            <div class="gtg-rule">⏱ Durée totale : 5–8 min · Le lendemain (samedi) = BDF B → garder les avant-bras frais · Réduire à 1 série si coude chaud</div>
+            <div class="gtg-cond">⚠ Coude droit &gt;3/10 → GTG annulé · GTG Block Start interdit ce jour (jeudi = veille pliométrie)</div>
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <!-- SAMEDI -->
+    <!-- ════ SAMEDI ════ -->
     <div class="day-card">
       <div class="day-header" onclick="toggleDay(this)">
         <span class="day-label">SAM</span>
@@ -1581,10 +1834,33 @@ footer {
           <strong>Durée :</strong> 30–40 min. Progression identique au mercredi : +1,25–2,5 kg quand 10 reps propres. Face pulls uniquement ici (1 fois par semaine suffit).
         </div>
         <div class="day-note">Semaines 3, 7, 11 (pic d'intensité) : supprimer cette séance. Protection coude prioritaire.</div>
+
+        <!-- GTG BLOCK START — SAMEDI (CONDITIONNEL) -->
+        <div class="gtg-block">
+          <div class="gtg-header">
+            <span class="gtg-badge gtg-bs-badge">◈ GTG</span>
+            <span class="gtg-title">GTG Block Start — Samedi</span>
+            <span class="gtg-optional-badge">OPTIONNEL</span>
+          </div>
+          <div class="gtg-body">
+            <strong style="color:#00ddff;">Conditionnel strict</strong> — uniquement si les jambes sont <em>parfaitement fraîches</em>, le matin avant la séance BDF.
+            <ul>
+              <li><strong style="color:#99ddff;">2 départs maximum 10m</strong> à 85% — technique pure, aucun sprint lancé. Focus sur la position initiale et la première poussée.</li>
+              <li>Récupération 90 s entre chaque départ. Durée : 4–5 min.</li>
+            </ul>
+            <div class="gtg-rule">⏱ À faire le matin uniquement, bien avant la séance BDF B · Jamais couplé avec la séance bras de fer</div>
+            <div class="gtg-cond">⚠ ANNULÉ si : SNC &lt;85% · Sommeil &lt;7h30 · Douleur ou lourdeur dans les jambes · Pliométrie intense la veille (vendredi) → dans ce cas, sauter le GTG Block Start systématiquement</div>
+          </div>
+        </div>
+
+        <div class="day-note" style="border-left-color:rgba(120,120,120,0.5);background:rgba(80,80,80,0.08);">
+          <strong style="color:#888;">— Pas de GTG BDF ce jour —</strong> Samedi = séance BDF B. Les avant-bras sont sollicités dans la séance principale — aucun GTG bras de fer supplémentaire.
+        </div>
+
       </div>
     </div>
 
-    <!-- DIMANCHE -->
+    <!-- ════ DIMANCHE ════ -->
     <div class="day-card">
       <div class="day-header" onclick="toggleDay(this)">
         <span class="day-label">DIM</span>
@@ -1628,6 +1904,29 @@ footer {
           <strong>Dimanche = récupération active.</strong> Les exercices de bras de fer sont symboliques : sensation et technique uniquement, aucun effort structurel. La vraie adaptation se fait en dormant.
         </div>
         <div class="day-note">Aucune séance de force lourde ni de vitesse ce jour. Le repos est de l'entraînement.</div>
+
+        <!-- GTG BDF — DIMANCHE (OPTIONNEL ULTRA-LÉGER) -->
+        <div class="gtg-block gtg-bdf">
+          <div class="gtg-header">
+            <span class="gtg-badge gtg-bdf-badge">◈ GTG</span>
+            <span class="gtg-title">GTG Bras de Fer — Dimanche</span>
+            <span class="gtg-optional-badge">ULTRA-LÉGER</span>
+          </div>
+          <div class="gtg-body">
+            <strong style="color:#ffcc88;">Optionnel et ultra-minimal</strong> — uniquement si les avant-bras sont reposés. Ce dimanche est avant tout un jour de récupération active.
+            <ul>
+              <li><strong style="color:#ffcc88;">Riser isométrique :</strong> 1 série × 15 s seulement — sensation de position, effort minime.</li>
+              <li><strong style="color:#ffcc88;">Pronation lente :</strong> 1 série × 8–10 reps — technique pure, bande légère ou sans résistance.</li>
+            </ul>
+            <div class="gtg-rule">⏱ Durée : 3–5 min maximum · Priorité absolue à la récupération · Aucune obligation ce jour</div>
+            <div class="gtg-cond">⚠ Moindre gêne au coude → passer directement à la mobilité · GTG Block Start interdit le dimanche (pas de sprint ce jour)</div>
+          </div>
+        </div>
+
+        <div class="day-note" style="border-left-color:rgba(120,120,120,0.5);background:rgba(80,80,80,0.08);">
+          <strong style="color:#888;">— Pas de GTG Block Start ce dimanche —</strong> Pas de sprint ni de départ ce jour. La récupération neurologique prime.
+        </div>
+
       </div>
     </div>
 
@@ -1732,7 +2031,7 @@ footer {
     <div class="rule-card" style="--delay:0s">
       <div class="rule-icon">🛌</div>
       <div class="rule-title">Protocole SNC Quotidien</div>
-      <div class="rule-body">3 sauts verticaux au réveil + durée sommeil. Si moyenne 7j &lt;85% ou nuit &lt;7h30 → séance haute intensité annulée sans exception. Test obligatoire avant chaque séance sprint.</div>
+      <div class="rule-body">3 sauts verticaux au réveil + durée sommeil. Si moyenne 7j &lt;85% ou nuit &lt;7h30 → séance haute intensité annulée sans exception. Test obligatoire avant chaque séance sprint. <strong>GTG Block Start également annulé si SNC &lt;85%.</strong></div>
     </div>
     <div class="rule-card" style="--delay:0.5s">
       <div class="rule-icon">📉</div>
@@ -1742,18 +2041,26 @@ footer {
     <div class="rule-card" style="--delay:1s">
       <div class="rule-icon">⏱</div>
       <div class="rule-title">Repos Strict</div>
-      <div class="rule-body">Sprints 30m / Vmax : 5–8 min. Sprints 60m : 6–8 min. Force lourde : 3–4 min. Pliométrie de choc : 4–5 min. Jamais de sprint sur fatigue résiduelle.</div>
+      <div class="rule-body">Sprints 30m / Vmax : 5–8 min. Sprints 60m : 6–8 min. Force lourde : 3–4 min. Pliométrie de choc : 4–5 min. Jamais de sprint sur fatigue résiduelle. <strong>GTG : repos 60–90 s entre départs.</strong></div>
     </div>
     <div class="rule-card" style="--delay:1.5s">
       <div class="rule-icon">🦵</div>
       <div class="rule-title">Tendon Radar</div>
-      <div class="rule-body">Douleur coude, achille ou rotule &gt;3/10 pendant l'échauffement → modification immédiate. LCL gauche : pas de course en virage S1–S4. Alerte tendon prioritaire sur tout planning.</div>
+      <div class="rule-body">Douleur coude, achille ou rotule &gt;3/10 pendant l'échauffement → modification immédiate. LCL gauche : pas de course en virage S1–S4. Alerte tendon prioritaire sur tout planning. <strong>GTG BDF annulé coude &gt;3/10.</strong></div>
+    </div>
+    <div class="rule-card" style="--delay:1.8s">
+      <div class="rule-icon">🔁</div>
+      <div class="rule-title">Règles GTG — Grease The Groove</div>
+      <div class="rule-body">
+        <strong>Block Start :</strong> Max 3 séances/semaine (Mar, Jeu, Sam conditionnel). 2–3 départs × 10m à 85–90%. Jamais le jour d'après pliométrie de choc. Annulé si SNC &lt;85%. <br><br>
+        <strong>Bras de Fer :</strong> Max 4 séances/semaine (Lun, Mar, Jeu, Ven + optionnel Dim). 2–3 séries totales. Jamais après grip intense. Annulé coude &gt;3/10. Volume ultra-bas, pas d'échec.
+      </div>
     </div>
     <div class="rule-card" style="--delay:2s; grid-column:1/-1;">
       <div class="rule-icon">🔒</div>
       <div class="rule-title">Règle Coude Sacré & Bras de Fer</div>
       <div class="rule-body">
-        <strong>Maximum 2 séances bras de fer par semaine</strong> (mercredi + samedi). Arrêt immédiat si coude sensible &gt;3/10. Jamais tractions lestées + bras de fer le même jour. Samedi bras de fer supprimé aux semaines 3, 7, 11. Montée de charge bras de fer plafonnée à +1,25–2,5 kg par 2 semaines max. La séance du dimanche (BF C) est symbolique et ne compte pas comme séance structurelle.
+        <strong>Maximum 2 séances bras de fer structurelles par semaine</strong> (mercredi + samedi). Arrêt immédiat si coude sensible &gt;3/10. Jamais tractions lestées + bras de fer le même jour. Samedi bras de fer supprimé aux semaines 3, 7, 11. Montée de charge bras de fer plafonnée à +1,25–2,5 kg par 2 semaines max. Les séances GTG BDF sont légères et ne comptent pas comme séances structurelles — elles complètent, elles n'ajoutent pas de charge. La séance du dimanche (BDF C) reste symbolique.
       </div>
     </div>
   </div>
@@ -1885,8 +2192,8 @@ footer {
 </main>
 
 <footer>
-  <div class="footer-logo">// NADHIR ELITE SYSTEM — PROGRAMME v2.3 + MÉTHODE BERLIN + HYBRIDE ACCÉLÉRATION //</div>
-  <div class="footer-date">MIS À JOUR 29 MAI 2026 — COMPÉTITION 1ER AOÛT 2026</div>
+  <div class="footer-logo">// NADHIR ELITE SYSTEM — PROGRAMME v2.4 + MÉTHODE BERLIN + HYBRIDE + GTG BLOCK START & BDF //</div>
+  <div class="footer-date">MIS À JOUR 06 JUIN 2026 — COMPÉTITION 1ER AOÛT 2026</div>
   <div class="pulse-badge" id="countdownBadge" style="margin-top:1rem;">
     <span class="pulse-dot"></span>
     <span id="countdownText">SYSTÈME ACTIF</span>
