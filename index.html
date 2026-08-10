@@ -2,2270 +2,912 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>NADHIR // ENFANT DE LA VICTOIRE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Nadhir Ben Nasr — Programme Hivernal 2026–2027</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
-:root {
-  --g: #00ff88;
-  --g2: #00cc66;
-  --gold: #ffd700;
-  --gold2: #c9960a;
-  --red: #ff2244;
-  --bg: #020408;
-  --bg2: #050c12;
-  --bg3: #0a1520;
-  --panel: rgba(0,255,136,0.04);
-  --border: rgba(0,255,136,0.18);
-  --border2: rgba(255,215,0,0.22);
-  --text: #c8e8d8;
-  --dim: #4a7060;
-}
-
-* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-
-html { scroll-behavior:smooth; }
-
-body {
-  font-family:'Rajdhani', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height:100vh;
-  overflow-x:hidden;
-  cursor:crosshair;
-}
-
-/* SCANLINE OVERLAY */
-body::before {
-  content:'';
-  position:fixed;
-  inset:0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0,255,136,0.015) 2px,
-    rgba(0,255,136,0.015) 4px
-  );
-  pointer-events:none;
-  z-index:9999;
-}
-
-/* NOISE TEXTURE */
-body::after {
-  content:'';
-  position:fixed;
-  inset:0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events:none;
-  z-index:9998;
-  opacity:0.4;
-}
-
-/* ══════════════════════════════════
-   HERO SECTION
-══════════════════════════════════ */
-.hero {
-  position:relative;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  overflow:hidden;
-  padding:2rem 1rem;
-}
-
-.hero-bg {
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0,255,136,0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(255,215,0,0.04) 0%, transparent 60%),
-    linear-gradient(180deg, #020408 0%, #030d18 50%, #020408 100%);
-}
-
-/* Animated grid */
-.grid-bg {
-  position:absolute;
-  inset:0;
-  background-image:
-    linear-gradient(rgba(0,255,136,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,255,136,0.04) 1px, transparent 1px);
-  background-size: 40px 40px;
-  animation: gridPulse 8s ease-in-out infinite;
-}
-
-@keyframes gridPulse {
-  0%,100% { opacity:0.4; }
-  50% { opacity:1; }
-}
-
-/* Corner brackets */
-.bracket {
-  position:absolute;
-  width:60px; height:60px;
-  border-color: var(--g);
-  border-style:solid;
-  opacity:0.5;
-}
-.bracket-tl { top:20px; left:20px; border-width:2px 0 0 2px; }
-.bracket-tr { top:20px; right:20px; border-width:2px 2px 0 0; }
-.bracket-bl { bottom:20px; left:20px; border-width:0 0 2px 2px; }
-.bracket-br { bottom:20px; right:20px; border-width:0 2px 2px 0; }
-
-.hero-content { position:relative; z-index:2; text-align:center; }
-
-.system-id {
-  font-family:'Share Tech Mono', monospace;
-  font-size:0.65rem;
-  color:var(--g);
-  letter-spacing:0.3em;
-  text-transform:uppercase;
-  margin-bottom:1rem;
-  animation: blink 3s ease-in-out infinite;
-}
-
-@keyframes blink {
-  0%,90%,100% { opacity:1; }
-  95% { opacity:0.2; }
-}
-
-.hero-name {
-  font-family:'Orbitron', monospace;
-  font-size:clamp(2rem,10vw,4.5rem);
-  font-weight:900;
-  line-height:0.9;
-  letter-spacing:-0.02em;
-  background: linear-gradient(135deg, #ffffff 0%, var(--g) 40%, var(--gold) 100%);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-  animation: nameGlow 4s ease-in-out infinite alternate;
-}
-
-@keyframes nameGlow {
-  from { filter:drop-shadow(0 0 20px rgba(0,255,136,0.3)); }
-  to { filter:drop-shadow(0 0 40px rgba(0,255,136,0.7)) drop-shadow(0 0 80px rgba(255,215,0,0.2)); }
-}
-
-.hero-subtitle {
-  font-family:'Orbitron', monospace;
-  font-size:clamp(0.55rem,2.5vw,0.85rem);
-  font-weight:400;
-  letter-spacing:0.5em;
-  color:var(--gold);
-  text-transform:uppercase;
-  margin-top:0.5rem;
-}
-
-.hero-divider {
-  width:200px;
-  height:2px;
-  background: linear-gradient(90deg, transparent, var(--g), var(--gold), transparent);
-  margin:1.5rem auto;
-  animation: scanLine 3s linear infinite;
-}
-
-@keyframes scanLine {
-  0% { background-position:-200px 0; }
-  100% { background-position:200px 0; }
-}
-
-/* STAT BARS */
-.stat-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:0.8rem;
-  margin-top:1.5rem;
-  max-width:500px;
-  width:100%;
-}
-
-.stat-item {
-  border:1px solid var(--border);
-  background:var(--panel);
-  padding:0.6rem 0.8rem;
-  border-radius:4px;
-  position:relative;
-  overflow:hidden;
-}
-
-.stat-item::before {
-  content:'';
-  position:absolute;
-  top:0; left:0; right:0;
-  height:1px;
-  background: linear-gradient(90deg, transparent, var(--g), transparent);
-  animation: scanH 2s linear infinite;
-}
-
-@keyframes scanH {
-  from { transform:translateX(-100%); }
-  to { transform:translateX(100%); }
-}
-
-.stat-label {
-  font-family:'Share Tech Mono', monospace;
-  font-size:0.6rem;
-  color:var(--dim);
-  letter-spacing:0.15em;
-  text-transform:uppercase;
-}
-
-.stat-value {
-  font-family:'Orbitron', monospace;
-  font-size:1.1rem;
-  font-weight:700;
-  color:var(--g);
-  margin-top:0.2rem;
-}
-
-.stat-unit {
-  font-size:0.65rem;
-  color:var(--dim);
-  font-family:'Share Tech Mono', monospace;
-}
-
-/* HERO DIAGNOSTIC BOX */
-.hero-diagnostic {
-  margin-top:1rem;
-  max-width:500px;
-  width:100%;
-  border:1px solid rgba(255,34,68,0.45);
-  border-radius:6px;
-  background:rgba(255,34,68,0.06);
-  padding:0.7rem 0.9rem;
-  text-align:left;
-}
-
-.hero-diagnostic .diag-title {
-  font-family:'Share Tech Mono', monospace;
-  font-size:0.6rem;
-  color:#ff6688;
-  letter-spacing:0.2em;
-  text-transform:uppercase;
-  margin-bottom:0.4rem;
-}
-
-.hero-diagnostic .diag-body {
-  font-size:0.72rem;
-  line-height:1.55;
-  color:var(--text);
-}
-
-.hero-diagnostic .diag-body strong { color:var(--red); }
-.hero-diagnostic .diag-body em { color:var(--g); font-style:normal; font-weight:700; }
-
-/* SCROLL CTA */
-.scroll-cta {
-  position:absolute;
-  bottom:2rem;
-  left:50%;
-  transform:translateX(-50%);
-  text-align:center;
-  z-index:2;
-}
-
-.scroll-arrow {
-  width:24px; height:24px;
-  border-right:2px solid var(--g);
-  border-bottom:2px solid var(--g);
-  transform:rotate(45deg);
-  margin:0 auto;
-  animation:arrowBounce 1.5s ease-in-out infinite;
-}
-
-@keyframes arrowBounce {
-  0%,100% { transform:rotate(45deg) translateY(0); opacity:1; }
-  50% { transform:rotate(45deg) translateY(6px); opacity:0.4; }
-}
-
-/* ══════════════════════════════════
-   NAVIGATION
-══════════════════════════════════ */
-.nav-strip {
-  position:sticky;
-  top:0;
-  z-index:100;
-  background:rgba(2,4,8,0.92);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border);
-  padding:0.6rem 0;
-  overflow-x:auto;
-  white-space:nowrap;
-  scrollbar-width:none;
-}
-
-.nav-strip::-webkit-scrollbar { display:none; }
-
-.nav-inner {
-  display:flex;
-  gap:0;
-  padding:0 1rem;
-  min-width:max-content;
-}
-
-.nav-btn {
-  font-family:'Rajdhani', sans-serif;
-  font-size:0.7rem;
-  font-weight:700;
-  letter-spacing:0.15em;
-  text-transform:uppercase;
-  color:var(--dim);
-  background:none;
-  border:none;
-  padding:0.4rem 0.9rem;
-  cursor:pointer;
-  position:relative;
-  transition:color 0.2s;
-}
-
-.nav-btn::after {
-  content:'';
-  position:absolute;
-  bottom:0; left:0.9rem; right:0.9rem;
-  height:2px;
-  background:var(--g);
-  transform:scaleX(0);
-  transition:transform 0.2s;
-}
-
-.nav-btn:hover, .nav-btn.active {
-  color:var(--g);
-}
-
-.nav-btn:hover::after, .nav-btn.active::after {
-  transform:scaleX(1);
-}
-
-/* ══════════════════════════════════
-   MAIN LAYOUT
-══════════════════════════════════ */
-main {
-  max-width:680px;
-  margin:0 auto;
-  padding:0 0.8rem 4rem;
-}
-
-/* ══════════════════════════════════
-   SECTION HEADERS
-══════════════════════════════════ */
-.section {
-  margin-top:3rem;
-  opacity:0;
-  transform:translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.section.visible {
-  opacity:1;
-  transform:translateY(0);
-}
-
-.section-header {
-  display:flex;
-  align-items:center;
-  gap:1rem;
-  margin-bottom:1.2rem;
-  position:relative;
-}
-
-.section-header::after {
-  content:'';
-  flex:1;
-  height:1px;
-  background:linear-gradient(90deg, var(--border) 0%, transparent 100%);
-}
-
-.section-num {
-  font-family:'Share Tech Mono', monospace;
-  font-size:0.6rem;
-  color:var(--g2);
-  letter-spacing:0.1em;
-}
-
-.section-title {
-  font-family:'Orbitron', monospace;
-  font-size:0.9rem;
-  font-weight:700;
-  letter-spacing:0.2em;
-  color:#fff;
-  text-transform:uppercase;
-}
-
-.section-icon {
-  font-size:1.1rem;
-}
-
-/* ══════════════════════════════════
-   OBJECTIFS TABLE
-══════════════════════════════════ */
-.objectives-grid {
-  display:grid;
-  gap:0.6rem;
-}
-
-.obj-row {
-  display:grid;
-  grid-template-columns:auto 1fr 1fr 1fr;
-  gap:0.5rem;
-  align-items:center;
-  padding:0.6rem 0.8rem;
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:4px;
-  position:relative;
-  overflow:hidden;
-  transition:border-color 0.3s, background 0.3s;
-}
-
-.obj-row:hover {
-  border-color:var(--g);
-  background:rgba(0,255,136,0.07);
-}
-
-.obj-row.peak {
-  border-color:var(--gold2);
-  background:rgba(255,215,0,0.04);
-}
-
-.obj-row.peak .obj-year {
-  color:var(--gold);
-}
-
-.obj-year {
-  font-family:'Orbitron', monospace;
-  font-size:0.8rem;
-  font-weight:700;
-  color:var(--g);
-  min-width:36px;
-}
-
-.obj-cell {
-  font-size:0.72rem;
-  font-weight:600;
-  text-align:center;
-}
-
-.obj-cell .val {
-  font-family:'Share Tech Mono', monospace;
-  color:#fff;
-  font-size:0.78rem;
-}
-
-.obj-cell .lbl {
-  font-size:0.55rem;
-  color:var(--dim);
-  display:block;
-  letter-spacing:0.1em;
-}
-
-.victory-badge {
-  position:absolute;
-  right:0.8rem;
-  top:50%;
-  transform:translateY(-50%);
-  background:var(--gold);
-  color:#000;
-  font-family:'Orbitron', monospace;
-  font-size:0.5rem;
-  font-weight:700;
-  padding:0.15rem 0.4rem;
-  border-radius:2px;
-  letter-spacing:0.1em;
-}
-
-/* ══════════════════════════════════
-   ANALYSE CRITIQUE
-══════════════════════════════════ */
-.analysis-grid {
-  display:grid;
-  gap:0.7rem;
-}
-
-.analysis-card {
-  border:1px solid var(--border);
-  border-radius:6px;
-  overflow:hidden;
-}
-
-.analysis-card.danger { border-color:rgba(255,34,68,0.4); }
-.analysis-card.warning { border-color:rgba(255,180,0,0.4); }
-.analysis-card.ok { border-color:rgba(0,255,136,0.3); }
-
-.analysis-header {
-  display:flex;
-  align-items:center;
-  gap:0.6rem;
-  padding:0.6rem 0.8rem;
-  background:rgba(0,0,0,0.3);
-  border-bottom:1px solid inherit;
-}
-
-.analysis-card.danger .analysis-header { background:rgba(255,34,68,0.08); }
-.analysis-card.warning .analysis-header { background:rgba(255,180,0,0.06); }
-.analysis-card.ok .analysis-header { background:rgba(0,255,136,0.05); }
-
-.badge {
-  font-family:'Share Tech Mono', monospace;
-  font-size:0.55rem;
-  font-weight:700;
-  padding:0.15rem 0.5rem;
-  border-radius:2px;
-  letter-spacing:0.15em;
-  text-transform:uppercase;
-}
-
-.badge-danger { background:var(--red); color:#fff; }
-.badge-warning { background:#c88000; color:#fff; }
-.badge-ok { background:var(--g2); color:#000; }
-
-.analysis-title-text {
-  font-family:'Rajdhani', sans-serif;
-  font-size:0.8rem;
-  font-weight:700;
-  color:#fff;
-  text-transform:uppercase;
-  letter-spacing:0.1em;
-  flex:1;
-}
-
-.analysis-body {
-  padding:0.7rem 0.8rem;
-  font-size:0.75rem;
-  line-height:1.6;
-  color:var(--text);
-}
-
-.analysis-body strong {
-  color:var(--g);
-  font-weight:700;
-}
-
-.analysis-body .fix {
-  display:flex;
-  align-items:flex-start;
-  gap:0.5rem;
-  margin-top:0.5rem;
-  padding:0.5rem 0.6rem;
-  background:rgba(0,255,136,0.04);
-  border-left:2px solid var(--g2);
-  border-radius:0 4px 4px 0;
-  font-size:0.72rem;
-}
-
-.fix-icon { color:var(--g); flex-shrink:0; font-size:0.85rem; }
-
-/* ══════════════════════════════════
-   SEMAINE TYPE (ACCORDÉON)
-══════════════════════════════════ */
-.days-grid {
-  display:grid;
-  gap:0.7rem;
-}
-
-.day-card {
-  border:1px solid var(--border);
-  border-radius:6px;
-  overflow:hidden;
-  background:var(--panel);
-}
-
-.day-header {
-  display:flex;
-  align-items:center;
-  gap:0.8rem;
-  padding:0.9rem 1rem;
-  cursor:pointer;
-  user-select:none;
-  position:relative;
-  transition:background 0.2s;
-}
-
-.day-header:hover { background:rgba(0,255,136,0.05); }
-
-.day-label {
-  font-family:'Share Tech Mono', monospace;
-  font-size:0.6rem;
-  color:var(--g2);
-  letter-spacing:0.2em;
-  min-width:24px;
-}
-
-.day-name {
-  font-family:'Orbitron', monospace;
-  font-size:0.75rem;
-  font-weight:700;
-  color:#fff;
-  flex:1;
-  text-transform:uppercase;
-  letter-spacing:0.08em;
-}
-
-.day-tag {
-  font-family:'Share Tech Mono', monospace;
-  font-size:0.55rem;
-  padding:0.15rem 0.5rem;
-  border-radius:2px;
-  letter-spacing:0.1em;
-}
-
-.day-tag-sprint { background:rgba(0,255,136,0.15); color:var(--g); border:1px solid rgba(0,255,136,0.3); }
-.day-tag-force { background:rgba(255,215,0,0.12); color:var(--gold); border:1px solid rgba(255,215,0,0.25); }
-.day-tag-bf { background:rgba(255,34,68,0.1); color:#ff6688; border:1px solid rgba(255,34,68,0.25); }
-.day-tag-plyo { background:rgba(100,150,255,0.12); color:#88aaff; border:1px solid rgba(100,150,255,0.25); }
-.day-tag-rest { background:rgba(80,80,80,0.3); color:#888; border:1px solid rgba(80,80,80,0.4); }
-
-.day-chevron {
-  font-size:0.7rem;
-  color:var(--dim);
-  transition:transform 0.3s;
-}
-
-.day-card.open .day-chevron { transform:rotate(90deg); }
-.day-card.open .day-header { background:rgba(0,255,136,0.05); border-bottom:1px solid var(--border); }
-
-.day-body {
-  display:none;
-  padding:0.8rem 0.8rem 1rem;
-}
-
-.day-card.open .day-body { display:block; }
-
-/* EXERCISE BLOCK */
-.ex-table {
-  width:100%;
-  border-collapse:collapse;
-  margin-bottom:0.8rem;
-}
-
-.ex-table th {
-  font-family:'Share Tech Mono', monospace;
-  font-size:0.58rem;
-  color:var(--g2);
-  letter-spacing:0.15em;
-  text-align:left;
-  padding:0.3rem 0.4rem;
-  border-bottom:1px solid var(--border);
-  background:rgba(0,255,136,0.03);
-  text-transform:uppercase;
-}
-
-.ex-table td {
-  font-size:0.72rem;
-  padding:0.4rem 0.4rem;
-  border-bottom:1px solid rgba(0,255,136,0.06);
-  vertical-align:top;
-  line-height:1.4;
-}
-
-.ex-table tr:last-child td { border-bottom:none; }
-
-.ex-table td:first-child {
-  font-weight:600;
-  color:#ddeedd;
-  max-width:130px;
-}
-
-.ex-table td:not(:first-child) {
-  font-family:'Share Tech Mono', monospace;
-  font-size:0.65rem;
-  color:var(--text);
-}
-
-.ex-table tr:hover td { background:rgba(0,255,136,0.03); }
-
-.bloc-header {
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr 1fr;
-  gap:0.3rem;
-  margin-bottom:0.4rem;
-}
-
-.bloc-tag {
-  text-align:center;
-  padding:0.2rem;
-  border-radius:3px;
-  font-family:'Orbitron', monospace;
-  font-size:0.55rem;
-  letter-spacing:0.1em;
-}
-
-.bloc-tag:first-child { background:transparent; }
-.bloc-b1 { background:rgba(0,100,255,0.15); color:#88aaff; border:1px solid rgba(0,100,255,0.2); }
-.bloc-b2 { background:rgba(255,140,0,0.15); color:#ffaa44; border:1px solid rgba(255,140,0,0.2); }
-.bloc-b3 { background:rgba(255,215,0,0.15); color:var(--gold); border:1px solid rgba(255,215,0,0.25); }
-
-.day-note {
-  padding:0.5rem 0.7rem;
-  background:rgba(0,255,136,0.04);
-  border-left:2px solid var(--g2);
-  border-radius:0 4px 4px 0;
-  font-size:0.7rem;
-  color:var(--text);
-  margin-top:0.6rem;
-}
-
-.day-warning {
-  padding:0.5rem 0.7rem;
-  background:rgba(255,34,68,0.06);
-  border-left:2px solid var(--red);
-  border-radius:0 4px 4px 0;
-  font-size:0.7rem;
-  color:#ffaaaa;
-  margin-top:0.6rem;
-}
-
-/* NOUVEAU BADGE */
-.new-badge {
-  display:inline-block;
-  background:rgba(0,255,136,0.18);
-  border:1px solid var(--g);
-  color:var(--g);
-  font-family:'Share Tech Mono', monospace;
-  font-size:0.55rem;
-  letter-spacing:0.1em;
-  padding:0.1rem 0.4rem;
-  border-radius:2px;
-  margin-left:0.3rem;
-  vertical-align:middle;
-}
-
-/* RAPPEL BADGE */
-.rappel-badge {
-  display:inline-block;
-  background:rgba(255,215,0,0.18);
-  border:1px solid var(--gold);
-  color:var(--gold);
-  font-family:'Share Tech Mono', monospace;
-  font-size:0.55rem;
-  letter-spacing:0.1em;
-  padding:0.1rem 0.4rem;
-  border-radius:2px;
-  margin-left:0.3rem;
-  vertical-align:middle;
-}
-
-/* ══════════════════════════════════
-   GTG — GREASE THE GROOVE BLOCKS
-══════════════════════════════════ */
-.gtg-block {
-  margin-top:0.6rem;
-  border:1px solid rgba(0,200,255,0.25);
-  border-radius:6px;
-  overflow:hidden;
-  background:rgba(0,180,255,0.03);
-}
-.gtg-block.gtg-bdf {
-  border-color:rgba(255,140,0,0.3);
-  background:rgba(255,140,0,0.03);
-}
-.gtg-header {
-  display:flex;
-  align-items:center;
-  gap:0.5rem;
-  padding:0.4rem 0.7rem;
-  background:rgba(0,180,255,0.07);
-  border-bottom:1px solid rgba(0,180,255,0.15);
-}
-.gtg-block.gtg-bdf .gtg-header {
-  background:rgba(255,140,0,0.07);
-  border-bottom-color:rgba(255,140,0,0.15);
-}
-.gtg-badge {
-  font-family:'Share Tech Mono',monospace;
-  font-size:0.55rem;
-  font-weight:700;
-  padding:0.12rem 0.45rem;
-  border-radius:2px;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  border:1px solid transparent;
-}
-.gtg-bs-badge {
-  background:rgba(0,200,255,0.2);
-  color:#00ddff;
-  border-color:rgba(0,200,255,0.4);
-}
-.gtg-bdf-badge {
-  background:rgba(255,140,0,0.2);
-  color:#ffaa44;
-  border-color:rgba(255,140,0,0.35);
-}
-.gtg-optional-badge {
-  background:rgba(120,120,120,0.2);
-  color:#999;
-  border:1px solid rgba(120,120,120,0.35);
-  font-family:'Share Tech Mono',monospace;
-  font-size:0.5rem;
-  padding:0.1rem 0.4rem;
-  border-radius:2px;
-  letter-spacing:0.1em;
-  display:inline-block;
-  vertical-align:middle;
-  margin-left:0.3rem;
-}
-.gtg-title {
-  font-family:'Orbitron',monospace;
-  font-size:0.65rem;
-  font-weight:700;
-  color:#00ddff;
-  letter-spacing:0.1em;
-  flex:1;
-}
-.gtg-block.gtg-bdf .gtg-title { color:#ffaa44; }
-.gtg-body {
-  padding:0.55rem 0.7rem;
-  font-size:0.7rem;
-  line-height:1.6;
-  color:var(--text);
-}
-.gtg-body ul {
-  list-style:none;
-  padding:0;
-  margin:0.3rem 0 0;
-  display:grid;
-  gap:0.25rem;
-}
-.gtg-body ul li {
-  padding-left:1.1rem;
-  position:relative;
-}
-.gtg-body ul li::before {
-  content:'▸';
-  position:absolute;
-  left:0;
-  color:#00ddff;
-}
-.gtg-block.gtg-bdf .gtg-body ul li::before { color:#ffaa44; }
-.gtg-cond {
-  display:flex;
-  align-items:flex-start;
-  gap:0.4rem;
-  margin-top:0.45rem;
-  padding:0.35rem 0.55rem;
-  background:rgba(255,34,68,0.05);
-  border-left:2px solid rgba(255,34,68,0.5);
-  border-radius:0 3px 3px 0;
-  font-size:0.65rem;
-  color:#ffaaaa;
-  font-family:'Share Tech Mono',monospace;
-  letter-spacing:0.03em;
-  line-height:1.45;
-}
-.gtg-rule {
-  display:flex;
-  align-items:flex-start;
-  gap:0.4rem;
-  margin-top:0.4rem;
-  padding:0.35rem 0.55rem;
-  background:rgba(0,200,255,0.04);
-  border-left:2px solid rgba(0,200,255,0.3);
-  border-radius:0 3px 3px 0;
-  font-size:0.65rem;
-  color:#99ddff;
-  font-family:'Share Tech Mono',monospace;
-  letter-spacing:0.03em;
-  line-height:1.45;
-}
-.gtg-block.gtg-bdf .gtg-rule {
-  background:rgba(255,140,0,0.04);
-  border-left-color:rgba(255,140,0,0.3);
-  color:#ffcc88;
-}
-
-/* ══════════════════════════════════
-   ROADMAP 30M — TABLEAU PROGRESSION
-══════════════════════════════════ */
-.roadmap-table {
-  width:100%;
-  border-collapse:collapse;
-  margin-bottom:1rem;
-}
-
-.roadmap-table th {
-  font-family:'Share Tech Mono', monospace;
-  font-size:0.58rem;
-  color:var(--g2);
-  letter-spacing:0.15em;
-  text-align:left;
-  padding:0.35rem 0.6rem;
-  border-bottom:1px solid var(--border);
-  background:rgba(0,255,136,0.03);
-  text-transform:uppercase;
-}
-
-.roadmap-table td {
-  font-size:0.72rem;
-  padding:0.4rem 0.6rem;
-  border-bottom:1px solid rgba(0,255,136,0.06);
-  vertical-align:middle;
-}
-
-.roadmap-table tr:last-child td { border-bottom:none; }
-
-.roadmap-table tr:hover td { background:rgba(0,255,136,0.03); }
-
-.roadmap-table .rw-week {
-  font-family:'Orbitron', monospace;
-  font-size:0.7rem;
-  font-weight:700;
-  color:var(--g);
-  white-space:nowrap;
-}
-
-.roadmap-table .rw-time {
-  font-family:'Share Tech Mono', monospace;
-  font-size:0.78rem;
-  color:#fff;
-  font-weight:700;
-}
-
-.roadmap-table .rw-delta {
-  font-family:'Share Tech Mono', monospace;
-  font-size:0.65rem;
-  color:var(--g2);
-}
-
-.roadmap-table .rw-label {
-  font-size:0.65rem;
-  color:var(--dim);
-  font-style:italic;
-}
-
-.roadmap-table tr.rw-current td { background:rgba(255,34,68,0.06); }
-.roadmap-table tr.rw-current .rw-week { color:var(--red); }
-.roadmap-table tr.rw-current .rw-time { color:var(--red); }
-
-.roadmap-table tr.rw-decharge td { background:rgba(255,215,0,0.04); }
-.roadmap-table tr.rw-decharge .rw-week { color:var(--gold); }
-
-.roadmap-table tr.rw-peak td { background:rgba(0,255,136,0.06); }
-.roadmap-table tr.rw-peak .rw-week { color:var(--g); }
-.roadmap-table tr.rw-peak .rw-time { color:var(--g); }
-
-.roadmap-projection {
-  border:1px solid var(--border2);
-  border-radius:6px;
-  background:rgba(255,215,0,0.04);
-  padding:0.9rem 1rem;
-  text-align:center;
-  margin-top:0.8rem;
-}
-
-.roadmap-projection .proj-label {
-  font-family:'Share Tech Mono', monospace;
-  font-size:0.6rem;
-  color:var(--dim);
-  letter-spacing:0.2em;
-  text-transform:uppercase;
-  margin-bottom:0.3rem;
-}
-
-.roadmap-projection .proj-value {
-  font-family:'Orbitron', monospace;
-  font-size:1.8rem;
-  font-weight:900;
-  color:var(--gold);
-}
-
-.roadmap-projection .proj-sub {
-  font-family:'Share Tech Mono', monospace;
-  font-size:0.6rem;
-  color:var(--dim);
-  letter-spacing:0.15em;
-  margin-top:0.2rem;
-}
-
-/* ══════════════════════════════════
-   RÈGLES HUD PANEL
-══════════════════════════════════ */
-.rules-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:0.7rem;
-}
-
-.rule-card {
-  border:1px solid var(--border);
-  border-radius:6px;
-  padding:0.8rem;
-  background:var(--panel);
-  position:relative;
-  overflow:hidden;
-}
-
-.rule-card::before {
-  content:'';
-  position:absolute;
-  top:0; left:0; right:0;
-  height:2px;
-  background:linear-gradient(90deg, transparent, var(--g), transparent);
-  animation: scanRule 4s linear infinite;
-  animation-delay:var(--delay, 0s);
-}
-
-@keyframes scanRule {
-  from { transform:translateX(-100%); }
-  to { transform:translateX(100%); }
-}
-
-.rule-icon { font-size:1.2rem; margin-bottom:0.4rem; }
-.rule-title {
-  font-family:'Orbitron', monospace;
-  font-size:0.65rem;
-  font-weight:700;
-  color:var(--g);
-  letter-spacing:0.1em;
-  margin-bottom:0.4rem;
-  text-transform:uppercase;
-}
-.rule-body { font-size:0.7rem; line-height:1.5; }
-
-/* ══════════════════════════════════
-   NUTRITION BAR
-══════════════════════════════════ */
-.macro-bars { display:grid; gap:0.8rem; }
-
-.macro-row {
-  display:flex;
-  align-items:center;
-  gap:0.8rem;
-}
-
-.macro-label {
-  font-family:'Share Tech Mono', monospace;
-  font-size:0.65rem;
-  color:var(--dim);
-  width:70px;
-  letter-spacing:0.1em;
-}
-
-.macro-bar-wrap {
-  flex:1;
-  height:8px;
-  background:rgba(255,255,255,0.06);
-  border-radius:4px;
-  overflow:hidden;
-  position:relative;
-}
-
-.macro-bar-fill {
-  height:100%;
-  border-radius:4px;
-  animation:fillBar 1.5s ease-out forwards;
-  transform-origin:left;
-}
-
-@keyframes fillBar {
-  from { width:0; }
-}
-
-.macro-bar-fill.prot { background:linear-gradient(90deg, #00cc66, #00ff88); }
-.macro-bar-fill.carb { background:linear-gradient(90deg, #c88000, #ffd700); }
-.macro-bar-fill.fat  { background:linear-gradient(90deg, #4455dd, #88aaff); }
-
-.kcal-display {
-  text-align:center;
-  margin-top:1rem;
-  padding:0.8rem;
-  border:1px solid var(--border2);
-  border-radius:6px;
-  background:rgba(255,215,0,0.04);
-}
-
-.kcal-num {
-  font-family:'Orbitron', monospace;
-  font-size:2rem;
-  font-weight:900;
-  color:var(--gold);
-}
-
-.kcal-unit {
-  font-family:'Share Tech Mono', monospace;
-  font-size:0.65rem;
-  color:var(--dim);
-  letter-spacing:0.2em;
-}
-
-/* ══════════════════════════════════
-   PROGRESSION VERTICALE
-══════════════════════════════════ */
-.progress-timeline {
-  position:relative;
-  padding-left:2rem;
-}
-
-.progress-timeline::before {
-  content:'';
-  position:absolute;
-  left:0.6rem;
-  top:0; bottom:0;
-  width:1px;
-  background:linear-gradient(180deg, var(--g), var(--gold), transparent);
-}
-
-.timeline-item {
-  position:relative;
-  padding:0.7rem 0 0.7rem 0.8rem;
-  margin-bottom:0.3rem;
-}
-
-.timeline-dot {
-  position:absolute;
-  left:-1.45rem;
-  top:1rem;
-  width:10px; height:10px;
-  border-radius:50%;
-  background:var(--g);
-  border:2px solid var(--bg);
-  box-shadow:0 0 8px var(--g);
-}
-
-.timeline-dot.gold { background:var(--gold); box-shadow:0 0 8px var(--gold); }
-
-.timeline-year {
-  font-family:'Orbitron', monospace;
-  font-size:0.7rem;
-  font-weight:700;
-  color:var(--g);
-  margin-bottom:0.3rem;
-}
-
-.timeline-year.gold { color:var(--gold); }
-
-.timeline-stats {
-  display:flex;
-  gap:0.8rem;
-  flex-wrap:wrap;
-}
-
-.t-stat {
-  font-size:0.7rem;
-  background:rgba(0,255,136,0.07);
-  border:1px solid var(--border);
-  padding:0.2rem 0.5rem;
-  border-radius:3px;
-  font-family:'Share Tech Mono', monospace;
-}
-
-/* ══════════════════════════════════
-   FOOTER
-══════════════════════════════════ */
-footer {
-  text-align:center;
-  padding:2rem 1rem 3rem;
-  border-top:1px solid var(--border);
-  margin-top:3rem;
-}
-
-.footer-logo {
-  font-family:'Orbitron', monospace;
-  font-size:0.7rem;
-  color:var(--dim);
-  letter-spacing:0.3em;
-}
-
-.footer-date {
-  font-family:'Share Tech Mono', monospace;
-  font-size:0.6rem;
-  color:rgba(100,120,100,0.5);
-  margin-top:0.4rem;
-  letter-spacing:0.2em;
-}
-
-/* PULSE BADGE */
-.pulse-badge {
-  display:inline-flex;
-  align-items:center;
-  gap:0.4rem;
-  background:rgba(0,255,136,0.06);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:0.3rem 0.8rem;
-  font-family:'Share Tech Mono', monospace;
-  font-size:0.6rem;
-  color:var(--g);
-  letter-spacing:0.1em;
-  margin:1.5rem auto 0;
-  display:block;
-  width:fit-content;
-}
-
-.pulse-dot {
-  width:6px; height:6px;
-  background:var(--g);
-  border-radius:50%;
-  animation:pulseAnim 1.5s ease-in-out infinite;
-  display:inline-block;
-}
-
-@keyframes pulseAnim {
-  0%,100% { box-shadow:0 0 0 0 rgba(0,255,136,0.7); }
-  50% { box-shadow:0 0 0 6px rgba(0,255,136,0); }
-}
-
-/* TOP PROGRESS BAR */
-.top-bar {
-  position:fixed;
-  top:0; left:0;
-  height:2px;
-  background:linear-gradient(90deg, var(--g), var(--gold));
-  z-index:10000;
-  transition:width 0.1s;
-  box-shadow:0 0 6px var(--g);
-}
-
-/* RESPONSIVE TWEAKS */
-@media (max-width:400px) {
-  .rules-grid { grid-template-columns:1fr; }
-  .stat-grid { grid-template-columns:1fr 1fr; }
-}
+  :root {
+    --bg: #020408;
+    --panel: rgba(0,255,136,0.04);
+    --border: rgba(0,255,136,0.18);
+    --text: #c8e8d8;
+    --dim: #4a7060;
+    --g: #00ff88;
+    --g2: #00cc66;
+    --gold: #ffd700;
+    --red: #ff2244;
+    --cyan: #00d4ff;
+    --orange: #ff6600;
+    --purple: #8855ff;
+    --phase0: #00ff88;
+    --phase1: #ffaa00;
+    --phase2: #ff6600;
+    --phase3: #00d4ff;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family:'Rajdhani',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
+  }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,136,0.012) 2px,rgba(0,255,136,0.012) 4px);
+    pointer-events:none; z-index:9999;
+  }
+  body::after {
+    content:''; position:fixed; inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events:none; z-index:9998; opacity:0.4;
+  }
+  a:focus-visible, .phase-header:focus-visible { outline:2px solid var(--g); outline-offset:2px; }
+
+  nav {
+    position:sticky; top:0; z-index:1000;
+    background:rgba(2,4,8,0.95); border-bottom:1px solid var(--border);
+    backdrop-filter:blur(12px); padding:0 24px; height:56px;
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+  }
+  .nav-brand {
+    font-family:'Orbitron',monospace; font-size:11px; font-weight:700;
+    color:var(--g); letter-spacing:3px; white-space:nowrap;
+  }
+  .nav-links { display:flex; gap:4px; list-style:none; overflow-x:auto; }
+  .nav-links a {
+    display:block; padding:6px 12px; font-family:'Share Tech Mono',monospace;
+    font-size:10px; color:var(--dim); text-decoration:none; letter-spacing:1.5px;
+    border:1px solid transparent; transition:all 0.2s; white-space:nowrap;
+  }
+  .nav-links a:hover, .nav-links a.active { color:var(--g); border-color:var(--g2); background:var(--panel); }
+
+  .hero {
+    position:relative; z-index:1; border-bottom:1px solid var(--border);
+    padding:40px 24px 32px;
+    background:radial-gradient(ellipse 800px 400px at 10% -20%, rgba(0,255,136,0.08), transparent 70%);
+  }
+  .hero-inner { max-width:1200px; margin:0 auto; }
+  .hero-eyebrow {
+    font-family:'Share Tech Mono',monospace; font-size:11px; color:var(--dim);
+    letter-spacing:4px; text-transform:uppercase; margin-bottom:10px;
+  }
+  .hero-name {
+    font-family:'Orbitron',monospace; font-weight:900; font-size:clamp(26px,5vw,44px);
+    color:#fff; letter-spacing:2px; margin-bottom:24px; line-height:1.1;
+    text-shadow:0 0 30px rgba(0,255,136,0.25);
+  }
+  .hero-goals { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin-bottom:24px; }
+  .hero-goal {
+    border:1px solid var(--border); border-left:3px solid var(--g); border-radius:6px;
+    padding:14px 16px; background:rgba(0,0,0,0.3);
+  }
+  .hero-goal.secondary { border-left-color:var(--purple); }
+  .hero-goal-tag {
+    display:block; font-family:'Share Tech Mono',monospace; font-size:9px; color:var(--dim);
+    letter-spacing:2px; text-transform:uppercase; margin-bottom:6px;
+  }
+  .hero-goal-value { display:block; font-size:15px; color:var(--text); line-height:1.4; }
+  .hero-goal-value strong { color:var(--g); font-weight:700; }
+  .hero-goal.secondary .hero-goal-value strong { color:var(--purple); }
+  .hero-goal-date {
+    display:block; font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--dim);
+    margin-top:6px; letter-spacing:1px;
+  }
+  .hero-timeline { display:flex; flex-wrap:wrap; gap:8px 24px; }
+  .hero-phase {
+    display:flex; align-items:center; gap:8px; font-family:'Share Tech Mono',monospace;
+    font-size:10px; color:var(--dim); letter-spacing:0.5px;
+  }
+  .dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; box-shadow:0 0 6px currentColor; }
+  .dot.p0 { background:var(--phase0); color:var(--phase0); }
+  .dot.p1 { background:var(--phase1); color:var(--phase1); }
+  .dot.p2 { background:var(--phase2); color:var(--phase2); }
+  .dot.p3 { background:var(--phase3); color:var(--phase3); }
+
+  main { position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:32px 24px 64px; }
+  section { margin-bottom:48px; scroll-margin-top:64px; }
+  .section-header {
+    display:flex; align-items:center; gap:16px; margin-bottom:24px; padding-bottom:16px;
+    border-bottom:1px solid var(--border);
+  }
+  .section-num {
+    font-family:'Orbitron',monospace; font-size:11px; font-weight:700; color:var(--dim);
+    letter-spacing:2px; padding:4px 10px; border:1px solid var(--dim);
+  }
+  .section-title {
+    font-family:'Orbitron',monospace; font-size:clamp(14px,2vw,18px); font-weight:700;
+    color:#fff; letter-spacing:3px; text-transform:uppercase;
+  }
+
+  .phase-card {
+    background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:8px;
+    overflow:hidden; transition:border-color 0.3s,box-shadow 0.3s;
+  }
+  .phase-card:hover { border-color:var(--g); box-shadow:0 4px 30px rgba(0,255,136,0.06); }
+  .phase-header {
+    padding:18px 24px; display:flex; align-items:center; gap:16px;
+    cursor:pointer; user-select:none; transition:background 0.2s;
+  }
+  .phase-header:hover { background:rgba(0,255,136,0.05); }
+  .phase-badge {
+    font-family:'Orbitron',monospace; font-size:10px; font-weight:900; padding:6px 14px;
+    letter-spacing:2px; flex-shrink:0; border:1px solid transparent;
+  }
+  .phase-badge.p0 { background:rgba(0,255,136,0.12); color:var(--phase0); border-color:rgba(0,255,136,0.3); }
+  .phase-badge.p1 { background:rgba(255,170,0,0.12); color:var(--phase1); border-color:rgba(255,170,0,0.3); }
+  .phase-badge.p2 { background:rgba(255,102,0,0.12); color:var(--phase2); border-color:rgba(255,102,0,0.3); }
+  .phase-badge.p3 { background:rgba(0,212,255,0.12); color:var(--phase3); border-color:rgba(0,212,255,0.3); }
+  .phase-info { flex:1; min-width:0; }
+  .phase-info h3 {
+    font-family:'Orbitron',monospace; font-size:clamp(12px,1.8vw,15px); font-weight:700;
+    color:#fff; letter-spacing:1px; margin-bottom:4px;
+  }
+  .phase-meta {
+    font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--dim); letter-spacing:1px;
+  }
+  .phase-toggle {
+    font-family:'Share Tech Mono',monospace; font-size:14px; color:var(--dim);
+    transition:transform 0.3s, color 0.3s; flex-shrink:0;
+  }
+  .phase-card.open .phase-toggle { transform:rotate(180deg); color:var(--g); }
+  .phase-body { display:none; padding:0 24px 24px; border-top:1px solid var(--border); }
+  .phase-card.open .phase-body { display:block; padding-top:20px; }
+
+  .day-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px; margin-top:16px; }
+  .day-card {
+    background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:6px;
+    padding:14px; transition:border-color 0.3s,transform 0.2s;
+  }
+  .day-card:hover { border-color:var(--g); transform:translateY(-2px); }
+  .day-name {
+    font-family:'Orbitron',monospace; font-size:12px; font-weight:700; color:#fff;
+    letter-spacing:1px; display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+  }
+  .day-subtitle {
+    font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--dim);
+    letter-spacing:0.5px; text-transform:uppercase; margin:3px 0 10px;
+  }
+  .day-tag {
+    font-family:'Share Tech Mono',monospace; font-size:9px; padding:2px 8px; border-radius:2px;
+    letter-spacing:1px; text-transform:uppercase; border:1px solid transparent;
+  }
+  .tag-force  { background:rgba(255,215,0,0.1); color:var(--gold); border-color:rgba(255,215,0,0.25); }
+  .tag-sprint { background:rgba(0,255,136,0.1); color:var(--g); border-color:rgba(0,255,136,0.3); }
+  .tag-bdf    { background:rgba(255,34,68,0.1); color:#ff6688; border-color:rgba(255,34,68,0.25); }
+  .tag-plyo   { background:rgba(100,150,255,0.1); color:#88aaff; border-color:rgba(100,150,255,0.25); }
+  .tag-rest   { background:rgba(80,80,80,0.3); color:#999; border-color:rgba(80,80,80,0.4); }
+  .tag-gtg    { background:rgba(0,200,255,0.1); color:#00ddff; border-color:rgba(0,200,255,0.3); }
+  .ex-list { list-style:none; padding:0; margin:0; }
+  .ex-list li {
+    font-size:13px; padding:6px 0; border-bottom:1px solid rgba(0,255,136,0.06);
+    display:grid; grid-template-columns:1fr auto; gap:8px; align-items:start;
+  }
+  .ex-list li:last-child { border-bottom:none; }
+  .ex-name { color:var(--text); line-height:1.4; }
+  .ex-detail { font-family:'Share Tech Mono',monospace; font-size:11px; color:var(--dim); text-align:right; white-space:nowrap; }
+  .ex-note { font-size:11px; color:var(--cyan); grid-column:1/-1; margin-top:2px; }
+  .stat-badges { grid-column:1/-1; display:flex; flex-wrap:wrap; gap:6px; margin-top:5px; }
+  .stat-badge {
+    display:inline-flex; align-items:center; gap:4px;
+    font-family:'Share Tech Mono',monospace; font-size:9.5px;
+    padding:3px 7px; border-radius:3px; border:1px solid transparent;
+    letter-spacing:0.3px; white-space:nowrap;
+  }
+  .badge-weight { background:rgba(255,215,0,0.1); color:var(--gold); border-color:rgba(255,215,0,0.25); }
+  .badge-rest   { background:rgba(0,212,255,0.1); color:var(--cyan); border-color:rgba(0,212,255,0.3); }
+  .badge-rir    { background:rgba(136,85,255,0.14); color:var(--purple); border-color:rgba(136,85,255,0.35); }
+
+  .note {
+    font-size:12px; color:var(--cyan); margin:0 0 12px; padding:10px 14px;
+    background:rgba(0,212,255,0.05); border-left:3px solid var(--cyan); border-radius:0 4px 4px 0;
+    line-height:1.5;
+  }
+  .warning {
+    font-size:12px; color:var(--gold); margin:0 0 12px; padding:10px 14px;
+    background:rgba(255,215,0,0.05); border-left:3px solid var(--gold); border-radius:0 4px 4px 0;
+    line-height:1.5;
+  }
+  .phase-body .note:not(:first-child), .phase-body .warning:not(:first-child) { margin-top:12px; }
+
+  .table-wrap { overflow-x:auto; margin:16px 0; }
+  table { width:100%; border-collapse:collapse; font-size:12px; }
+  th {
+    font-family:'Share Tech Mono',monospace; font-size:9px; color:var(--dim); letter-spacing:2px;
+    text-transform:uppercase; padding:8px 12px; border-bottom:1px solid var(--border);
+    background:rgba(0,0,0,0.3); text-align:left;
+  }
+  td {
+    padding:8px 12px; border-bottom:1px solid rgba(0,255,136,0.06);
+    color:var(--text); vertical-align:top; line-height:1.5;
+  }
+  tr:hover td { background:rgba(0,255,136,0.03); }
+  .inline-badge {
+    display:inline-block; font-family:'Share Tech Mono',monospace; font-size:9px;
+    padding:2px 6px; border-radius:2px; margin-right:4px; letter-spacing:1px;
+    border:1px solid transparent;
+  }
+  .ib-force { background:rgba(255,215,0,0.1); color:var(--gold); border-color:rgba(255,215,0,0.25); }
+  .ib-sprint { background:rgba(0,255,136,0.1); color:var(--g); border-color:rgba(0,255,136,0.3); }
+  .ib-plyo { background:rgba(100,150,255,0.1); color:#88aaff; border-color:rgba(100,150,255,0.25); }
+  .ib-gtg { background:rgba(0,200,255,0.1); color:#00ddff; border-color:rgba(0,200,255,0.3); }
+
+  .protocol-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
+  .protocol-card {
+    background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:8px;
+    padding:18px; transition:border-color 0.3s,transform 0.2s;
+  }
+  .protocol-card:hover { border-color:var(--g); transform:translateY(-2px); }
+  .protocol-card h4 { font-family:'Orbitron',monospace; font-size:12px; color:#fff; margin-bottom:10px; letter-spacing:1px; }
+  .protocol-card p { font-size:12px; color:var(--text); line-height:1.6; }
+  .protocol-card .highlight { color:var(--g); font-weight:600; }
+
+  footer {
+    text-align:center; padding:32px 24px; border-top:1px solid var(--border); margin-top:48px;
+    font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--dim); letter-spacing:2px;
+  }
+
+  @media(max-width:768px) {
+    nav { padding:0 12px; }
+    .nav-links a { padding:6px 8px; font-size:9px; }
+    main { padding:24px 12px 48px; }
+    .hero { padding:28px 16px 24px; }
+    .day-cards { grid-template-columns:1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior:auto; }
+    * { animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
+  }
 </style>
 </head>
 <body>
 
-<div class="top-bar" id="topBar"></div>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="grid-bg"></div>
-  <div class="bracket bracket-tl"></div>
-  <div class="bracket bracket-tr"></div>
-  <div class="bracket bracket-bl"></div>
-  <div class="bracket bracket-br"></div>
-
-  <div class="hero-content">
-    <div class="system-id">// SYSTÈME ÉLITE — CHARGEMENT PROGRAMME v2.4 HYBRIDE + GTG //</div>
-    <div class="hero-name">NADHIR</div>
-    <div class="hero-subtitle">L'Enfant de la Victoire</div>
-    <div class="hero-divider"></div>
-    <div class="stat-grid">
-      <div class="stat-item">
-        <div class="stat-label">100M actuel</div>
-        <div class="stat-value">12.6<span class="stat-unit">s</span></div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-label">Détente élan</div>
-        <div class="stat-value">72<span class="stat-unit">cm</span></div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-label">Poids</div>
-        <div class="stat-value">68<span class="stat-unit">kg</span></div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-label">Objectif compet.</div>
-        <div class="stat-value">66<span class="stat-unit">kg</span></div>
-      </div>
-    </div>
-
-    <!-- DIAGNOSTIC BLOC -->
-    <div class="hero-diagnostic">
-      <div class="diag-title">⚠ DIAGNOSTIC — POINT FAIBLE IDENTIFIÉ</div>
-      <div class="diag-body">
-        <strong>Départ 30m arrêté : 4.51s</strong> — c'est le maillon faible. La phase d'accélération (0–30m) est nettement en retard par rapport à la vitesse lancée (30–60m à ~3.09s, point fort). Le programme v2.4 adopte une <em>approche hybride modérée</em> : volume d'accélération augmenté sur les séances lundi et jeudi, plus deux protocoles GTG (Grease The Groove) pour le départ et le bras de fer. Objectif : progresser sur le départ sans risque de blessure.
-      </div>
-    </div>
-
-    <div class="pulse-badge">
-      <span class="pulse-dot"></span>
-      COMPÉTITION — 1ER AOÛT 2026
-    </div>
-  </div>
-
-  <div class="scroll-cta">
-    <div class="scroll-arrow"></div>
-  </div>
-</section>
-
-<!-- NAV -->
-<nav class="nav-strip">
-  <div class="nav-inner">
-    <button class="nav-btn active" onclick="navScrollTo('#objectifs')">Objectifs</button>
-    <button class="nav-btn" onclick="navScrollTo('#analyse')">Analyse</button>
-    <button class="nav-btn" onclick="navScrollTo('#programme')">Programme</button>
-    <button class="nav-btn" onclick="navScrollTo('#roadmap')">Roadmap 30m</button>
-    <button class="nav-btn" onclick="navScrollTo('#regles')">Règles</button>
-    <button class="nav-btn" onclick="navScrollTo('#nutrition')">Nutrition</button>
-    <button class="nav-btn" onclick="navScrollTo('#macrocycle')">Macrocycle</button>
-  </div>
+<nav>
+  <div class="nav-brand">NBN // HIVERNAL 2026–27</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#objectifs" class="active">Objectifs</a></li>
+    <li><a href="#structure">Structure</a></li>
+    <li><a href="#protocoles">Protocoles</a></li>
+    <li><a href="#phase0">Phase 0</a></li>
+    <li><a href="#phase1">Phase 1</a></li>
+    <li><a href="#phase2">Phase 2</a></li>
+    <li><a href="#phase3">Phase 3</a></li>
+    <li><a href="#suivi">Suivi</a></li>
+  </ul>
 </nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Programme Hivernal 2026–2027</div>
+    <h1 class="hero-name">Nadhir Ben Nasr</h1>
+    <div class="hero-goals">
+      <div class="hero-goal">
+        <span class="hero-goal-tag">Objectif principal</span>
+        <span class="hero-goal-value">60 m en salle — <strong>7.20 – 7.30 s</strong></span>
+        <span class="hero-goal-date">Janvier – Mars 2027</span>
+      </div>
+      <div class="hero-goal secondary">
+        <span class="hero-goal-tag">Objectif secondaire</span>
+        <span class="hero-goal-value">100 m estival — <strong>11.30 – 11.50 s</strong></span>
+        <span class="hero-goal-date">Mai 2027</span>
+      </div>
+    </div>
+    <div class="hero-timeline">
+      <div class="hero-phase"><span class="dot p0"></span>Phase 0 · Régénération · Août 2026</div>
+      <div class="hero-phase"><span class="dot p1"></span>Phase 1 · Force & Hypertrophie · Sept–mi-nov 2026</div>
+      <div class="hero-phase"><span class="dot p2"></span>Phase 2 · Puissance & Accélération · Mi-nov–déc 2026</div>
+      <div class="hero-phase"><span class="dot p3"></span>Phase 3 · Compétition · Janv–mars 2027</div>
+    </div>
+  </div>
+</header>
 
 <main>
 
-<!-- OBJECTIFS -->
-<div class="section" id="objectifs">
-  <div class="section-header">
-    <span class="section-num">01</span>
-    <span class="section-icon">🎯</span>
-    <span class="section-title">Objectifs & Jalons</span>
-  </div>
+  <section id="objectifs">
+    <div class="section-header">
+      <span class="section-num">00</span>
+      <span class="section-title">Objectifs de la saison</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Performance (60 m)</th><th>Cible</th></tr>
+        <tr><td><strong>60 m officiel</strong></td><td>7.20 – 7.30 s</td></tr>
+        <tr><td><strong>10 m</strong> (avec starting-blocks)</td><td>1.90 – 1.95 s</td></tr>
+        <tr><td><strong>30 m</strong> (course pure)</td><td>≤ 4.15 s</td></tr>
+        <tr><td><strong>Détente verticale</strong> (fin 2026)</td><td>85 – 90 cm</td></tr>
+      </table>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Force (fin de Phase 1, nov. 2026)</th><th>Cible</th></tr>
+        <tr><td><strong>Squat profond 1RM</strong></td><td>110 kg+</td></tr>
+        <tr><td><strong>Deadlift 1RM</strong></td><td>130 kg+</td></tr>
+        <tr><td><strong>Poids de corps</strong></td><td>68-69 kg (+3-4 kg de masse maigre)</td></tr>
+      </table>
+    </div>
+  </section>
 
-  <div class="objectives-grid">
-    <div class="obj-row" style="border-color:rgba(0,255,136,0.5);">
-      <div class="obj-year">2026</div>
-      <div class="obj-cell"><span class="val">12.0–12.2</span><span class="lbl">100M (s)</span></div>
-      <div class="obj-cell"><span class="val">85–90</span><span class="lbl">DÉTENTE (cm)</span></div>
-      <div class="obj-cell"><span class="val">Top-Roll</span><span class="lbl">EFFICACE</span></div>
+  <section id="structure">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <span class="section-title">Structure générale</span>
     </div>
-    <div class="obj-row">
-      <div class="obj-year">2027</div>
-      <div class="obj-cell"><span class="val">11.3–11.5</span><span class="lbl">100M (s)</span></div>
-      <div class="obj-cell"><span class="val">95–100</span><span class="lbl">DÉTENTE (cm)</span></div>
-      <div class="obj-cell"><span class="val">Force Max</span><span class="lbl">SPÉCIFIQUE</span></div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Phase</th><th>Période</th><th>Durée</th><th>Focus</th></tr>
+        <tr><td><span class="inline-badge ib-gtg">P0</span></td><td>Août 2026</td><td>2-3 sem</td><td>Régénération</td></tr>
+        <tr><td><span class="inline-badge ib-force">P1</span></td><td>Sept – mi-nov 2026</td><td>10 sem</td><td>Force Maximale & Hypertrophie Fonctionnelle</td></tr>
+        <tr><td><span class="inline-badge ib-plyo">P2</span></td><td>Mi-nov – déc 2026</td><td>6 sem</td><td>Puissance & Accélération</td></tr>
+        <tr><td><span class="inline-badge ib-sprint">P3</span></td><td>Janv – mars 2027</td><td>8-10 sem</td><td>Compétition (mini-cycles d'affûtage)</td></tr>
+      </table>
     </div>
-    <div class="obj-row" style="border-color:rgba(255,34,68,0.5); background:rgba(255,34,68,0.04);">
-      <div class="obj-year" style="color:var(--red);">2028</div>
-      <div class="obj-cell"><span class="val">10.8–11.0</span><span class="lbl">100M (s)</span></div>
-      <div class="obj-cell"><span class="val">100–105</span><span class="lbl">DÉTENTE (cm)</span></div>
-      <div class="obj-cell"><span class="val">⚔️ Victoire</span><span class="lbl">VS FRÈRE</span></div>
-    </div>
-    <div class="obj-row">
-      <div class="obj-year">2029</div>
-      <div class="obj-cell"><span class="val">10.4–10.6</span><span class="lbl">100M (s)</span></div>
-      <div class="obj-cell"><span class="val">110–112</span><span class="lbl">DÉTENTE (cm)</span></div>
-      <div class="obj-cell"><span class="val">Elite</span><span class="lbl">NIVEAU</span></div>
-    </div>
-    <div class="obj-row">
-      <div class="obj-year">2030</div>
-      <div class="obj-cell"><span class="val">10.1–10.3</span><span class="lbl">100M (s)</span></div>
-      <div class="obj-cell"><span class="val">115–117</span><span class="lbl">DÉTENTE (cm)</span></div>
-      <div class="obj-cell"><span class="val">Dominant</span><span class="lbl">NIVEAU</span></div>
-    </div>
-    <div class="obj-row peak">
-      <div class="obj-year">2031</div>
-      <div class="obj-cell"><span class="val">10.00</span><span class="lbl">100M (s)</span></div>
-      <div class="obj-cell"><span class="val">120</span><span class="lbl">DÉTENTE (cm)</span></div>
-      <div class="obj-cell"><span class="val">PIC</span><span class="lbl">CARRIÈRE</span></div>
-      <span class="victory-badge">PEAK</span>
-    </div>
-  </div>
-</div>
+  </section>
 
-<!-- ANALYSE CRITIQUE -->
-<div class="section" id="analyse">
-  <div class="section-header">
-    <span class="section-num">02</span>
-    <span class="section-icon">⚡</span>
-    <span class="section-title">Analyse Critique — Version Corrigée</span>
-  </div>
-
-  <div class="analysis-grid">
-
-    <div class="analysis-card danger">
-      <div class="analysis-header">
-        <span class="badge badge-danger">CRITIQUE</span>
-        <span class="analysis-title-text">Nordic Curl — Erreur de prescription</span>
+  <section id="protocoles">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <span class="section-title">Protocoles permanents</span>
+    </div>
+    <div class="protocol-grid">
+      <div class="protocol-card">
+        <h4>🧬 Tendon Quotidien (Baar)</h4>
+        <p>10 min d'isométriques légères coude + Achille chaque matin. Prendre <span class="highlight">10-15 g collagène + vit C</span> 45-60 min avant.</p>
       </div>
-      <div class="analysis-body">
-        Tu commences 4×3 excentriques avec <strong>0 répétition parfaite</strong>. Sans régression, risque de douleur ischiotibiale proximale avant la semaine 4 — classique et dévastateur pour un sprinteur.
-        <div class="fix">
-          <span class="fix-icon">→</span>
-          <span><strong>Correction :</strong> Semaines 1–4 = Nordic assisté (bande élastique) ou razor curl à 30–40° d'amplitude seulement. Pleine amplitude uniquement au Bloc 2.</span>
-        </div>
+      <div class="protocol-card">
+        <h4>⚡ GTG Block Start</h4>
+        <p>Mar + Jeu, 2-3 départs 10 m à <span class="highlight">85-90 %</span>, repos 60-90 s. Sous-maximal : pas de RIR ciblé.</p>
       </div>
-    </div>
-
-    <div class="analysis-card danger">
-      <div class="analysis-header">
-        <span class="badge badge-danger">CRITIQUE</span>
-        <span class="analysis-title-text">Vitesse Lancée — Angle mort total</span>
+      <div class="protocol-card">
+        <h4>💪 GTG Bras de Fer</h4>
+        <p>Max 3×/semaine, <span class="highlight">loin des jours de tirage lourd</span>. Riser 2-3×15-20s, Pronation lente 2×10-12, <span class="highlight">RIR > 5</span>.</p>
       </div>
-      <div class="analysis-body">
-        Tous les sprints partent d'un arrêt ou d'une résistance. La <strong>vitesse de pointe lancée</strong> (flying 20–30m) n'est jamais entraînée. C'est précisément ce qui bloque le passage sous 12s.
-        <div class="fix">
-          <span class="fix-icon">→</span>
-          <span><strong>Correction :</strong> Jeudi, remplacer 1×60m départ par 3×20–30m volant lancés. Priorité absolue dès la semaine 1.</span>
-        </div>
+      <div class="protocol-card">
+        <h4>🦵 Berlin Achille</h4>
+        <p>2×45 s isométrie, <span class="highlight">2×/semaine</span>. Pas de RIR (isométrie).</p>
+      </div>
+      <div class="protocol-card">
+        <h4>🦿 Nordic Curl</h4>
+        <p>Chargement <span class="highlight">progressif (RIR 2-3)</span>, jamais à l'échec.</p>
+      </div>
+      <div class="protocol-card">
+        <h4>🧠 Test SNC quotidien</h4>
+        <p>3 sauts verticaux + sommeil. Si <span class="highlight">&lt; 85 %</span> ou sommeil <span class="highlight">&lt; 7h30</span> → annulation haute intensité.</p>
+      </div>
+      <div class="protocol-card">
+        <h4>🔒 Règle du Coude Sacré</h4>
+        <p>Auto-évaluation quotidienne (0-10). Si <span class="highlight">&gt; 2/10</span> → arrêt immédiat du BDF et des curls.</p>
+      </div>
+      <div class="protocol-card">
+        <h4>📉 Règle des 5 %</h4>
+        <p>Ne jamais augmenter volume/intensité de plus de <span class="highlight">5 % par semaine</span>.</p>
       </div>
     </div>
+  </section>
 
-    <div class="analysis-card warning">
-      <div class="analysis-header">
-        <span class="badge badge-warning">ATTENTION</span>
-        <span class="analysis-title-text">Conflit Force + Déficit — Risque dès S1</span>
+  <section id="phase0">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <span class="section-title">Phase 0 — Régénération (août 2026)</span>
+    </div>
+    <div class="phase-card open">
+      <div class="phase-header" role="button" tabindex="0" aria-expanded="true">
+        <span class="phase-badge p0">P0</span>
+        <div class="phase-info"><h3>Régénération</h3><div class="phase-meta">Août 2026 · 2-3 semaines</div></div>
+        <span class="phase-toggle">▾</span>
       </div>
-      <div class="analysis-body">
-        Viser 64 kg (−4 kg) à 8% BF depuis 14–15% BF en 12 semaines, tout en progressant en force et vitesse = <strong>conflit métabolique réel</strong>. À −400 kcal/j, les adaptations neuromusculaires du Bloc 1 seront suboptimales.
-        <div class="fix">
-          <span class="fix-icon">→</span>
-          <span><strong>Correction :</strong> Maintenance 2700–3000 kcal jusqu'à S11. Pas de déficit avant S11. Pertes de force évitées sur les 8 premières semaines critiques.</span>
-        </div>
+      <div class="phase-body">
+        <ul class="ex-list">
+          <li><span class="ex-name">Repos actif : marche, mobilité, protocole tendon quotidien</span></li>
+          <li>
+            <span class="ex-name">GTG BDF ultra-léger</span>
+            <div class="stat-badges"><span class="stat-badge badge-rir">RIR &gt; 8</span></div>
+          </li>
+          <li><span class="ex-name">Pas de sprint, pas de force lourde, pas de pliométrie</span></li>
+        </ul>
       </div>
     </div>
+  </section>
 
-    <div class="analysis-card warning">
-      <div class="analysis-header">
-        <span class="badge badge-warning">ATTENTION</span>
-        <span class="analysis-title-text">Saut Max Hebdo — Mauvais timing</span>
-      </div>
-      <div class="analysis-body">
-        Le saut maximal est mesuré le <strong>samedi en fin de semaine</strong> — après 6 jours de charge. Les données sont biaisées. Tu ne mesures pas ton max, tu mesures ta fatigue.
-        <div class="fix">
-          <span class="fix-icon">→</span>
-          <span><strong>Correction :</strong> Déplacer le test saut max au mardi, après l'échauffement mais avant le squat — jambes fraîches, données fiables.</span>
-        </div>
-      </div>
+  <section id="phase1">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <span class="section-title">Phase 1 — Force Maximale & Hypertrophie (10 semaines)</span>
     </div>
-
-    <div class="analysis-card warning">
-      <div class="analysis-header">
-        <span class="badge badge-warning">ATTENTION</span>
-        <span class="analysis-title-text">Bras de fer — Force sans Technique</span>
+    <div class="phase-card open">
+      <div class="phase-header" role="button" tabindex="0" aria-expanded="true">
+        <span class="phase-badge p1">P1</span>
+        <div class="phase-info"><h3>Force Maximale & Hypertrophie Fonctionnelle</h3><div class="phase-meta">Sept – mi-nov 2026 · 10 semaines</div></div>
+        <span class="phase-toggle">▾</span>
       </div>
-      <div class="analysis-body">
-        Le programme traite le bras de fer comme de la force pure. Contre ton frère (120 kg), la <strong>compétence technique top-roll</strong> est aussi décisive que les kg soulevés. Sans pratique de combat, la force ne se transfère pas.
-        <div class="fix">
-          <span class="fix-icon">→</span>
-          <span><strong>Correction :</strong> Ajouter 1 simulation de combat/semaine dès Bloc 2. Travailler le "cup" (fermeture poignet) en isolation. Étude vidéo matchs top-roll.</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="analysis-card ok">
-      <div class="analysis-header">
-        <span class="badge badge-ok">SOLIDE</span>
-        <span class="analysis-title-text">Auto-régulation SNC — Concept excellent</span>
-      </div>
-      <div class="analysis-body">
-        Le test SNC (3 sauts + sommeil) est une pratique d'élite. <strong>Bien conçu.</strong> Ajouter une vigilance tendon (douleur &gt;3/10 sur le trajet = séance modifiée) pour compléter la détection précoce invisible au SNC.
-      </div>
-    </div>
-
-    <div class="analysis-card ok">
-      <div class="analysis-header">
-        <span class="badge badge-ok">SOLIDE</span>
-        <span class="analysis-title-text">Structure 3 Blocs — Périodisation correcte</span>
-      </div>
-      <div class="analysis-body">
-        Accumulation → Transformation → Affûtage est <strong>la structure juste</strong> pour un pic le 1er août. Décharges semaines 4/8/12 correctes. La réduction de volume Bloc 3 tout en maintenant l'intensité respecte la science du tapering.
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- PROGRAMME CORRIGÉ -->
-<div class="section" id="programme">
-  <div class="section-header">
-    <span class="section-num">03</span>
-    <span class="section-icon">🗓</span>
-    <span class="section-title">Programme Corrigé — 12 Semaines</span>
-  </div>
-
-  <div style="margin-bottom:0.8rem;">
-    <div class="bloc-header">
-      <div style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:var(--dim);padding:0.2rem;letter-spacing:0.1em;">BLOCS</div>
-      <div class="bloc-tag bloc-b1">B1 ACC.</div>
-      <div class="bloc-tag bloc-b2">B2 TRANS.</div>
-      <div class="bloc-tag bloc-b3">B3 AFF.</div>
-    </div>
-  </div>
-
-  <!-- GTG LEGEND -->
-  <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;padding:0.6rem 0.8rem;background:rgba(0,0,0,0.25);border-radius:6px;border:1px solid rgba(255,255,255,0.06);">
-    <span style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:var(--dim);letter-spacing:0.1em;align-self:center;">GTG :</span>
-    <span class="gtg-badge gtg-bs-badge">◈ BLOCK START</span>
-    <span style="font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:var(--dim);">Départ 10m technique, 85–90%, 5–7 min</span>
-    &nbsp;·&nbsp;
-    <span class="gtg-badge gtg-bdf-badge">◈ BRAS DE FER</span>
-    <span style="font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:var(--dim);">Riser isométrique + Pronation légère, &lt;10 min</span>
-  </div>
-
-  <div class="days-grid">
-
-    <!-- ════ LUNDI ════ -->
-    <div class="day-card open">
-      <div class="day-header" onclick="toggleDay(this)">
-        <span class="day-label">LUN</span>
-        <span class="day-name">Sprint Technique</span>
-        <span class="day-tag day-tag-sprint">VITESSE</span>
-        <span class="day-chevron">▶</span>
-      </div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercice</th><th>Bloc 1</th><th>Bloc 2</th><th>Bloc 3</th></tr>
-          <tr><td>Échauffement</td><td colspan="3">Footing 10' + gammes 10' + Wall drill 5'</td></tr>
-          <tr><td>Départs 4 points</td><td>4×10m résisté</td><td>3×20m résisté + 2×10m libre</td><td>4×10m libre signal</td></tr>
-          <tr>
-            <td>
-              Sprint technique
-              <span class="new-badge">★ NOUVEAU</span><br>
-              <span style="color:var(--g);font-size:0.6rem;font-weight:700;">Volume accru — cibler l'accélération</span>
-            </td>
-            <td><strong style="color:var(--g);">5×30m à 98–100% chronométré obligatoire — repos 5 min</strong></td>
-            <td><strong style="color:var(--g);">4×30m à 100% chrono obligatoire + 1×60m à 98%</strong></td>
-            <td><strong style="color:var(--g);">3×30m à 100% chrono obligatoire + 1×80m à 98%</strong></td>
-          </tr>
-          <tr>
-            <td>★ Berlin Achille <span style="color:#88aaff;font-size:0.6rem;">[MÉTHODE BERLIN]</span><br><span style="color:var(--dim);font-size:0.6rem;">Talon sur step, genou tendu — poussée isométrique vers le bas contre sol/mur</span></td>
-            <td>5×4 reps (3s ON / 3s OFF) — repos 60s/série</td>
-            <td>5×4 reps (3s ON / 3s OFF) — repos 60s/série</td>
-            <td>5×3 reps (3s ON / 3s OFF) — repos 60s/série</td>
-          </tr>
-          <tr><td>Pliométrie basse</td><td>Pogo 3×20 + sauts joints 3×6</td><td>idem</td><td>−30% vol.</td></tr>
-          <tr><td>Volume sprint total</td><td>~300m</td><td>~240m</td><td>~200m</td></tr>
-        </table>
-        <div class="day-note"><strong style="color:var(--g);">★ NOUVEAU — Volume accru pour cibler l'accélération :</strong> 5×30m à 98–100% <em>chronométrés obligatoirement</em>, repos 5 minutes complets entre chaque répétition. Comparer les temps à la cible Roadmap 30m. Annulation si SNC &lt;85%.</div>
-        <div class="day-note">Séance technique pure : départs, mécanique, accélération. Repos 3–4 min entre séries. Le reste de la séance (départs résistés, Berlin, plio basse) reste inchangé.</div>
-        <div class="day-note"><strong style="color:#88aaff;">⚡ Méthode Berlin :</strong> Face à un mur, talon posé sur bord de step (pied à 90°, genou tendu). Pousser le talon vers le bas en isométrie maximale 3s, relâcher 3s = 1 rep. Aucun mouvement visible. Durée ajoutée : ~8 min. Inséré AVANT la pliométrie pour potentialiser l'élasticité du tendon.</div>
-        <div class="day-warning">⚠ Douleur Achille &gt;3/10 à l'échauffement → Berlin annulé ce jour, pliométrie maintenue à −50% volume.</div>
-
-        <!-- GTG BDF — LUNDI -->
-        <div class="gtg-block gtg-bdf">
-          <div class="gtg-header">
-            <span class="gtg-badge gtg-bdf-badge">◈ GTG</span>
-            <span class="gtg-title">GTG Bras de Fer — Lundi</span>
-            <span style="font-family:'Share Tech Mono',monospace;font-size:0.55rem;color:#888;letter-spacing:0.1em;">EN DEHORS DE LA SÉANCE</span>
-          </div>
-          <div class="gtg-body">
-            À effectuer le matin ou en dehors de la séance principale — jamais cumulé avec les sprints.
-            <ul>
-              <li><strong style="color:#ffcc88;">Riser isométrique :</strong> 2–3 séries × 15–20 s — bande élastique fine, main en pronation, élévation radiale (pouce vers le plafond). Effort modéré, pas de brûlure.</li>
-              <li><strong style="color:#ffcc88;">Pronation lente :</strong> 2 séries × 10–12 reps — bande élastique fine, rotation de l'avant-bras (paume vers le bas), contrôle total.</li>
+      <div class="phase-body">
+        <div class="note">Calendrier organisé sur un cycle de 14 jours, aligné sur le jeûne de Daoud : séances lourdes (Power Clean, Squat, Deadlift) les jours sans jeûne ; séances légères/techniques les jours de jeûne, ou juste après la rupture. La trame ci-dessous est un planning hebdomadaire type, à adapter selon le cycle réel.</div>
+        <div class="note" style="margin-top:0;">Les % de 1RM sont remplacés par des cibles RIR (Reps In Reserve). Poids indicatifs (⚖) et repos (⏱) affichés uniquement quand ils sont fixés.</div>
+        <div class="day-cards">
+          <div class="day-card">
+            <div class="day-name">LUNDI <span class="day-tag tag-force">Force</span></div>
+            <div class="day-subtitle">Force Inférieure A</div>
+            <ul class="ex-list">
+              <li>
+                <span class="ex-name">Power Clean (apprentissage progressif)</span><span class="ex-detail">5×3 · technique</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 4-5</span></div>
+              </li>
+              <li>
+                <span class="ex-name">Squat profond</span><span class="ex-detail">4×5 · explosif</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 1-2</span></div>
+              </li>
+              <li>
+                <span class="ex-name">Hip thrust</span><span class="ex-detail">4×8</span>
+                <div class="stat-badges"><span class="stat-badge badge-weight">⚖ 80-90 kg</span><span class="stat-badge badge-rir">RIR 2-3</span></div>
+              </li>
+              <li>
+                <span class="ex-name">Nordic curl excentrique</span><span class="ex-detail">3×4</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 2-3</span></div>
+              </li>
+              <li><span class="ex-name">Berlin Achille</span><span class="ex-detail">2×45 s iso</span></li>
+              <li class="ex-note">Pas de BDF ce jour.</li>
             </ul>
-            <div class="gtg-rule">⏱ Durée totale : 5–8 min · Repos entre séries : 60 s · Jamais après grip intense</div>
-            <div class="gtg-cond">⚠ Coude droit &gt;3/10 → GTG annulé · Pas d'échec musculaire · Volume très bas</div>
           </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ════ MARDI ════ -->
-    <div class="day-card">
-      <div class="day-header" onclick="toggleDay(this)">
-        <span class="day-label">MAR</span>
-        <span class="day-name">Force Bas + Saut Max + Isométrie</span>
-        <span class="day-tag day-tag-force">FORCE</span>
-        <span class="day-chevron">▶</span>
-      </div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercice</th><th>Bloc 1</th><th>Bloc 2</th><th>Bloc 3</th></tr>
-          <tr><td>★ Saut max élan <span style="color:var(--gold);font-size:0.6rem;">[DÉPLACÉ ICI]</span></td><td colspan="3">4–6 sauts max 100% — noté avant tout effort</td></tr>
-          <tr><td>Squat profond</td><td>4×5 70–75 kg</td><td>4×4 80–88 kg</td><td>3×3 90–100 kg</td></tr>
-          <tr><td>Hip thrust explosif</td><td>4×6 72–76 kg</td><td>4×4 76–81 kg</td><td>3×3 79–83 kg</td></tr>
-          <tr><td>Trap Bar Deadlift</td><td>3×5 88–95 kg</td><td>3×3 98–110 kg</td><td>2×3 108–118 kg</td></tr>
-          <tr><td>★ Nordic RÉGRESSÉ <span style="color:var(--g);font-size:0.6rem;">[CORRIGÉ]</span></td><td>4×3 bande élastique (descente 5s)</td><td>4×4 amplitude 60% (3s)</td><td>3×4 amplitude pleine (2s)</td></tr>
-          <tr><td>Fentes bulgares</td><td>3×6/jambe 20–25 kg</td><td>3×5/jambe 25–30 kg</td><td>2×5/jambe 30 kg</td></tr>
-          <tr><td>Isométrie mollets</td><td colspan="3">Genou tendu 2×30s + genou fléchi 2×30s</td></tr>
-        </table>
-        <div class="day-note">Saut max EN PREMIER — jambes fraîches = données réelles. Repos 3–4 min entre séries de force.</div>
-
-        <!-- GTG BLOCK START — MARDI -->
-        <div class="gtg-block">
-          <div class="gtg-header">
-            <span class="gtg-badge gtg-bs-badge">◈ GTG</span>
-            <span class="gtg-title">GTG Block Start — Mardi</span>
-            <span style="font-family:'Share Tech Mono',monospace;font-size:0.55rem;color:#888;letter-spacing:0.1em;">AVANT LA SÉANCE</span>
-          </div>
-          <div class="gtg-body">
-            À faire le matin ou en tout début d'échauffement, <strong>avant le saut max et la séance de force</strong>.
-            <ul>
-              <li><strong style="color:#99ddff;">2–3 départs 10m en 4 points</strong> à 85–90% — focus technique pure (posture, poussée, bras). Jamais chronométré.</li>
-              <li>Récupération complète entre chaque départ (60–90 s). Aucune sensation de fatigue musculaire.</li>
+          <div class="day-card">
+            <div class="day-name">MARDI <span class="day-tag tag-gtg">GTG</span></div>
+            <div class="day-subtitle">GTG Block Start + Force Supérieure A</div>
+            <ul class="ex-list">
+              <li>
+                <span class="ex-name">GTG Block Start</span><span class="ex-detail">2-3 départs 10 m / 85-90%</span>
+                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span></div>
+              </li>
+              <li>
+                <span class="ex-name">Développé couché</span><span class="ex-detail">4×5</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 1-2</span></div>
+              </li>
+              <li>
+                <span class="ex-name">Tractions lestées</span><span class="ex-detail">4×5</span>
+                <div class="stat-badges"><span class="stat-badge badge-weight">⚖ +15-20 kg</span><span class="stat-badge badge-rir">RIR 1-2</span></div>
+              </li>
+              <li>
+                <span class="ex-name">Rowing barre</span><span class="ex-detail">4×8</span>
+                <div class="stat-badges"><span class="stat-badge badge-weight">⚖ 50-60 kg</span><span class="stat-badge badge-rir">RIR 2-3</span></div>
+              </li>
+              <li><span class="ex-name">Facepull</span><span class="ex-detail">3×12</span></li>
+              <li class="ex-note">Pas de BDF ce jour.</li>
             </ul>
-            <div class="gtg-rule">⏱ Durée : 5–7 min · Ce n'est pas une séance de vitesse — c'est du câblage moteur</div>
-            <div class="gtg-cond">⚠ SNC &lt;85% ou sommeil &lt;7h30 → GTG Block Start annulé · Douleur ou perte de coordination → arrêt immédiat</div>
           </div>
-        </div>
-
-        <!-- GTG BDF — MARDI -->
-        <div class="gtg-block gtg-bdf">
-          <div class="gtg-header">
-            <span class="gtg-badge gtg-bdf-badge">◈ GTG</span>
-            <span class="gtg-title">GTG Bras de Fer — Mardi</span>
-            <span style="font-family:'Share Tech Mono',monospace;font-size:0.55rem;color:#888;letter-spacing:0.1em;">EN DEHORS DE LA SÉANCE</span>
-          </div>
-          <div class="gtg-body">
-            Identique au lundi — matin ou en dehors de la séance force. Pas de cumul séance force + GTG BDF dans la même session.
-            <ul>
-              <li><strong style="color:#ffcc88;">Riser isométrique :</strong> 2–3 séries × 15–20 s — bande élastique fine, main en pronation.</li>
-              <li><strong style="color:#ffcc88;">Pronation lente :</strong> 2 séries × 10–12 reps — bande élastique fine, amplitude contrôlée.</li>
+          <div class="day-card">
+            <div class="day-name">MERCREDI <span class="day-tag tag-sprint">Sprint</span></div>
+            <div class="day-subtitle">Sprint Technique + Force Inférieure B + BDF</div>
+            <ul class="ex-list">
+              <li><span class="ex-name">Échauffement + drills</span><span class="ex-detail">20 min</span></li>
+              <li><span class="ex-name">Sprint entretien</span><span class="ex-detail">3×30 m / 85%</span></li>
+              <li>
+                <span class="ex-name">Trap bar deadlift</span><span class="ex-detail">4×4</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 1-2</span></div>
+              </li>
+              <li><span class="ex-name">Good morning</span><span class="ex-detail">3×10 · léger</span></li>
+              <li><span class="ex-name">Berlin Achille</span><span class="ex-detail">2×45 s</span></li>
+              <li>
+                <span class="ex-name">RDL unijambiste (prévention genou)</span><span class="ex-detail">2×8/jambe</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 3-4</span></div>
+              </li>
+              <li>
+                <span class="ex-name">BDF — Curl marteau</span><span class="ex-detail">3×8</span>
+                <div class="stat-badges"><span class="stat-badge badge-weight">⚖ 12-15 kg</span><span class="stat-badge badge-rir">RIR 1-2</span></div>
+              </li>
             </ul>
-            <div class="gtg-rule">⏱ Durée totale : 5–8 min · Volume très bas · Jamais à l'échec</div>
-            <div class="gtg-cond">⚠ Coude droit &gt;3/10 → GTG annulé · Pas le jour du lendemain de pliométrie de choc</div>
           </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ════ MERCREDI ════ -->
-    <div class="day-card">
-      <div class="day-header" onclick="toggleDay(this)">
-        <span class="day-label">MER</span>
-        <span class="day-name">Bras de Fer A — Force Max Top-Roll</span>
-        <span class="day-tag day-tag-bf">BRAS DE FER</span>
-        <span class="day-chevron">▶</span>
-      </div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercice</th><th>Bloc 1</th><th>Bloc 2</th><th>Bloc 3</th></tr>
-          <tr>
-            <td>Pronation drill <span style="color:var(--g);font-size:0.6rem;">(câble ou bande)</span></td>
-            <td>2×6–8 — RPE 8</td>
-            <td>2×6–8 — RPE 9</td>
-            <td>2×6 charge max RPE 9</td>
-          </tr>
-          <tr>
-            <td>Back pressure poulie haute</td>
-            <td>2×8–10 — RPE 8</td>
-            <td>2×6–8 — RPE 9</td>
-            <td>2×6 charge max RPE 9</td>
-          </tr>
-          <tr>
-            <td>Riser poulie basse</td>
-            <td>2×8–10 — RPE 8</td>
-            <td>2×6–8 — RPE 9</td>
-            <td>2×6 charge max RPE 9</td>
-          </tr>
-          <tr>
-            <td>Cup isolation <span style="color:var(--g);font-size:0.6rem;">(flexion poignet, palme haut)</span></td>
-            <td>2×10–12 lent</td>
-            <td>2×8–10 + iso 3s fin</td>
-            <td>2×8 charge ++</td>
-          </tr>
-          <tr>
-            <td>Isometric hold top-roll <span style="color:var(--gold);font-size:0.6rem;">(angle 90°, résistance fixe)</span></td>
-            <td>2×15s</td>
-            <td>2×18s</td>
-            <td>2×20s charge ++</td>
-          </tr>
-          <tr>
-            <td>Wrist extensions <span style="color:var(--dim);font-size:0.6rem;">(équilibre tendineux)</span></td>
-            <td>1–2×12–15 léger</td>
-            <td>1–2×12–15 léger</td>
-            <td>1–2×12–15 léger</td>
-          </tr>
-        </table>
-        <div class="day-note">
-          <strong>Durée :</strong> 30–40 min. Volume bas = 2 séries/exercice. Stop 1–2 reps avant l'échec (RPE 8–9). Progression : +1,25–2,5 kg quand 10 reps propres atteintes.
-        </div>
-        <div class="day-warning">⚠ Gêne coude droit &gt;3/10 → stop immédiat, récupération 48h. Jamais à l'échec sur bras de fer.</div>
-        <div class="day-note" style="border-left-color:rgba(120,120,120,0.5);background:rgba(80,80,80,0.08);">
-          <strong style="color:#888;">— Pas de GTG ce jour —</strong> Mercredi = séance bras de fer intense (BDF A). Les deux protocoles GTG (Block Start et BDF) sont suspendus pour préserver la récupération neuromusculaire du coude et des avant-bras.
-        </div>
-      </div>
-    </div>
-
-    <!-- ════ JEUDI ════ -->
-    <div class="day-card">
-      <div class="day-header" onclick="toggleDay(this)">
-        <span class="day-label">JEU</span>
-        <span class="day-name">Sprint Accélération + Bonds + Flying</span>
-        <span class="day-tag day-tag-sprint">VITESSE</span>
-        <span class="day-chevron">▶</span>
-      </div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercice</th><th>Bloc 1</th><th>Bloc 2</th><th>Bloc 3</th></tr>
-          <tr><td>Départs résistés</td><td>4×10m</td><td>3×15m</td><td>3×10m libre</td></tr>
-          <tr>
-            <td>
-              ★ Flying 20m
-              <span class="new-badge">★ NOUVEAU</span><br>
-              <span style="color:var(--g);font-size:0.6rem;">Volume flying accru</span>
-            </td>
-            <td><strong style="color:var(--g);">4×20m volant (élan 30m)</strong></td>
-            <td>4×25m volant</td>
-            <td>3×30m volant (100%)</td>
-          </tr>
-          <tr>
-            <td>
-              Sprint 60m
-              <span class="new-badge">★ NOUVEAU</span><br>
-              <span style="color:var(--g);font-size:0.6rem;">Volume réduit — qualité maximale</span>
-            </td>
-            <td><strong style="color:var(--g);">2×60m à 95–98%, repos 6–8 min</strong></td>
-            <td><strong style="color:var(--g);">2×60m à 95–98%, repos 6–8 min</strong></td>
-            <td><strong style="color:var(--g);">2×60m à 98–100%, repos 6–8 min</strong></td>
-          </tr>
-          <tr>
-            <td>★ Berlin Achille <span style="color:#88aaff;font-size:0.6rem;">[MÉTHODE BERLIN]</span><br><span style="color:var(--dim);font-size:0.6rem;">Même protocole que Lundi — talon step, isométrie maximale</span></td>
-            <td>5×4 reps (3s ON / 3s OFF) — repos 60s/série</td>
-            <td>5×4 reps (3s ON / 3s OFF) — repos 60s/série</td>
-            <td>5×3 reps (3s ON / 3s OFF) — repos 60s/série</td>
-          </tr>
-          <tr><td>Bonds horizontaux (5B)</td><td>3 séries</td><td>4 séries</td><td>3 séries qualité</td></tr>
-          <tr><td>Hops unipodaux bas</td><td colspan="3">2×15/jambe, cheville verrouillée</td></tr>
-          <tr><td>Drill cadence <span style="color:var(--g);font-size:0.6rem;">[AJOUT]</span></td><td colspan="3">Mini-haies 2×20m ou fréquence drill 3×10s</td></tr>
-          <tr><td>Volume sprint total</td><td>~250m</td><td>~240m</td><td>~200m</td></tr>
-        </table>
-        <div class="day-note"><strong style="color:var(--g);">Volume réduit sur 60m — qualité prioritaire :</strong> 2×60m au lieu de 3, repos 6–8 min. Volume jeudi B1 ~250m. Le flying (4×20m volant) reste inchangé pour cibler la vitesse de pointe.</div>
-        <div class="day-note">Flying = élan de 30m puis sprint mesuré sur 20m. Cible la vitesse de pointe, pas l'accélération. Le reste de la séance (départs résistés, Berlin, bonds, drills) reste inchangé.</div>
-        <div class="day-note"><strong style="color:#88aaff;">⚡ Méthode Berlin (2ème session) :</strong> Placé après les sprints, avant les bonds — tendon chaud mais pas épuisé. C'est l'ordre optimal : stimulus tendineux isométrique → transfert immédiat en élasticité sur les bonds horizontaux. Durée ajoutée : ~8 min.</div>
-        <div class="day-warning">⚠ Douleur Achille &gt;3/10 → Berlin annulé. Ne jamais cumuler Berlin + intensité pliométrique élevée le même jour si douleur présente.</div>
-
-        <!-- GTG BLOCK START — JEUDI -->
-        <div class="gtg-block">
-          <div class="gtg-header">
-            <span class="gtg-badge gtg-bs-badge">◈ GTG</span>
-            <span class="gtg-title">GTG Block Start — Jeudi</span>
-            <span style="font-family:'Share Tech Mono',monospace;font-size:0.55rem;color:#888;letter-spacing:0.1em;">PENDANT L'ÉCHAUFFEMENT</span>
-          </div>
-          <div class="gtg-body">
-            Intégré <strong>pendant l'échauffement</strong>, après footing et gammes, avant les départs résistés.
-            <ul>
-              <li><strong style="color:#99ddff;">2–3 départs 10m en 4 points</strong> à 85–90% — focus technique pure (posture, poussée initiale, bras). Jamais chronométré.</li>
-              <li>Récupération 60–90 s entre chaque départ. Aucune fatigue cumulée avec la séance principale.</li>
+          <div class="day-card">
+            <div class="day-name">JEUDI <span class="day-tag tag-gtg">GTG</span></div>
+            <div class="day-subtitle">GTG Block Start + BDF</div>
+            <ul class="ex-list">
+              <li>
+                <span class="ex-name">GTG Block Start</span><span class="ex-detail">2-3 départs 10 m / 87-90%</span>
+                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span></div>
+              </li>
+              <li>
+                <span class="ex-name">GTG BDF — Riser</span><span class="ex-detail">2-3×15-20 s</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR &gt;5</span></div>
+              </li>
+              <li>
+                <span class="ex-name">GTG BDF — Pronation lente</span><span class="ex-detail">2×10-12</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR &gt;5</span></div>
+              </li>
             </ul>
-            <div class="gtg-rule">⏱ Durée : 5–7 min · S'enchaîne naturellement avec l'échauffement · Volume total journée déjà élevé → limiter à 2 départs si fatigue perceptible</div>
-            <div class="gtg-cond">⚠ SNC &lt;85% ou sommeil &lt;7h30 → GTG Block Start annulé · Douleur ou coordination dégradée → arrêt immédiat</div>
           </div>
-        </div>
-
-        <!-- GTG BDF — JEUDI -->
-        <div class="gtg-block gtg-bdf">
-          <div class="gtg-header">
-            <span class="gtg-badge gtg-bdf-badge">◈ GTG</span>
-            <span class="gtg-title">GTG Bras de Fer — Jeudi</span>
-            <span style="font-family:'Share Tech Mono',monospace;font-size:0.55rem;color:#888;letter-spacing:0.1em;">EN DEHORS DE LA SÉANCE</span>
-          </div>
-          <div class="gtg-body">
-            Matin ou en dehors de la séance sprint. Ne jamais cumuler avec les sprints dans la même session.
-            <ul>
-              <li><strong style="color:#ffcc88;">Riser isométrique :</strong> 2–3 séries × 15–20 s — bande élastique fine, main en pronation, élévation radiale.</li>
-              <li><strong style="color:#ffcc88;">Pronation lente :</strong> 2 séries × 10–12 reps — bande élastique fine, rotation contrôlée de l'avant-bras.</li>
+          <div class="day-card">
+            <div class="day-name">VENDREDI <span class="day-tag tag-force">Force</span></div>
+            <div class="day-subtitle">Force Inférieure C (volume) + BDF</div>
+            <ul class="ex-list">
+              <li>
+                <span class="ex-name">Squat profond (volume)</span><span class="ex-detail">5×6</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 2-3</span></div>
+              </li>
+              <li>
+                <span class="ex-name">Hip thrust</span><span class="ex-detail">4×10</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 2-3</span></div>
+              </li>
+              <li>
+                <span class="ex-name">Nordic curl</span><span class="ex-detail">3×4</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 2-3</span></div>
+              </li>
+              <li>
+                <span class="ex-name">Mollets lestés</span><span class="ex-detail">3×12</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 2-3</span></div>
+              </li>
+              <li>
+                <span class="ex-name">BDF — Riser long (endurance/tendons)</span><span class="ex-detail">3×20 s</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 4-5</span></div>
+              </li>
+              <li>
+                <span class="ex-name">BDF — Pronation endurance</span><span class="ex-detail">3×12</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 4-5</span></div>
+              </li>
             </ul>
-            <div class="gtg-rule">⏱ Durée totale : 5–8 min · Effort léger — sensation de travail musculaire, pas de douleur</div>
-            <div class="gtg-cond">⚠ Coude droit &gt;3/10 → GTG annulé · Jamais après grip intense ou veille de BDF intense</div>
           </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ════ VENDREDI ════ -->
-    <div class="day-card">
-      <div class="day-header" onclick="toggleDay(this)">
-        <span class="day-label">VEN</span>
-        <span class="day-name">Pliométrie de Choc + Force Explosive</span>
-        <span class="day-tag day-tag-plyo">PLYO</span>
-        <span class="day-chevron">▶</span>
-      </div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercice</th><th>Bloc 1</th><th>Bloc 2</th><th>Bloc 3</th></tr>
-          <tr><td>Drop jumps</td><td>5×3 (40 cm)</td><td>5×3 (45–50 cm)</td><td>4×3 (40 cm)</td></tr>
-          <tr><td>Trap Bar Jumps</td><td>5×3 30–35 kg</td><td>5×2 35–40 kg</td><td>4×2 35–40 kg</td></tr>
-          <tr><td>Squat sauté</td><td>3×5 20 kg</td><td>4×4 25 kg</td><td>3×4 20 kg</td></tr>
-          <tr><td>Pompes claquées</td><td>3×6</td><td>3×8</td><td>3×6</td></tr>
-          <tr>
-            <td>★ Rappel Squat léger <span class="rappel-badge">[RAPPEL]</span><br><span style="color:var(--dim);font-size:0.6rem;">Volume additionnel — charge modérée, pas d'échec — repos 2–3 min</span></td>
-            <td>3×5 65–70 kg</td>
-            <td>3×5 70–80 kg</td>
-            <td>2×5 75–85 kg</td>
-          </tr>
-          <tr><td>Isométrie mollets</td><td colspan="3">Genou tendu 2×30s + genou fléchi 2×30s</td></tr>
-        </table>
-        <div class="day-note">Drop jumps : temps de contact cible &lt;0,2s. Si &gt;0,25s sur 3 séries de suite → stop, fatigue réelle. Repos 4–5 min entre séries de choc.</div>
-        <div class="day-warning">⚠ Vendredi = pliométrie pure, pas de sprint. Ne pas ajouter de sprint ce jour-là : cumul choc + vitesse = risque ischios élevé.</div>
-        <div class="day-note"><strong>Rappel squat du vendredi :</strong> Séance légère, loin de l'échec. Objectif = volume additionnel pour renforcer le pattern moteur et stimuler la force sans impacter la récupération. Si fatigue élevée, réduire à 2×5.</div>
-
-        <!-- GTG BDF — VENDREDI -->
-        <div class="gtg-block gtg-bdf">
-          <div class="gtg-header">
-            <span class="gtg-badge gtg-bdf-badge">◈ GTG</span>
-            <span class="gtg-title">GTG Bras de Fer — Vendredi</span>
-            <span style="font-family:'Share Tech Mono',monospace;font-size:0.55rem;color:#888;letter-spacing:0.1em;">EN DEHORS DE LA SÉANCE</span>
-          </div>
-          <div class="gtg-body">
-            Matin ou en dehors de la séance pliométrie. Vendredi = pas de GTG Block Start (lendemain de pliométrie de choc = jambes non disponibles pour départ).
-            <ul>
-              <li><strong style="color:#ffcc88;">Riser isométrique :</strong> 2–3 séries × 15–20 s — bande élastique fine, main en pronation, élévation radiale.</li>
-              <li><strong style="color:#ffcc88;">Pronation lente :</strong> 2 séries × 10–12 reps — bande élastique fine, rotation contrôlée.</li>
+          <div class="day-card">
+            <div class="day-name">SAMEDI <span class="day-tag tag-force">Force</span></div>
+            <div class="day-subtitle">Force Supérieure B</div>
+            <ul class="ex-list">
+              <li>
+                <span class="ex-name">Développé incliné</span><span class="ex-detail">4×6</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 1-2</span></div>
+              </li>
+              <li><span class="ex-name">Tractions (poids du corps)</span><span class="ex-detail">3×max-2</span></li>
+              <li>
+                <span class="ex-name">Rowing unilatéral</span><span class="ex-detail">3×10/côté</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 2-3</span></div>
+              </li>
+              <li><span class="ex-name">Rotation externe épaule + prévention coude</span><span class="ex-detail">10 min</span></li>
             </ul>
-            <div class="gtg-rule">⏱ Durée totale : 5–8 min · Le lendemain (samedi) = BDF B → garder les avant-bras frais · Réduire à 1 série si coude chaud</div>
-            <div class="gtg-cond">⚠ Coude droit &gt;3/10 → GTG annulé · GTG Block Start interdit ce jour (jeudi = veille pliométrie)</div>
           </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ════ SAMEDI ════ -->
-    <div class="day-card">
-      <div class="day-header" onclick="toggleDay(this)">
-        <span class="day-label">SAM</span>
-        <span class="day-name">Bras de Fer B — Endurance & Tendons</span>
-        <span class="day-tag day-tag-bf">BRAS DE FER</span>
-        <span class="day-chevron">▶</span>
-      </div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Exercice</th><th>Bloc 1</th><th>Bloc 2</th><th>Bloc 3</th></tr>
-          <tr>
-            <td>Curl marteau <span style="color:var(--dim);font-size:0.6rem;">(ou reverse curl)</span></td>
-            <td>2×10–12 — RPE 8</td>
-            <td>2×8–10 — RPE 9</td>
-            <td>2×8 charge max RPE 9</td>
-          </tr>
-          <tr>
-            <td>Pronation partielle lente <span style="color:var(--dim);font-size:0.6rem;">(amplitude contrôlée)</span></td>
-            <td>2×12 lent</td>
-            <td>2×10–12 lent</td>
-            <td>2×10 charge ++</td>
-          </tr>
-          <tr>
-            <td>Side pressure isométrique <span style="color:var(--dim);font-size:0.6rem;">(mur ou bande)</span></td>
-            <td>2×12s</td>
-            <td>2×15s</td>
-            <td>2×15s charge ++</td>
-          </tr>
-          <tr>
-            <td>Grip serviette <span style="color:var(--dim);font-size:0.6rem;">(tenue maximale)</span></td>
-            <td>2×hold max</td>
-            <td>2×hold max</td>
-            <td>2×hold max</td>
-          </tr>
-          <tr>
-            <td>Face pulls <span style="color:var(--g);font-size:0.6rem;">(stabilité dos/épaule — 1×/sem.)</span></td>
-            <td>2×12–15 léger</td>
-            <td>2×12–15 léger</td>
-            <td>2×12–15 léger</td>
-          </tr>
-        </table>
-        <div class="day-note">
-          <strong>Durée :</strong> 30–40 min. Progression identique au mercredi : +1,25–2,5 kg quand 10 reps propres. Face pulls uniquement ici (1 fois par semaine suffit).
-        </div>
-        <div class="day-note">Semaines 3, 7, 11 (pic d'intensité) : supprimer cette séance. Protection coude prioritaire.</div>
-
-        <!-- GTG BLOCK START — SAMEDI (CONDITIONNEL) -->
-        <div class="gtg-block">
-          <div class="gtg-header">
-            <span class="gtg-badge gtg-bs-badge">◈ GTG</span>
-            <span class="gtg-title">GTG Block Start — Samedi</span>
-            <span class="gtg-optional-badge">OPTIONNEL</span>
-          </div>
-          <div class="gtg-body">
-            <strong style="color:#00ddff;">Conditionnel strict</strong> — uniquement si les jambes sont <em>parfaitement fraîches</em>, le matin avant la séance BDF.
-            <ul>
-              <li><strong style="color:#99ddff;">2 départs maximum 10m</strong> à 85% — technique pure, aucun sprint lancé. Focus sur la position initiale et la première poussée.</li>
-              <li>Récupération 90 s entre chaque départ. Durée : 4–5 min.</li>
+          <div class="day-card">
+            <div class="day-name">DIMANCHE <span class="day-tag tag-rest">Repos</span></div>
+            <div class="day-subtitle">Repos complet</div>
+            <ul class="ex-list">
+              <li><span class="ex-name">Repos complet</span></li>
             </ul>
-            <div class="gtg-rule">⏱ À faire le matin uniquement, bien avant la séance BDF B · Jamais couplé avec la séance bras de fer</div>
-            <div class="gtg-cond">⚠ ANNULÉ si : SNC &lt;85% · Sommeil &lt;7h30 · Douleur ou lourdeur dans les jambes · Pliométrie intense la veille (vendredi) → dans ce cas, sauter le GTG Block Start systématiquement</div>
           </div>
         </div>
-
-        <div class="day-note" style="border-left-color:rgba(120,120,120,0.5);background:rgba(80,80,80,0.08);">
-          <strong style="color:#888;">— Pas de GTG BDF ce jour —</strong> Samedi = séance BDF B. Les avant-bras sont sollicités dans la séance principale — aucun GTG bras de fer supplémentaire.
-        </div>
-
+        <div class="note" style="margin-top:16px;">Rappel vitesse max : 1-2×60 m à 95-100 % toutes les 2 semaines (SNC vert obligatoire).</div>
+        <div class="warning">Décharges : semaines 4 et 8 (volume -30 %).</div>
+        <div class="note">Test 10 m avec blocks : 1×/mois, sous-maximal (85-90 %), pour isoler le gain technique.</div>
       </div>
     </div>
+  </section>
 
-    <!-- ════ DIMANCHE ════ -->
-    <div class="day-card">
-      <div class="day-header" onclick="toggleDay(this)">
-        <span class="day-label">DIM</span>
-        <span class="day-name">Bras de Fer C — Technique & Mobilité</span>
-        <span class="day-tag day-tag-bf">BRAS DE FER</span>
-        <span class="day-chevron">▶</span>
+  <section id="phase2">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <span class="section-title">Phase 2 — Puissance & Accélération (6 semaines)</span>
+    </div>
+    <div class="phase-card open">
+      <div class="phase-header" role="button" tabindex="0" aria-expanded="true">
+        <span class="phase-badge p2">P2</span>
+        <div class="phase-info"><h3>Puissance & Accélération</h3><div class="phase-meta">Mi-nov – déc 2026 · 6 semaines</div></div>
+        <span class="phase-toggle">▾</span>
       </div>
-      <div class="day-body">
-        <table class="ex-table">
-          <tr><th>Activité</th><th colspan="3">Détail</th></tr>
-          <tr>
-            <td>Isométrie légère top-roll</td>
-            <td colspan="3">2×10s — charge très légère, sensation de position, pas d'effort maximal</td>
-          </tr>
-          <tr>
-            <td>Pronation sans charge <span style="color:var(--dim);font-size:0.6rem;">(technique pure)</span></td>
-            <td colspan="3">2×10 reps — mouvement lent et contrôlé, focus trajectoire du cup</td>
-          </tr>
-          <tr>
-            <td>Mobilité poignets & coudes</td>
-            <td colspan="3">5 min — cercles poignets, flexions/extensions coude, traction légère de doigts</td>
-          </tr>
-          <tr>
-            <td>★ Étude vidéo top-roll</td>
-            <td colspan="3">15 min minimum — analyser 1 match de compétition, focus : initiation cup, angle d'attaque, timing pronation</td>
-          </tr>
-          <tr>
-            <td>Marche inclinée</td>
-            <td colspan="3">30–40 min (ou marche rapide 25 min, ~200 kcal)</td>
-          </tr>
-          <tr>
-            <td>Mobilité générale</td>
-            <td colspan="3">Hanches, chevilles, épaules — 15–20 min</td>
-          </tr>
-          <tr>
-            <td>Test RSI mensuel</td>
-            <td colspan="3">3 drop jumps 40 cm — hauteur / temps de contact (1× par mois)</td>
-          </tr>
-        </table>
-        <div class="day-note">
-          <strong>Dimanche = récupération active.</strong> Les exercices de bras de fer sont symboliques : sensation et technique uniquement, aucun effort structurel. La vraie adaptation se fait en dormant.
-        </div>
-        <div class="day-note">Aucune séance de force lourde ni de vitesse ce jour. Le repos est de l'entraînement.</div>
-
-        <!-- GTG BDF — DIMANCHE (OPTIONNEL ULTRA-LÉGER) -->
-        <div class="gtg-block gtg-bdf">
-          <div class="gtg-header">
-            <span class="gtg-badge gtg-bdf-badge">◈ GTG</span>
-            <span class="gtg-title">GTG Bras de Fer — Dimanche</span>
-            <span class="gtg-optional-badge">ULTRA-LÉGER</span>
-          </div>
-          <div class="gtg-body">
-            <strong style="color:#ffcc88;">Optionnel et ultra-minimal</strong> — uniquement si les avant-bras sont reposés. Ce dimanche est avant tout un jour de récupération active.
-            <ul>
-              <li><strong style="color:#ffcc88;">Riser isométrique :</strong> 1 série × 15 s seulement — sensation de position, effort minime.</li>
-              <li><strong style="color:#ffcc88;">Pronation lente :</strong> 1 série × 8–10 reps — technique pure, bande légère ou sans résistance.</li>
+      <div class="phase-body">
+        <div class="warning">Transition : semaine de décharge (-20 à -30 %) entre Phase 1 et Phase 2.</div>
+        <div class="day-cards">
+          <div class="day-card">
+            <div class="day-name">LUNDI <span class="day-tag tag-plyo">Puissance</span></div>
+            <div class="day-subtitle">Puissance Inférieure</div>
+            <ul class="ex-list">
+              <li>
+                <span class="ex-name">Power Clean</span><span class="ex-detail">5×3 · explosif</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 4-5</span></div>
+              </li>
+              <li>
+                <span class="ex-name">Squat dynamique</span><span class="ex-detail">6×3 · Vmax</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 4-5</span></div>
+              </li>
+              <li>
+                <span class="ex-name">Trap Bar Jump</span><span class="ex-detail">4×4</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 4-5</span></div>
+              </li>
+              <li>
+                <span class="ex-name">Drop Jump 40 cm</span><span class="ex-detail">4×5</span>
+                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 4-5 min</span></div>
+              </li>
+              <li>
+                <span class="ex-name">Hip thrust explosif</span><span class="ex-detail">4×5</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 4-5</span></div>
+              </li>
+              <li>
+                <span class="ex-name">Nordic curl</span><span class="ex-detail">3×3</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 2-3</span></div>
+              </li>
+              <li><span class="ex-name">Berlin Achille</span><span class="ex-detail">2×45 s</span></li>
+              <li class="ex-note">Pas de BDF ce jour.</li>
             </ul>
-            <div class="gtg-rule">⏱ Durée : 3–5 min maximum · Priorité absolue à la récupération · Aucune obligation ce jour</div>
-            <div class="gtg-cond">⚠ Moindre gêne au coude → passer directement à la mobilité · GTG Block Start interdit le dimanche (pas de sprint ce jour)</div>
+          </div>
+          <div class="day-card">
+            <div class="day-name">MARDI <span class="day-tag tag-sprint">Sprint</span></div>
+            <div class="day-subtitle">Sprint Résisté + GTG Block Start + BDF</div>
+            <ul class="ex-list">
+              <li><span class="ex-name">Sprint traîné 5-8 %</span><span class="ex-detail">4×30 m</span></li>
+              <li><span class="ex-name">Drills ABC sprint</span></li>
+              <li>
+                <span class="ex-name">GTG Block Start</span><span class="ex-detail">2-3 départs 10 m / 90%</span>
+                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span></div>
+              </li>
+              <li>
+                <span class="ex-name">BDF — Curl marteau</span><span class="ex-detail">3×8</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 1-2</span></div>
+              </li>
+              <li>
+                <span class="ex-name">BDF — Pronation explosive</span><span class="ex-detail">3×6</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 4-5</span></div>
+              </li>
+            </ul>
+          </div>
+          <div class="day-card">
+            <div class="day-name">MERCREDI <span class="day-tag tag-plyo">Puissance</span></div>
+            <div class="day-subtitle">Puissance Supérieure</div>
+            <ul class="ex-list">
+              <li>
+                <span class="ex-name">Développé balistique</span><span class="ex-detail">5×3</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 4-5</span></div>
+              </li>
+              <li>
+                <span class="ex-name">Tractions explosives</span><span class="ex-detail">4×3</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 4-5</span></div>
+              </li>
+              <li><span class="ex-name">Med ball slam</span><span class="ex-detail">4×5</span></li>
+              <li class="ex-note">Pas de BDF ce jour.</li>
+            </ul>
+          </div>
+          <div class="day-card">
+            <div class="day-name">JEUDI <span class="day-tag tag-gtg">GTG</span></div>
+            <div class="day-subtitle">GTG Block Start + GTG BDF</div>
+            <ul class="ex-list">
+              <li>
+                <span class="ex-name">GTG Block Start</span><span class="ex-detail">2-3 départs 10 m / 90%</span>
+                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span></div>
+              </li>
+              <li>
+                <span class="ex-name">GTG BDF — Riser</span><span class="ex-detail">2-3×15 s</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR &gt;5</span></div>
+              </li>
+              <li>
+                <span class="ex-name">GTG BDF — Pronation lente</span><span class="ex-detail">2×10</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR &gt;5</span></div>
+              </li>
+            </ul>
+          </div>
+          <div class="day-card">
+            <div class="day-name">VENDREDI <span class="day-tag tag-sprint">Sprint</span></div>
+            <div class="day-subtitle">Sprint Libre + BDF</div>
+            <ul class="ex-list">
+              <li><span class="ex-name">30 m libre</span><span class="ex-detail">4 reps / 90-95%</span></li>
+              <li><span class="ex-name">50 m progressif</span><span class="ex-detail">2 reps</span></li>
+              <li>
+                <span class="ex-name">BDF — Riser long (endurance)</span><span class="ex-detail">3×20 s</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 4-5</span></div>
+              </li>
+              <li>
+                <span class="ex-name">BDF — Pronation endurance</span><span class="ex-detail">3×12</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 4-5</span></div>
+              </li>
+            </ul>
+          </div>
+          <div class="day-card">
+            <div class="day-name">SAMEDI <span class="day-tag tag-plyo">Puissance</span></div>
+            <div class="day-subtitle">Puissance Inférieure B</div>
+            <ul class="ex-list">
+              <li>
+                <span class="ex-name">Squat dynamique</span><span class="ex-detail">5×3</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 4-5</span></div>
+              </li>
+              <li><span class="ex-name">Bounding 10 m</span><span class="ex-detail">4×4</span></li>
+              <li><span class="ex-name">Drop Jump 60 cm</span><span class="ex-detail">3×5</span></li>
+              <li><span class="ex-name">Berlin Achille</span><span class="ex-detail">2×45 s</span></li>
+            </ul>
+          </div>
+          <div class="day-card">
+            <div class="day-name">DIMANCHE <span class="day-tag tag-rest">Repos</span></div>
+            <div class="day-subtitle">Repos complet</div>
+            <ul class="ex-list">
+              <li><span class="ex-name">Repos complet</span></li>
+            </ul>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="day-note" style="border-left-color:rgba(120,120,120,0.5);background:rgba(80,80,80,0.08);">
-          <strong style="color:#888;">— Pas de GTG Block Start ce dimanche —</strong> Pas de sprint ni de départ ce jour. La récupération neurologique prime.
+  <section id="phase3">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <span class="section-title">Phase 3 — Compétition (8-10 semaines, mini-cycles)</span>
+    </div>
+    <div class="phase-card open">
+      <div class="phase-header" role="button" tabindex="0" aria-expanded="true">
+        <span class="phase-badge p3">P3</span>
+        <div class="phase-info"><h3>Compétition</h3><div class="phase-meta">Janv – mars 2027 · 8-10 semaines</div></div>
+        <span class="phase-toggle">▾</span>
+      </div>
+      <div class="phase-body">
+        <div class="note">Structure : 2-3 mini-cycles de 3-4 semaines (charge légère → décharge → compétition). Semaine type hors compétition ci-dessous.</div>
+        <div class="day-cards">
+          <div class="day-card">
+            <div class="day-name">LUNDI <span class="day-tag tag-plyo">Pliométrie</span></div>
+            <div class="day-subtitle">Force Maintien + Pliométrie Choc</div>
+            <ul class="ex-list">
+              <li>
+                <span class="ex-name">Squat profond</span><span class="ex-detail">2×3</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 1-2</span></div>
+              </li>
+              <li>
+                <span class="ex-name">Hip thrust explosif</span><span class="ex-detail">2×5</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 4-5</span></div>
+              </li>
+              <li><span class="ex-name">Drop Jump 80 cm</span><span class="ex-detail">4×5</span></li>
+              <li><span class="ex-name">Bounding horizontal</span><span class="ex-detail">3×10 m</span></li>
+              <li><span class="ex-name">Hurdle hop</span><span class="ex-detail">3×5</span></li>
+              <li><span class="ex-name">Berlin Achille</span><span class="ex-detail">2×45 s</span></li>
+            </ul>
+          </div>
+          <div class="day-card">
+            <div class="day-name">MARDI <span class="day-tag tag-sprint">Sprint</span></div>
+            <div class="day-subtitle">Sprint Haute Intensité</div>
+            <ul class="ex-list">
+              <li><span class="ex-name">Échauffement complet</span><span class="ex-detail">25 min</span></li>
+              <li><span class="ex-name">Flying 30 m</span><span class="ex-detail">6 reps / 97%</span></li>
+              <li><span class="ex-name">60 m complet</span><span class="ex-detail">3 reps / 97%</span></li>
+              <li>
+                <span class="ex-name">GTG Block Start</span><span class="ex-detail">2×10 m / 90%</span>
+                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span></div>
+              </li>
+            </ul>
+          </div>
+          <div class="day-card">
+            <div class="day-name">MERCREDI <span class="day-tag tag-rest">Récup</span></div>
+            <div class="day-subtitle">Récupération active</div>
+            <ul class="ex-list">
+              <li><span class="ex-name">Mobilité + marche</span><span class="ex-detail">20 min + 30 min</span></li>
+              <li>
+                <span class="ex-name">Riser BDF</span><span class="ex-detail">2×15 s</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR &gt;5</span></div>
+              </li>
+              <li>
+                <span class="ex-name">Nordic curl léger</span><span class="ex-detail">2×3</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 2-3</span></div>
+              </li>
+            </ul>
+          </div>
+          <div class="day-card">
+            <div class="day-name">JEUDI <span class="day-tag tag-sprint">Sprint</span></div>
+            <div class="day-subtitle">Sprint 60 m + Accélération</div>
+            <ul class="ex-list">
+              <li><span class="ex-name">Block start → 30 m</span><span class="ex-detail">4 reps / 95%</span></li>
+              <li><span class="ex-name">60 m complet</span><span class="ex-detail">2 reps / 97%</span></li>
+            </ul>
+          </div>
+          <div class="day-card">
+            <div class="day-name">VENDREDI <span class="day-tag tag-force">Force</span></div>
+            <div class="day-subtitle">Force Maintien Supérieur</div>
+            <ul class="ex-list">
+              <li>
+                <span class="ex-name">Trap bar lourd</span><span class="ex-detail">2×3</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 1-2</span></div>
+              </li>
+              <li>
+                <span class="ex-name">Développé couché</span><span class="ex-detail">3×3</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 1-2</span></div>
+              </li>
+              <li>
+                <span class="ex-name">Tractions lestées</span><span class="ex-detail">3×3</span>
+                <div class="stat-badges"><span class="stat-badge badge-rir">RIR 1-2</span></div>
+              </li>
+              <li><span class="ex-name">Prévention coude</span><span class="ex-detail">10 min</span></li>
+            </ul>
+          </div>
+          <div class="day-card">
+            <div class="day-name">SAMEDI <span class="day-tag tag-sprint">Compét.</span></div>
+            <div class="day-subtitle">Simulation Compétition</div>
+            <ul class="ex-list">
+              <li>
+                <span class="ex-name">60 m simulation</span><span class="ex-detail">1-2 reps / 100%</span>
+                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 15 min</span></div>
+              </li>
+              <li class="ex-note">Semaines de compétition uniquement.</li>
+            </ul>
+          </div>
+          <div class="day-card">
+            <div class="day-name">DIMANCHE <span class="day-tag tag-rest">Repos</span></div>
+            <div class="day-subtitle">Repos complet</div>
+            <ul class="ex-list">
+              <li><span class="ex-name">Repos complet</span></li>
+            </ul>
+          </div>
         </div>
-
       </div>
     </div>
+  </section>
 
-  </div>
-</div>
-
-<!-- ROADMAP 30M -->
-<div class="section" id="roadmap">
-  <div class="section-header">
-    <span class="section-num">04</span>
-    <span class="section-icon">📊</span>
-    <span class="section-title">Roadmap 30m — Cibles Semaine par Semaine</span>
-  </div>
-
-  <div class="day-note" style="margin-bottom:1rem;">
-    <strong style="color:var(--red);">Point faible prioritaire : 30m départ arrêté actuellement à 4.51s.</strong> Ce tableau de bord fixe les cibles chronométrées semaine par semaine. Chaque lundi (5×30m), noter le meilleur temps et comparer.
-  </div>
-
-  <table class="roadmap-table">
-    <tr>
-      <th>Semaine</th>
-      <th>Cible 30m</th>
-      <th>Delta</th>
-      <th>Statut</th>
-    </tr>
-    <tr class="rw-current">
-      <td class="rw-week">S4 — Actuel</td>
-      <td class="rw-time">4.51s</td>
-      <td class="rw-delta">—</td>
-      <td class="rw-label">📍 Semaine en cours</td>
-    </tr>
-    <tr>
-      <td class="rw-week">S5</td>
-      <td class="rw-time">4.45s</td>
-      <td class="rw-delta">−0.06s</td>
-      <td class="rw-label">Accélération B1</td>
-    </tr>
-    <tr>
-      <td class="rw-week">S6</td>
-      <td class="rw-time">4.40s</td>
-      <td class="rw-delta">−0.05s</td>
-      <td class="rw-label">Accélération B1</td>
-    </tr>
-    <tr>
-      <td class="rw-week">S7</td>
-      <td class="rw-time">4.35s</td>
-      <td class="rw-delta">−0.05s</td>
-      <td class="rw-label">Transition B2</td>
-    </tr>
-    <tr class="rw-decharge">
-      <td class="rw-week">S8 — Décharge</td>
-      <td class="rw-time">4.33s</td>
-      <td class="rw-delta">−0.02s</td>
-      <td class="rw-label">⚡ Semaine allégée — supercompensation</td>
-    </tr>
-    <tr>
-      <td class="rw-week">S9</td>
-      <td class="rw-time">4.30s</td>
-      <td class="rw-delta">−0.03s</td>
-      <td class="rw-label">Transformation B2</td>
-    </tr>
-    <tr>
-      <td class="rw-week">S10</td>
-      <td class="rw-time">4.28s</td>
-      <td class="rw-delta">−0.02s</td>
-      <td class="rw-label">Transformation B2</td>
-    </tr>
-    <tr>
-      <td class="rw-week">S11 — Pic</td>
-      <td class="rw-time">4.25s</td>
-      <td class="rw-delta">−0.03s</td>
-      <td class="rw-label">🔥 Pic intensité — test chronométré</td>
-    </tr>
-    <tr class="rw-peak">
-      <td class="rw-week">S12 — Compét.</td>
-      <td class="rw-time">4.22–4.25s</td>
-      <td class="rw-delta">−0.26–0.29s</td>
-      <td class="rw-label">🏆 1er août 2026 — Compétition</td>
-    </tr>
-  </table>
-
-  <div class="roadmap-projection">
-    <div class="proj-label">Projection 100m finale — 1er août 2026</div>
-    <div class="proj-value">12.1–12.2s</div>
-    <div class="proj-sub">AMÉLIORATION NETTE DE 0.4–0.5S — SANS BLESSURE — APPROCHE HYBRIDE MODÉRÉE</div>
-  </div>
-
-  <div class="day-note" style="margin-top:0.8rem;">
-    <strong>Règle de lecture :</strong> Si le chrono du lundi (5×30m) est en avance sur la cible de la semaine → progression confirmée, maintenir le volume. Si retard &gt;0.10s sur 2 semaines consécutives → revoir la récupération ou le volume d'accélération.
-  </div>
-</div>
-
-<!-- RÈGLES -->
-<div class="section" id="regles">
-  <div class="section-header">
-    <span class="section-num">05</span>
-    <span class="section-icon">🧠</span>
-    <span class="section-title">Règles d'Auto-Régulation</span>
-  </div>
-
-  <div class="rules-grid">
-    <div class="rule-card" style="--delay:0s">
-      <div class="rule-icon">🛌</div>
-      <div class="rule-title">Protocole SNC Quotidien</div>
-      <div class="rule-body">3 sauts verticaux au réveil + durée sommeil. Si moyenne 7j &lt;85% ou nuit &lt;7h30 → séance haute intensité annulée sans exception. Test obligatoire avant chaque séance sprint. <strong>GTG Block Start également annulé si SNC &lt;85%.</strong></div>
+  <section id="suivi">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <span class="section-title">Suivi & Nutrition</span>
     </div>
-    <div class="rule-card" style="--delay:0.5s">
-      <div class="rule-icon">📉</div>
-      <div class="rule-title">Règle des 5%</div>
-      <div class="rule-body">Chute de vitesse ou hauteur de saut &gt;5% sur 3 répétitions consécutives → arrêt immédiat de la série. S'applique aussi aux chronos 30m : si &gt;5% au-dessus de la cible → arrêt sprint.</div>
-    </div>
-    <div class="rule-card" style="--delay:1s">
-      <div class="rule-icon">⏱</div>
-      <div class="rule-title">Repos Strict</div>
-      <div class="rule-body">Sprints 30m / Vmax : 5–8 min. Sprints 60m : 6–8 min. Force lourde : 3–4 min. Pliométrie de choc : 4–5 min. Jamais de sprint sur fatigue résiduelle. <strong>GTG : repos 60–90 s entre départs.</strong></div>
-    </div>
-    <div class="rule-card" style="--delay:1.5s">
-      <div class="rule-icon">🦵</div>
-      <div class="rule-title">Tendon Radar</div>
-      <div class="rule-body">Douleur coude, achille ou rotule &gt;3/10 pendant l'échauffement → modification immédiate. LCL gauche : pas de course en virage S1–S4. Alerte tendon prioritaire sur tout planning. <strong>GTG BDF annulé coude &gt;3/10.</strong></div>
-    </div>
-    <div class="rule-card" style="--delay:1.8s">
-      <div class="rule-icon">🔁</div>
-      <div class="rule-title">Règles GTG — Grease The Groove</div>
-      <div class="rule-body">
-        <strong>Block Start :</strong> Max 3 séances/semaine (Mar, Jeu, Sam conditionnel). 2–3 départs × 10m à 85–90%. Jamais le jour d'après pliométrie de choc. Annulé si SNC &lt;85%. <br><br>
-        <strong>Bras de Fer :</strong> Max 4 séances/semaine (Lun, Mar, Jeu, Ven + optionnel Dim). 2–3 séries totales. Jamais après grip intense. Annulé coude &gt;3/10. Volume ultra-bas, pas d'échec.
+    <div class="protocol-grid">
+      <div class="protocol-card">
+        <h4>⏱️ Chronométrage</h4>
+        <p>Conditions notées pour chaque record : vent, méthode, piste.</p>
+      </div>
+      <div class="protocol-card">
+        <h4>📓 Carnet d'entraînement</h4>
+        <p>Noter chaque jour : charge, reps, RPE, douleur coude (0-10), raideur Achille (0-10), qualité de sommeil.</p>
+      </div>
+      <div class="protocol-card">
+        <h4>🏁 Compétitions</h4>
+        <p>Mini-cycle d'affûtage avant chaque course : 2-3 jours de repos, activation la veille.</p>
       </div>
     </div>
-    <div class="rule-card" style="--delay:2s; grid-column:1/-1;">
-      <div class="rule-icon">🔒</div>
-      <div class="rule-title">Règle Coude Sacré & Bras de Fer</div>
-      <div class="rule-body">
-        <strong>Maximum 2 séances bras de fer structurelles par semaine</strong> (mercredi + samedi). Arrêt immédiat si coude sensible &gt;3/10. Jamais tractions lestées + bras de fer le même jour. Samedi bras de fer supprimé aux semaines 3, 7, 11. Montée de charge bras de fer plafonnée à +1,25–2,5 kg par 2 semaines max. Les séances GTG BDF sont légères et ne comptent pas comme séances structurelles — elles complètent, elles n'ajoutent pas de charge. La séance du dimanche (BDF C) reste symbolique.
-      </div>
+    <div class="table-wrap" style="margin-top:24px;">
+      <table>
+        <tr><th>Phase</th><th>Calories</th><th>Protéines</th><th>Glucides</th><th>Lipides</th></tr>
+        <tr><td>Phase 1</td><td>~2900 kcal</td><td>190-210 g</td><td>340-380 g</td><td>75-85 g</td></tr>
+        <tr><td>Phase 2</td><td>~2700 kcal</td><td>185-200 g</td><td>310-340 g</td><td>70-80 g</td></tr>
+        <tr><td>Phase 3</td><td>~2500 kcal</td><td>195-210 g</td><td>280-310 g</td><td>65-75 g</td></tr>
+      </table>
     </div>
-  </div>
-</div>
-
-<!-- NUTRITION -->
-<div class="section" id="nutrition">
-  <div class="section-header">
-    <span class="section-num">06</span>
-    <span class="section-icon">🍽</span>
-    <span class="section-title">Nutrition — Stratégie Corrigée</span>
-  </div>
-
-  <div class="kcal-display" style="margin-bottom:1rem;">
-    <div class="kcal-num">2 700–3 000</div>
-    <div class="kcal-unit">KCAL / JOUR — MAINTENANCE (JOURS D'ENTRAÎNEMENT)</div>
-  </div>
-
-  <div class="macro-bars">
-    <div class="macro-row">
-      <div class="macro-label">PROTÉINES</div>
-      <div class="macro-bar-wrap"><div class="macro-bar-fill prot" style="width:75%"></div></div>
-      <div class="macro-val">180–200g</div>
+    <div class="note" style="margin-top:16px;">
+      <strong>Suppléments :</strong> créatine 5 g/j, collagène + vitamine C 45-60 min avant le protocole tendon, magnésium bisglycinate le soir, vitamine D3 1000 UI/j.
     </div>
-    <div class="macro-row">
-      <div class="macro-label">GLUCIDES</div>
-      <div class="macro-bar-wrap"><div class="macro-bar-fill carb" style="width:82%"></div></div>
-      <div class="macro-val">350–400g</div>
-    </div>
-    <div class="macro-row">
-      <div class="macro-label">LIPIDES</div>
-      <div class="macro-bar-wrap"><div class="macro-bar-fill fat" style="width:42%"></div></div>
-      <div class="macro-val">60–70g</div>
-    </div>
-  </div>
-
-  <div style="margin-top:1.2rem; display:grid; gap:0.5rem;">
-    <div class="day-note">
-      <strong style="color:var(--gold);">★ Stratégie corrigée :</strong> Maintenance 2700–3000 kcal sur les jours d'entraînement. Glucides montés à 350–400g les jours d'entraînement pour soutenir le volume sprint accru. <strong style="color:var(--red);">Pas de déficit avant S11.</strong> Les gains de force et de vitesse sont intégralement préservés sur les 10 premières semaines.
-    </div>
-    <div class="day-note">
-      <strong>Sources :</strong> Patates douces / pommes de terre (glucides), poulet / colin / œufs / whey (protéines), huile d'olive crue + œufs (lipides). Bsissa 1× semaine.
-    </div>
-    <div class="day-note">
-      <strong>Marche inclinée :</strong> 25–30 min/jour = ~200 kcal additionnelles brûlées. Permet d'atteindre 2700–3000 kcal effectives à maintenance pendant les blocs de force sans surplus.
-    </div>
-    <div class="day-note">
-      <strong>Jours de repos :</strong> Réduire glucides à 250–280g. Maintenir protéines et lipides identiques.
-    </div>
-  </div>
-
-  <div class="kcal-display" style="margin-top:1rem; border-color:rgba(255,34,68,0.3); background:rgba(255,34,68,0.04);">
-    <div class="kcal-num" style="color:var(--red); font-size:1.5rem;">2 300–2 400</div>
-    <div class="kcal-unit" style="color:#ff8899;">KCAL / JOUR — BLOC 3 SEULEMENT, À PARTIR DE S11 (AFFÛTAGE)</div>
-  </div>
-</div>
-
-<!-- MACROCYCLE -->
-<div class="section" id="macrocycle">
-  <div class="section-header">
-    <span class="section-num">07</span>
-    <span class="section-icon">📈</span>
-    <span class="section-title">Macrocycle 2026–2031</span>
-  </div>
-
-  <div class="progress-timeline">
-
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-year">2026 — Fondations (1er août 2026)</div>
-      <div class="timeline-stats">
-        <span class="t-stat">100m → 12.0–12.2s</span>
-        <span class="t-stat">30m → 4.22–4.25s</span>
-        <span class="t-stat">Détente → 85–90cm</span>
-        <span class="t-stat">Top-roll efficace</span>
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-year">2027 — Développement accéléré</div>
-      <div class="timeline-stats">
-        <span class="t-stat">100m → 11.3–11.5s</span>
-        <span class="t-stat">Détente → 95–100cm</span>
-        <span class="t-stat">Force spécifique BD</span>
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-dot" style="background:var(--red); box-shadow:0 0 12px var(--red);"></div>
-      <div class="timeline-year" style="color:var(--red);">2028 — VICTOIRE ⚔️</div>
-      <div class="timeline-stats">
-        <span class="t-stat" style="border-color:rgba(255,34,68,0.3); background:rgba(255,34,68,0.08);">100m → 10.8–11.0s</span>
-        <span class="t-stat" style="border-color:rgba(255,34,68,0.3); background:rgba(255,34,68,0.08);">Détente → 100–105cm</span>
-        <span class="t-stat" style="border-color:rgba(255,34,68,0.3); background:rgba(255,34,68,0.08);">Victoire vs frère 30/06</span>
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-year">2029 — Elite confirmé</div>
-      <div class="timeline-stats">
-        <span class="t-stat">100m → 10.4–10.6s</span>
-        <span class="t-stat">Détente → 110–112cm</span>
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-year">2030 — Frontière sub-10.3</div>
-      <div class="timeline-stats">
-        <span class="t-stat">100m → 10.1–10.3s</span>
-        <span class="t-stat">Détente → 115–117cm</span>
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-dot gold"></div>
-      <div class="timeline-year gold">2031 — PIC DE CARRIÈRE 👑</div>
-      <div class="timeline-stats">
-        <span class="t-stat" style="border-color:var(--border2); background:rgba(255,215,0,0.07); color:var(--gold);">100m → 10.00s</span>
-        <span class="t-stat" style="border-color:var(--border2); background:rgba(255,215,0,0.07); color:var(--gold);">Détente → 120cm</span>
-      </div>
-    </div>
-
-  </div>
-</div>
+  </section>
 
 </main>
 
 <footer>
-  <div class="footer-logo">// NADHIR ELITE SYSTEM — PROGRAMME v2.4 + MÉTHODE BERLIN + HYBRIDE + GTG BLOCK START & BDF //</div>
-  <div class="footer-date">MIS À JOUR 06 JUIN 2026 — COMPÉTITION 1ER AOÛT 2026</div>
-  <div class="pulse-badge" id="countdownBadge" style="margin-top:1rem;">
-    <span class="pulse-dot"></span>
-    <span id="countdownText">SYSTÈME ACTIF</span>
-  </div>
+  Nadhir Ben Nasr — Programme Hivernal 2026–2027 · Compétition 60 m indoor
 </footer>
 
 <script>
-// Toggle days
-function toggleDay(header) {
-  const card = header.parentElement;
-  card.classList.toggle('open');
-}
-
-// Scroll to section
-function navScrollTo(id) {
-  const el = document.querySelector(id);
-  if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
-}
-
-// Progress bar
-window.addEventListener('scroll', () => {
-  const el = document.documentElement;
-  const progress = el.scrollTop / (el.scrollHeight - el.clientHeight);
-  document.getElementById('topBar').style.width = (progress * 100) + '%';
-});
-
-// Intersection observer for section reveals + nav highlight
-const sectionIds = ['objectifs','analyse','programme','roadmap','regles','nutrition','macrocycle'];
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      const id = e.target.id;
-      const idx = sectionIds.indexOf(id);
-      document.querySelectorAll('.nav-btn').forEach((b, i) => {
-        b.classList.toggle('active', i === idx);
-      });
-    }
+  // Accordéon des phases (clic + clavier)
+  document.querySelectorAll('.phase-header').forEach(header => {
+    const card = header.parentElement;
+    const toggle = () => {
+      const isOpen = card.classList.toggle('open');
+      header.setAttribute('aria-expanded', String(isOpen));
+    };
+    header.addEventListener('click', toggle);
+    header.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle();
+      }
+    });
   });
-}, { threshold: 0.1 });
 
-document.querySelectorAll('.section').forEach(s => observer.observe(s));
+  // Navigation fluide + suivi de la section active au scroll
+  const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
+  const sections = navLinks
+    .map(link => document.querySelector(link.getAttribute('href')))
+    .filter(Boolean);
 
-// Animate macro bars on visible
-const macroObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.querySelectorAll('.macro-bar-fill').forEach(bar => {
-        bar.style.animationPlayState = 'running';
-      });
-    }
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   });
-}, { threshold: 0.5 });
 
-document.querySelectorAll('.macro-bars').forEach(el => macroObs.observe(el));
-
-// Countdown — cible le 1er août 2026
-function updateCountdown() {
-  const comp = new Date('2026-08-01T00:00:00');
-  const now = new Date();
-  const days = Math.ceil((comp - now) / (1000 * 60 * 60 * 24));
-  const txt = days > 0
-    ? `SYSTÈME ACTIF — ${days} JOURS AVANT COMPÉTITION`
-    : "COMPÉTITION AUJOURD'HUI — GO !";
-  // Hero badge
-  const heroBadge = document.querySelector('.hero .pulse-badge');
-  if (heroBadge) heroBadge.innerHTML = `<span class="pulse-dot"></span> ${txt}`;
-  // Footer badge
-  const footerText = document.getElementById('countdownText');
-  if (footerText) footerText.textContent = txt;
-}
-updateCountdown();
+  if ('IntersectionObserver' in window) {
+    const setActive = id => {
+      navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    };
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    }, { rootMargin: '-56px 0px -70% 0px', threshold: 0 });
+    sections.forEach(section => observer.observe(section));
+  }
 </script>
+
 </body>
 </html>
