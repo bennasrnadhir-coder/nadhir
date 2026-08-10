@@ -6,14 +6,20 @@
 <title>Nadhir Ben Nasr — Programme Hivernal 2026–2027</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
+  /* ============================================================
+     TOKENS
+     ============================================================ */
   :root {
     --bg: #020408;
-    --panel: rgba(0,255,136,0.04);
+    --panel-glass: rgba(9,20,17,0.55);
+    --panel-glass-soft: rgba(9,20,17,0.32);
     --border: rgba(0,255,136,0.18);
+    --border-hover: rgba(0,255,136,0.45);
     --text: #c8e8d8;
     --dim: #4a7060;
+    --dimmer: #2e4a3e;
     --g: #00ff88;
     --g2: #00cc66;
     --gold: #ffd700;
@@ -25,12 +31,26 @@
     --phase1: #ffaa00;
     --phase2: #ff6600;
     --phase3: #00d4ff;
+    --grad-main: linear-gradient(135deg, var(--g), var(--cyan) 55%, var(--purple));
+    --grad-static: linear-gradient(90deg, var(--g), var(--cyan) 45%, var(--purple) 80%, var(--gold));
+    --ease: cubic-bezier(.4,0,.2,1);
+    --ease-out: cubic-bezier(.16,.8,.24,1);
+    --r-sm: 6px;
+    --r-md: 10px;
   }
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   html { scroll-behavior:smooth; }
+
+  /* ============================================================
+     ATMOSPHERE
+     ============================================================ */
   body {
     font-family:'Rajdhani',sans-serif;
-    background:var(--bg);
+    background:
+      radial-gradient(ellipse 900px 520px at 88% -8%, rgba(0,212,255,0.07), transparent 62%),
+      radial-gradient(ellipse 720px 520px at -8% 55%, rgba(136,85,255,0.06), transparent 60%),
+      radial-gradient(ellipse 900px 620px at 50% 118%, rgba(0,255,136,0.05), transparent 60%),
+      var(--bg);
     color:var(--text);
     min-height:100vh;
     overflow-x:hidden;
@@ -46,26 +66,48 @@
     background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
     pointer-events:none; z-index:9998; opacity:0.4;
   }
-  a:focus-visible, .phase-header:focus-visible { outline:2px solid var(--g); outline-offset:2px; }
+  a:focus-visible, .phase-header:focus-visible, .back-to-top:focus-visible { outline:2px solid var(--g); outline-offset:2px; }
 
+  /* ============================================================
+     NAV
+     ============================================================ */
   nav {
     position:sticky; top:0; z-index:1000;
-    background:rgba(2,4,8,0.95); border-bottom:1px solid var(--border);
-    backdrop-filter:blur(12px); padding:0 24px; height:56px;
+    background:rgba(2,4,8,0.82);
+    border-bottom:1px solid var(--border);
+    backdrop-filter:blur(16px) saturate(140%);
+    -webkit-backdrop-filter:blur(16px) saturate(140%);
+    padding:0 24px; height:56px;
     display:flex; align-items:center; justify-content:space-between; gap:12px;
+    transition:height .35s var(--ease), background .35s var(--ease), box-shadow .35s var(--ease);
+  }
+  nav.scrolled {
+    height:44px;
+    background:rgba(2,4,8,0.97);
+    box-shadow:0 12px 32px rgba(0,0,0,0.5);
   }
   .nav-brand {
     font-family:'Orbitron',monospace; font-size:11px; font-weight:700;
     color:var(--g); letter-spacing:3px; white-space:nowrap;
+    text-shadow:0 0 12px rgba(0,255,136,0.35);
   }
   .nav-links { display:flex; gap:4px; list-style:none; overflow-x:auto; }
   .nav-links a {
-    display:block; padding:6px 12px; font-family:'Share Tech Mono',monospace;
+    position:relative; display:block; padding:6px 12px; font-family:'Share Tech Mono',monospace;
     font-size:10px; color:var(--dim); text-decoration:none; letter-spacing:1.5px;
-    border:1px solid transparent; transition:all 0.2s; white-space:nowrap;
+    border:1px solid transparent; border-radius:4px; transition:all 0.2s; white-space:nowrap;
   }
-  .nav-links a:hover, .nav-links a.active { color:var(--g); border-color:var(--g2); background:var(--panel); }
+  .nav-links a:hover { color:var(--g); border-color:var(--g2); background:var(--panel-glass-soft); }
+  .nav-links a.active { color:var(--g); border-color:var(--g2); background:var(--panel-glass-soft); }
+  .nav-links a.active::after {
+    content:''; position:absolute; left:10px; right:10px; bottom:2px; height:2px; border-radius:2px;
+    background:linear-gradient(90deg, var(--g), var(--cyan));
+    box-shadow:0 0 8px var(--g);
+  }
 
+  /* ============================================================
+     HERO
+     ============================================================ */
   .hero {
     position:relative; z-index:1; border-bottom:1px solid var(--border);
     padding:40px 24px 32px;
@@ -81,12 +123,16 @@
     color:#fff; letter-spacing:2px; margin-bottom:24px; line-height:1.1;
     text-shadow:0 0 30px rgba(0,255,136,0.25);
   }
-  .hero-goals { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin-bottom:24px; }
+  .hero-goals { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin-bottom:22px; }
   .hero-goal {
-    border:1px solid var(--border); border-left:3px solid var(--g); border-radius:6px;
-    padding:14px 16px; background:rgba(0,0,0,0.3);
+    position:relative; overflow:hidden;
+    border:1px solid var(--border); border-left:3px solid var(--g); border-radius:var(--r-sm);
+    padding:14px 16px; background:var(--panel-glass-soft); backdrop-filter:blur(10px);
+    transition:background .3s var(--ease), box-shadow .3s var(--ease), transform .3s var(--ease-out);
   }
+  .hero-goal:hover { background:var(--panel-glass); box-shadow:0 10px 30px rgba(0,255,136,0.08); transform:translateY(-2px); }
   .hero-goal.secondary { border-left-color:var(--purple); }
+  .hero-goal.secondary:hover { box-shadow:0 10px 30px rgba(136,85,255,0.1); }
   .hero-goal-tag {
     display:block; font-family:'Share Tech Mono',monospace; font-size:9px; color:var(--dim);
     letter-spacing:2px; text-transform:uppercase; margin-bottom:6px;
@@ -98,6 +144,41 @@
     display:block; font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--dim);
     margin-top:6px; letter-spacing:1px;
   }
+
+  /* -- Mission clock (signature element) -- */
+  .hero-clock-wrap { margin-bottom:26px; }
+  .hero-clock {
+    position:relative; overflow:hidden;
+    display:inline-flex; flex-wrap:wrap; align-items:center; gap:20px;
+    padding:16px 22px; border:1px solid var(--border); border-radius:var(--r-md);
+    background:var(--panel-glass); backdrop-filter:blur(16px) saturate(140%);
+    -webkit-backdrop-filter:blur(16px) saturate(140%);
+    box-shadow:0 20px 60px rgba(0,0,0,0.35);
+  }
+  .hero-clock::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:2px;
+    background:var(--grad-static); background-size:220% 100%;
+    animation:flow 5s linear infinite;
+  }
+  .clock-label {
+    display:flex; align-items:center; gap:8px;
+    font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--dim);
+    letter-spacing:2px; text-transform:uppercase; white-space:nowrap;
+  }
+  .clock-label .beacon {
+    width:7px; height:7px; border-radius:50%; background:var(--g);
+    box-shadow:0 0 8px var(--g); animation:beacon 1.6s ease-in-out infinite;
+  }
+  .clock-grid { display:flex; align-items:baseline; gap:4px; }
+  .clock-unit { display:flex; flex-direction:column; align-items:center; min-width:46px; }
+  .clock-val {
+    font-family:'Orbitron',monospace; font-weight:700; font-size:clamp(22px,4.2vw,30px);
+    color:var(--g); text-shadow:0 0 18px rgba(0,255,136,0.45); letter-spacing:1px;
+    font-variant-numeric:tabular-nums; line-height:1;
+  }
+  .clock-lbl { font-family:'Share Tech Mono',monospace; font-size:8.5px; color:var(--dim); letter-spacing:1.5px; text-transform:uppercase; margin-top:5px; }
+  .clock-colon { font-family:'Orbitron',monospace; font-size:20px; color:var(--dimmer); padding-bottom:14px; }
+
   .hero-timeline { display:flex; flex-wrap:wrap; gap:8px 24px; }
   .hero-phase {
     display:flex; align-items:center; gap:8px; font-family:'Share Tech Mono',monospace;
@@ -109,34 +190,69 @@
   .dot.p2 { background:var(--phase2); color:var(--phase2); }
   .dot.p3 { background:var(--phase3); color:var(--phase3); }
 
+  /* ============================================================
+     LAYOUT / SECTIONS
+     ============================================================ */
   main { position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:32px 24px 64px; }
   section { margin-bottom:48px; scroll-margin-top:64px; }
   .section-header {
+    position:relative;
     display:flex; align-items:center; gap:16px; margin-bottom:24px; padding-bottom:16px;
     border-bottom:1px solid var(--border);
   }
+  .section-header::after {
+    content:''; position:absolute; left:0; bottom:-1px; width:110px; height:2px;
+    background:var(--grad-static); opacity:.85; border-radius:2px;
+  }
   .section-num {
     font-family:'Orbitron',monospace; font-size:11px; font-weight:700; color:var(--dim);
-    letter-spacing:2px; padding:4px 10px; border:1px solid var(--dim);
+    letter-spacing:2px; padding:4px 10px; border:1px solid var(--dim); border-radius:4px;
   }
   .section-title {
     font-family:'Orbitron',monospace; font-size:clamp(14px,2vw,18px); font-weight:700;
     color:#fff; letter-spacing:3px; text-transform:uppercase;
   }
 
-  .phase-card {
-    background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:8px;
-    overflow:hidden; transition:border-color 0.3s,box-shadow 0.3s;
+  /* ============================================================
+     GLASS + GRADIENT-BORDER UTILITY
+     ============================================================ */
+  .phase-card, .day-card, .protocol-card {
+    position:relative; isolation:isolate;
+    background:var(--panel-glass-soft);
+    backdrop-filter:blur(14px) saturate(130%);
+    -webkit-backdrop-filter:blur(14px) saturate(130%);
+    border:1px solid var(--border); border-radius:var(--r-md);
   }
-  .phase-card:hover { border-color:var(--g); box-shadow:0 4px 30px rgba(0,255,136,0.06); }
+  .phase-card::before, .day-card::before, .protocol-card::before {
+    content:''; position:absolute; inset:-1px; border-radius:inherit; padding:1px;
+    background:var(--grad-main); opacity:0; transition:opacity .4s var(--ease); z-index:-1;
+    -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor; mask-composite:exclude; pointer-events:none;
+  }
+  .phase-card:hover::before, .day-card:hover::before, .protocol-card:hover::before { opacity:.85; }
+
+  /* ============================================================
+     PHASE CARDS
+     ============================================================ */
+  .phase-card {
+    overflow:hidden;
+    transition:box-shadow 0.35s var(--ease);
+  }
+  .phase-card:hover { box-shadow:0 16px 44px rgba(0,255,136,0.07); }
+  .phase-card::after {
+    content:''; position:absolute; left:0; right:0; height:130px; top:-130px; z-index:0;
+    background:linear-gradient(180deg, transparent, rgba(0,255,136,0.045) 45%, rgba(0,255,136,0.08) 50%, rgba(0,255,136,0.045) 55%, transparent);
+    animation:scan 10s ease-in-out infinite; pointer-events:none;
+  }
   .phase-header {
+    position:relative; z-index:1;
     padding:18px 24px; display:flex; align-items:center; gap:16px;
     cursor:pointer; user-select:none; transition:background 0.2s;
   }
   .phase-header:hover { background:rgba(0,255,136,0.05); }
   .phase-badge {
     font-family:'Orbitron',monospace; font-size:10px; font-weight:900; padding:6px 14px;
-    letter-spacing:2px; flex-shrink:0; border:1px solid transparent;
+    letter-spacing:2px; flex-shrink:0; border:1px solid transparent; border-radius:4px;
   }
   .phase-badge.p0 { background:rgba(0,255,136,0.12); color:var(--phase0); border-color:rgba(0,255,136,0.3); }
   .phase-badge.p1 { background:rgba(255,170,0,0.12); color:var(--phase1); border-color:rgba(255,170,0,0.3); }
@@ -155,15 +271,24 @@
     transition:transform 0.3s, color 0.3s; flex-shrink:0;
   }
   .phase-card.open .phase-toggle { transform:rotate(180deg); color:var(--g); }
-  .phase-body { display:none; padding:0 24px 24px; border-top:1px solid var(--border); }
-  .phase-card.open .phase-body { display:block; padding-top:20px; }
+
+  /* Smooth CSS-grid accordion (no JS height math needed) */
+  .phase-collapse {
+    position:relative; z-index:1;
+    display:grid; grid-template-rows:0fr;
+    transition:grid-template-rows .5s var(--ease);
+    border-top:1px solid var(--border);
+  }
+  .phase-card.open .phase-collapse { grid-template-rows:1fr; }
+  .phase-body { overflow:hidden; min-height:0; padding:20px 24px 24px; }
 
   .day-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px; margin-top:16px; }
   .day-card {
-    background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:6px;
-    padding:14px; transition:border-color 0.3s,transform 0.2s;
+    padding:14px;
+    transition:box-shadow .3s var(--ease);
+    will-change:transform;
   }
-  .day-card:hover { border-color:var(--g); transform:translateY(-2px); }
+  .day-card:hover { box-shadow:0 14px 34px rgba(0,255,136,0.1); }
   .day-name {
     font-family:'Orbitron',monospace; font-size:12px; font-weight:700; color:#fff;
     letter-spacing:1px; display:flex; align-items:center; gap:8px; flex-wrap:wrap;
@@ -173,8 +298,9 @@
     letter-spacing:0.5px; text-transform:uppercase; margin:3px 0 10px;
   }
   .day-tag {
-    font-family:'Share Tech Mono',monospace; font-size:9px; padding:2px 8px; border-radius:2px;
+    font-family:'Share Tech Mono',monospace; font-size:9px; padding:2px 8px; border-radius:3px;
     letter-spacing:1px; text-transform:uppercase; border:1px solid transparent;
+    transition:filter .2s, box-shadow .2s;
   }
   .tag-force  { background:rgba(255,215,0,0.1); color:var(--gold); border-color:rgba(255,215,0,0.25); }
   .tag-sprint { background:rgba(0,255,136,0.1); color:var(--g); border-color:rgba(0,255,136,0.3); }
@@ -182,6 +308,7 @@
   .tag-plyo   { background:rgba(100,150,255,0.1); color:#88aaff; border-color:rgba(100,150,255,0.25); }
   .tag-rest   { background:rgba(80,80,80,0.3); color:#999; border-color:rgba(80,80,80,0.4); }
   .tag-gtg    { background:rgba(0,200,255,0.1); color:#00ddff; border-color:rgba(0,200,255,0.3); }
+
   .ex-list { list-style:none; padding:0; margin:0; }
   .ex-list li {
     font-size:13px; padding:6px 0; border-bottom:1px solid rgba(0,255,136,0.06);
@@ -201,6 +328,14 @@
   .badge-weight { background:rgba(255,215,0,0.1); color:var(--gold); border-color:rgba(255,215,0,0.25); }
   .badge-rest   { background:rgba(0,212,255,0.1); color:var(--cyan); border-color:rgba(0,212,255,0.3); }
   .badge-rir    { background:rgba(136,85,255,0.14); color:var(--purple); border-color:rgba(136,85,255,0.35); }
+  @keyframes badgePulse {
+    0%,100% { filter:brightness(1); transform:scale(1); }
+    50% { filter:brightness(1.35); transform:scale(1.06); }
+  }
+  .stat-badge:hover, .inline-badge:hover, .day-tag:hover {
+    animation:badgePulse 1s ease-in-out infinite;
+    box-shadow:0 0 10px currentColor;
+  }
 
   .note {
     font-size:12px; color:var(--cyan); margin:0 0 12px; padding:10px 14px;
@@ -214,21 +349,32 @@
   }
   .phase-body .note:not(:first-child), .phase-body .warning:not(:first-child) { margin-top:12px; }
 
-  .table-wrap { overflow-x:auto; margin:16px 0; }
+  /* ============================================================
+     TABLES
+     ============================================================ */
+  .table-wrap {
+    overflow-x:auto; margin:16px 0; border:1px solid var(--border); border-radius:var(--r-md);
+    background:var(--panel-glass-soft); backdrop-filter:blur(10px);
+  }
   table { width:100%; border-collapse:collapse; font-size:12px; }
   th {
     font-family:'Share Tech Mono',monospace; font-size:9px; color:var(--dim); letter-spacing:2px;
-    text-transform:uppercase; padding:8px 12px; border-bottom:1px solid var(--border);
-    background:rgba(0,0,0,0.3); text-align:left;
+    text-transform:uppercase; padding:10px 14px; border-bottom:1px solid var(--border);
+    background:rgba(0,0,0,0.25); text-align:left;
   }
   td {
-    padding:8px 12px; border-bottom:1px solid rgba(0,255,136,0.06);
-    color:var(--text); vertical-align:top; line-height:1.5;
+    padding:10px 14px; border-bottom:1px solid rgba(0,255,136,0.06);
+    color:var(--text); vertical-align:top; line-height:1.5; position:relative;
+    transition:background .2s;
   }
-  tr:hover td { background:rgba(0,255,136,0.03); }
+  tr:last-child td { border-bottom:none; }
+  tr:hover td { background:rgba(0,255,136,0.035); }
+  tr:hover td:first-child::before {
+    content:''; position:absolute; left:0; top:0; bottom:0; width:2px; background:var(--grad-main);
+  }
   .inline-badge {
     display:inline-block; font-family:'Share Tech Mono',monospace; font-size:9px;
-    padding:2px 6px; border-radius:2px; margin-right:4px; letter-spacing:1px;
+    padding:2px 6px; border-radius:3px; margin-right:4px; letter-spacing:1px;
     border:1px solid transparent;
   }
   .ib-force { background:rgba(255,215,0,0.1); color:var(--gold); border-color:rgba(255,215,0,0.25); }
@@ -236,37 +382,84 @@
   .ib-plyo { background:rgba(100,150,255,0.1); color:#88aaff; border-color:rgba(100,150,255,0.25); }
   .ib-gtg { background:rgba(0,200,255,0.1); color:#00ddff; border-color:rgba(0,200,255,0.3); }
 
+  /* ============================================================
+     PROTOCOL CARDS
+     ============================================================ */
   .protocol-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
   .protocol-card {
-    background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:8px;
-    padding:18px; transition:border-color 0.3s,transform 0.2s;
+    padding:18px;
+    transition:box-shadow .3s var(--ease), transform .3s var(--ease-out);
   }
-  .protocol-card:hover { border-color:var(--g); transform:translateY(-2px); }
+  .protocol-card:hover { box-shadow:0 14px 34px rgba(0,255,136,0.08); transform:translateY(-2px); }
   .protocol-card h4 { font-family:'Orbitron',monospace; font-size:12px; color:#fff; margin-bottom:10px; letter-spacing:1px; }
   .protocol-card p { font-size:12px; color:var(--text); line-height:1.6; }
   .protocol-card .highlight { color:var(--g); font-weight:600; }
 
+  /* Scroll-reveal (progressive enhancement — JS adds .reveal, no-JS stays visible) */
+  .reveal { opacity:0; transform:translateY(16px); transition:opacity .6s var(--ease-out), transform .6s var(--ease-out); }
+  .reveal-in { opacity:1; transform:translateY(0); }
+
+  /* ============================================================
+     BACK TO TOP
+     ============================================================ */
+  .back-to-top {
+    position:fixed; right:20px; bottom:20px; z-index:900;
+    width:46px; height:46px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--panel-glass); border:1px solid var(--border-hover); color:var(--g);
+    backdrop-filter:blur(12px); cursor:pointer;
+    opacity:0; visibility:hidden; transform:translateY(12px) scale(.9);
+    transition:opacity .3s var(--ease-out), transform .3s var(--ease-out), visibility .3s, box-shadow .25s;
+  }
+  .back-to-top.visible { opacity:1; visibility:visible; transform:translateY(0) scale(1); }
+  .back-to-top:hover { box-shadow:0 0 24px rgba(0,255,136,0.45); border-color:var(--g); }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
   footer {
+    position:relative;
     text-align:center; padding:32px 24px; border-top:1px solid var(--border); margin-top:48px;
     font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--dim); letter-spacing:2px;
   }
+  footer::before {
+    content:''; position:absolute; top:-1px; left:50%; transform:translateX(-50%);
+    width:140px; height:2px; background:var(--grad-static);
+  }
 
+  /* ============================================================
+     RESPONSIVE
+     ============================================================ */
   @media(max-width:768px) {
     nav { padding:0 12px; }
     .nav-links a { padding:6px 8px; font-size:9px; }
     main { padding:24px 12px 48px; }
     .hero { padding:28px 16px 24px; }
     .day-cards { grid-template-columns:1fr; }
+    .hero-clock { gap:14px; padding:14px 16px; width:100%; }
+    .clock-val { font-size:clamp(19px,7vw,26px); }
+    .back-to-top { right:14px; bottom:14px; width:42px; height:42px; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior:auto; }
     * { animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
   }
+
+  /* ============================================================
+     KEYFRAMES
+     ============================================================ */
+  @keyframes flow { 0% { background-position:0% 50%; } 100% { background-position:220% 50%; } }
+  @keyframes beacon { 0%,100% { opacity:1; box-shadow:0 0 6px var(--g); } 50% { opacity:.5; box-shadow:0 0 14px var(--g); } }
+  @keyframes scan {
+    0%, 6% { top:-130px; }
+    48%, 58% { top:100%; }
+    100% { top:100%; }
+  }
 </style>
 </head>
 <body>
 
-<nav>
+<nav id="mainNav">
   <div class="nav-brand">NBN // HIVERNAL 2026–27</div>
   <ul class="nav-links" id="navLinks">
     <li><a href="#objectifs" class="active">Objectifs</a></li>
@@ -296,6 +489,22 @@
         <span class="hero-goal-date">Mai 2027</span>
       </div>
     </div>
+
+    <div class="hero-clock-wrap">
+      <div class="hero-clock">
+        <span class="clock-label"><span class="beacon" aria-hidden="true"></span>Compte à rebours · 60 m Indoor · 21 Fév 2027</span>
+        <div class="clock-grid" id="clock" aria-live="off">
+          <div class="clock-unit"><span class="clock-val" id="cdD">000</span><span class="clock-lbl">Jours</span></div>
+          <div class="clock-colon">:</div>
+          <div class="clock-unit"><span class="clock-val" id="cdH">00</span><span class="clock-lbl">Heures</span></div>
+          <div class="clock-colon">:</div>
+          <div class="clock-unit"><span class="clock-val" id="cdM">00</span><span class="clock-lbl">Min</span></div>
+          <div class="clock-colon">:</div>
+          <div class="clock-unit"><span class="clock-val" id="cdS">00</span><span class="clock-lbl">Sec</span></div>
+        </div>
+      </div>
+    </div>
+
     <div class="hero-timeline">
       <div class="hero-phase"><span class="dot p0"></span>Phase 0 · Régénération · Août 2026</div>
       <div class="hero-phase"><span class="dot p1"></span>Phase 1 · Force & Hypertrophie · Sept–mi-nov 2026</div>
@@ -399,15 +608,17 @@
         <div class="phase-info"><h3>Régénération</h3><div class="phase-meta">Août 2026 · 2-3 semaines</div></div>
         <span class="phase-toggle">▾</span>
       </div>
-      <div class="phase-body">
-        <ul class="ex-list">
-          <li><span class="ex-name">Repos actif : marche, mobilité, protocole tendon quotidien</span></li>
-          <li>
-            <span class="ex-name">GTG BDF ultra-léger</span>
-            <div class="stat-badges"><span class="stat-badge badge-rir">RIR &gt; 8</span></div>
-          </li>
-          <li><span class="ex-name">Pas de sprint, pas de force lourde, pas de pliométrie</span></li>
-        </ul>
+      <div class="phase-collapse">
+        <div class="phase-body">
+          <ul class="ex-list">
+            <li><span class="ex-name">Repos actif : marche, mobilité, protocole tendon quotidien</span></li>
+            <li>
+              <span class="ex-name">GTG BDF ultra-léger</span>
+              <div class="stat-badges"><span class="stat-badge badge-rir">RIR &gt; 8</span></div>
+            </li>
+            <li><span class="ex-name">Pas de sprint, pas de force lourde, pas de pliométrie</span></li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -423,167 +634,169 @@
         <div class="phase-info"><h3>Force Maximale & Hypertrophie Fonctionnelle</h3><div class="phase-meta">Sept – mi-nov 2026 · 10 semaines</div></div>
         <span class="phase-toggle">▾</span>
       </div>
-      <div class="phase-body">
-        <div class="note">Calendrier organisé sur un cycle de 14 jours, aligné sur le jeûne de Daoud : séances lourdes (Power Clean, Squat, Deadlift) les jours sans jeûne ; séances légères/techniques les jours de jeûne, ou juste après la rupture. La trame ci-dessous est un planning hebdomadaire type, à adapter selon le cycle réel.</div>
-        <div class="note" style="margin-top:0;">Les % de 1RM sont remplacés par des cibles RIR. Poids (⚖) = déjà communiqués. Repos (⏱) = recommandations standards par type d'effort, à ajuster selon le ressenti de Nadhir.</div>
-        <div class="day-cards">
-          <div class="day-card">
-            <div class="day-name">LUNDI <span class="day-tag tag-force">Force</span></div>
-            <div class="day-subtitle">Force Inférieure A</div>
-            <ul class="ex-list">
-              <li>
-                <span class="ex-name">Power Clean (apprentissage progressif)</span><span class="ex-detail">5×3 · technique</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Squat profond</span><span class="ex-detail">4×5 · explosif</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 3-4 min</span><span class="stat-badge badge-rir">RIR 1-2</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Hip thrust</span><span class="ex-detail">4×8</span>
-                <div class="stat-badges"><span class="stat-badge badge-weight">⚖ 80-90 kg</span><span class="stat-badge badge-rest">⏱ 90 s-2 min</span><span class="stat-badge badge-rir">RIR 2-3</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Nordic curl excentrique</span><span class="ex-detail">3×4</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 90 s-2 min</span><span class="stat-badge badge-rir">RIR 2-3</span></div>
-              </li>
-              <li><span class="ex-name">Berlin Achille</span><span class="ex-detail">2×45 s iso</span></li>
-              <li class="ex-note">Pas de BDF ce jour.</li>
-            </ul>
+      <div class="phase-collapse">
+        <div class="phase-body">
+          <div class="note">Calendrier organisé sur un cycle de 14 jours, aligné sur le jeûne de Daoud : séances lourdes (Power Clean, Squat, Deadlift) les jours sans jeûne ; séances légères/techniques les jours de jeûne, ou juste après la rupture. La trame ci-dessous est un planning hebdomadaire type, à adapter selon le cycle réel.</div>
+          <div class="note" style="margin-top:0;">Les % de 1RM sont remplacés par des cibles RIR. Poids (⚖) = déjà communiqués. Repos (⏱) = recommandations standards par type d'effort, à ajuster selon le ressenti de Nadhir.</div>
+          <div class="day-cards">
+            <div class="day-card">
+              <div class="day-name">LUNDI <span class="day-tag tag-force">Force</span></div>
+              <div class="day-subtitle">Force Inférieure A</div>
+              <ul class="ex-list">
+                <li>
+                  <span class="ex-name">Power Clean (apprentissage progressif)</span><span class="ex-detail">5×3 · technique</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Squat profond</span><span class="ex-detail">4×5 · explosif</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 3-4 min</span><span class="stat-badge badge-rir">RIR 1-2</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Hip thrust</span><span class="ex-detail">4×8</span>
+                  <div class="stat-badges"><span class="stat-badge badge-weight">⚖ 80-90 kg</span><span class="stat-badge badge-rest">⏱ 90 s-2 min</span><span class="stat-badge badge-rir">RIR 2-3</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Nordic curl excentrique</span><span class="ex-detail">3×4</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 90 s-2 min</span><span class="stat-badge badge-rir">RIR 2-3</span></div>
+                </li>
+                <li><span class="ex-name">Berlin Achille</span><span class="ex-detail">2×45 s iso</span></li>
+                <li class="ex-note">Pas de BDF ce jour.</li>
+              </ul>
+            </div>
+            <div class="day-card">
+              <div class="day-name">MARDI <span class="day-tag tag-gtg">GTG</span></div>
+              <div class="day-subtitle">GTG Block Start + Force Supérieure A</div>
+              <ul class="ex-list">
+                <li>
+                  <span class="ex-name">GTG Block Start</span><span class="ex-detail">2-3 départs 10 m / 85-90%</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Développé couché</span><span class="ex-detail">4×5</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 3-4 min</span><span class="stat-badge badge-rir">RIR 1-2</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Tractions lestées</span><span class="ex-detail">4×5</span>
+                  <div class="stat-badges"><span class="stat-badge badge-weight">⚖ +15-20 kg</span><span class="stat-badge badge-rest">⏱ 2-3 min</span><span class="stat-badge badge-rir">RIR 1-2</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Rowing barre</span><span class="ex-detail">4×8</span>
+                  <div class="stat-badges"><span class="stat-badge badge-weight">⚖ 50-60 kg</span><span class="stat-badge badge-rest">⏱ 90 s-2 min</span><span class="stat-badge badge-rir">RIR 2-3</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Facepull</span><span class="ex-detail">3×12</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span></div>
+                </li>
+                <li class="ex-note">Pas de BDF ce jour.</li>
+              </ul>
+            </div>
+            <div class="day-card">
+              <div class="day-name">MERCREDI <span class="day-tag tag-sprint">Sprint</span></div>
+              <div class="day-subtitle">Sprint Technique + Force Inférieure B + BDF</div>
+              <ul class="ex-list">
+                <li><span class="ex-name">Échauffement + drills</span><span class="ex-detail">20 min</span></li>
+                <li>
+                  <span class="ex-name">Sprint entretien</span><span class="ex-detail">3×30 m / 85%</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 90 s-2 min</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Trap bar deadlift</span><span class="ex-detail">4×4</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 3-4 min</span><span class="stat-badge badge-rir">RIR 1-2</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Good morning</span><span class="ex-detail">3×10 · léger</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span></div>
+                </li>
+                <li><span class="ex-name">Berlin Achille</span><span class="ex-detail">2×45 s</span></li>
+                <li>
+                  <span class="ex-name">RDL unijambiste (prévention genou)</span><span class="ex-detail">2×8/jambe</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span><span class="stat-badge badge-rir">RIR 3-4</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">BDF — Curl marteau</span><span class="ex-detail">3×8</span>
+                  <div class="stat-badges"><span class="stat-badge badge-weight">⚖ 12-15 kg</span><span class="stat-badge badge-rest">⏱ 90 s-2 min</span><span class="stat-badge badge-rir">RIR 1-2</span></div>
+                </li>
+              </ul>
+            </div>
+            <div class="day-card">
+              <div class="day-name">JEUDI <span class="day-tag tag-gtg">GTG</span></div>
+              <div class="day-subtitle">GTG Block Start + BDF</div>
+              <ul class="ex-list">
+                <li>
+                  <span class="ex-name">GTG Block Start</span><span class="ex-detail">2-3 départs 10 m / 87-90%</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">GTG BDF — Riser</span><span class="ex-detail">2-3×15-20 s</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span><span class="stat-badge badge-rir">RIR &gt;5</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">GTG BDF — Pronation lente</span><span class="ex-detail">2×10-12</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span><span class="stat-badge badge-rir">RIR &gt;5</span></div>
+                </li>
+              </ul>
+            </div>
+            <div class="day-card">
+              <div class="day-name">VENDREDI <span class="day-tag tag-force">Force</span></div>
+              <div class="day-subtitle">Force Inférieure C (volume) + BDF</div>
+              <ul class="ex-list">
+                <li>
+                  <span class="ex-name">Squat profond (volume)</span><span class="ex-detail">5×6</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 90 s-2 min</span><span class="stat-badge badge-rir">RIR 2-3</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Hip thrust</span><span class="ex-detail">4×10</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 90 s-2 min</span><span class="stat-badge badge-rir">RIR 2-3</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Nordic curl</span><span class="ex-detail">3×4</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 90 s-2 min</span><span class="stat-badge badge-rir">RIR 2-3</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Mollets lestés</span><span class="ex-detail">3×12</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 90 s-2 min</span><span class="stat-badge badge-rir">RIR 2-3</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">BDF — Riser long (endurance/tendons)</span><span class="ex-detail">3×20 s</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">BDF — Pronation endurance</span><span class="ex-detail">3×12</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
+                </li>
+              </ul>
+            </div>
+            <div class="day-card">
+              <div class="day-name">SAMEDI <span class="day-tag tag-force">Force</span></div>
+              <div class="day-subtitle">Force Supérieure B</div>
+              <ul class="ex-list">
+                <li>
+                  <span class="ex-name">Développé incliné</span><span class="ex-detail">4×6</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 3-4 min</span><span class="stat-badge badge-rir">RIR 1-2</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Tractions (poids du corps)</span><span class="ex-detail">3×max-2</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Rowing unilatéral</span><span class="ex-detail">3×10/côté</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 90 s-2 min</span><span class="stat-badge badge-rir">RIR 2-3</span></div>
+                </li>
+                <li><span class="ex-name">Rotation externe épaule + prévention coude</span><span class="ex-detail">10 min</span></li>
+              </ul>
+            </div>
+            <div class="day-card">
+              <div class="day-name">DIMANCHE <span class="day-tag tag-rest">Repos</span></div>
+              <div class="day-subtitle">Repos complet</div>
+              <ul class="ex-list">
+                <li><span class="ex-name">Repos complet</span></li>
+              </ul>
+            </div>
           </div>
-          <div class="day-card">
-            <div class="day-name">MARDI <span class="day-tag tag-gtg">GTG</span></div>
-            <div class="day-subtitle">GTG Block Start + Force Supérieure A</div>
-            <ul class="ex-list">
-              <li>
-                <span class="ex-name">GTG Block Start</span><span class="ex-detail">2-3 départs 10 m / 85-90%</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Développé couché</span><span class="ex-detail">4×5</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 3-4 min</span><span class="stat-badge badge-rir">RIR 1-2</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Tractions lestées</span><span class="ex-detail">4×5</span>
-                <div class="stat-badges"><span class="stat-badge badge-weight">⚖ +15-20 kg</span><span class="stat-badge badge-rest">⏱ 2-3 min</span><span class="stat-badge badge-rir">RIR 1-2</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Rowing barre</span><span class="ex-detail">4×8</span>
-                <div class="stat-badges"><span class="stat-badge badge-weight">⚖ 50-60 kg</span><span class="stat-badge badge-rest">⏱ 90 s-2 min</span><span class="stat-badge badge-rir">RIR 2-3</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Facepull</span><span class="ex-detail">3×12</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span></div>
-              </li>
-              <li class="ex-note">Pas de BDF ce jour.</li>
-            </ul>
-          </div>
-          <div class="day-card">
-            <div class="day-name">MERCREDI <span class="day-tag tag-sprint">Sprint</span></div>
-            <div class="day-subtitle">Sprint Technique + Force Inférieure B + BDF</div>
-            <ul class="ex-list">
-              <li><span class="ex-name">Échauffement + drills</span><span class="ex-detail">20 min</span></li>
-              <li>
-                <span class="ex-name">Sprint entretien</span><span class="ex-detail">3×30 m / 85%</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 90 s-2 min</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Trap bar deadlift</span><span class="ex-detail">4×4</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 3-4 min</span><span class="stat-badge badge-rir">RIR 1-2</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Good morning</span><span class="ex-detail">3×10 · léger</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span></div>
-              </li>
-              <li><span class="ex-name">Berlin Achille</span><span class="ex-detail">2×45 s</span></li>
-              <li>
-                <span class="ex-name">RDL unijambiste (prévention genou)</span><span class="ex-detail">2×8/jambe</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span><span class="stat-badge badge-rir">RIR 3-4</span></div>
-              </li>
-              <li>
-                <span class="ex-name">BDF — Curl marteau</span><span class="ex-detail">3×8</span>
-                <div class="stat-badges"><span class="stat-badge badge-weight">⚖ 12-15 kg</span><span class="stat-badge badge-rest">⏱ 90 s-2 min</span><span class="stat-badge badge-rir">RIR 1-2</span></div>
-              </li>
-            </ul>
-          </div>
-          <div class="day-card">
-            <div class="day-name">JEUDI <span class="day-tag tag-gtg">GTG</span></div>
-            <div class="day-subtitle">GTG Block Start + BDF</div>
-            <ul class="ex-list">
-              <li>
-                <span class="ex-name">GTG Block Start</span><span class="ex-detail">2-3 départs 10 m / 87-90%</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span></div>
-              </li>
-              <li>
-                <span class="ex-name">GTG BDF — Riser</span><span class="ex-detail">2-3×15-20 s</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span><span class="stat-badge badge-rir">RIR &gt;5</span></div>
-              </li>
-              <li>
-                <span class="ex-name">GTG BDF — Pronation lente</span><span class="ex-detail">2×10-12</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span><span class="stat-badge badge-rir">RIR &gt;5</span></div>
-              </li>
-            </ul>
-          </div>
-          <div class="day-card">
-            <div class="day-name">VENDREDI <span class="day-tag tag-force">Force</span></div>
-            <div class="day-subtitle">Force Inférieure C (volume) + BDF</div>
-            <ul class="ex-list">
-              <li>
-                <span class="ex-name">Squat profond (volume)</span><span class="ex-detail">5×6</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 90 s-2 min</span><span class="stat-badge badge-rir">RIR 2-3</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Hip thrust</span><span class="ex-detail">4×10</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 90 s-2 min</span><span class="stat-badge badge-rir">RIR 2-3</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Nordic curl</span><span class="ex-detail">3×4</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 90 s-2 min</span><span class="stat-badge badge-rir">RIR 2-3</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Mollets lestés</span><span class="ex-detail">3×12</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 90 s-2 min</span><span class="stat-badge badge-rir">RIR 2-3</span></div>
-              </li>
-              <li>
-                <span class="ex-name">BDF — Riser long (endurance/tendons)</span><span class="ex-detail">3×20 s</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
-              </li>
-              <li>
-                <span class="ex-name">BDF — Pronation endurance</span><span class="ex-detail">3×12</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
-              </li>
-            </ul>
-          </div>
-          <div class="day-card">
-            <div class="day-name">SAMEDI <span class="day-tag tag-force">Force</span></div>
-            <div class="day-subtitle">Force Supérieure B</div>
-            <ul class="ex-list">
-              <li>
-                <span class="ex-name">Développé incliné</span><span class="ex-detail">4×6</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 3-4 min</span><span class="stat-badge badge-rir">RIR 1-2</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Tractions (poids du corps)</span><span class="ex-detail">3×max-2</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Rowing unilatéral</span><span class="ex-detail">3×10/côté</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 90 s-2 min</span><span class="stat-badge badge-rir">RIR 2-3</span></div>
-              </li>
-              <li><span class="ex-name">Rotation externe épaule + prévention coude</span><span class="ex-detail">10 min</span></li>
-            </ul>
-          </div>
-          <div class="day-card">
-            <div class="day-name">DIMANCHE <span class="day-tag tag-rest">Repos</span></div>
-            <div class="day-subtitle">Repos complet</div>
-            <ul class="ex-list">
-              <li><span class="ex-name">Repos complet</span></li>
-            </ul>
-          </div>
+          <div class="note" style="margin-top:16px;">Rappel vitesse max : 1-2×60 m à 95-100 % toutes les 2 semaines (SNC vert obligatoire).</div>
+          <div class="warning">Décharges : semaines 4 et 8 (volume -30 %).</div>
+          <div class="note">Test 10 m avec blocks : 1×/mois, sous-maximal (85-90 %), pour isoler le gain technique.</div>
         </div>
-        <div class="note" style="margin-top:16px;">Rappel vitesse max : 1-2×60 m à 95-100 % toutes les 2 semaines (SNC vert obligatoire).</div>
-        <div class="warning">Décharges : semaines 4 et 8 (volume -30 %).</div>
-        <div class="note">Test 10 m avec blocks : 1×/mois, sous-maximal (85-90 %), pour isoler le gain technique.</div>
       </div>
     </div>
   </section>
@@ -599,148 +812,150 @@
         <div class="phase-info"><h3>Puissance & Accélération</h3><div class="phase-meta">Mi-nov – déc 2026 · 6 semaines</div></div>
         <span class="phase-toggle">▾</span>
       </div>
-      <div class="phase-body">
-        <div class="warning">Transition : semaine de décharge (-20 à -30 %) entre Phase 1 et Phase 2.</div>
-        <div class="day-cards">
-          <div class="day-card">
-            <div class="day-name">LUNDI <span class="day-tag tag-plyo">Puissance</span></div>
-            <div class="day-subtitle">Puissance Inférieure</div>
-            <ul class="ex-list">
-              <li>
-                <span class="ex-name">Power Clean</span><span class="ex-detail">5×3 · explosif</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Squat dynamique</span><span class="ex-detail">6×3 · Vmax</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Trap Bar Jump</span><span class="ex-detail">4×4</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Drop Jump 40 cm</span><span class="ex-detail">4×5</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 4-5 min</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Hip thrust explosif</span><span class="ex-detail">4×5</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Nordic curl</span><span class="ex-detail">3×3</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 90 s-2 min</span><span class="stat-badge badge-rir">RIR 2-3</span></div>
-              </li>
-              <li><span class="ex-name">Berlin Achille</span><span class="ex-detail">2×45 s</span></li>
-              <li class="ex-note">Pas de BDF ce jour.</li>
-            </ul>
-          </div>
-          <div class="day-card">
-            <div class="day-name">MARDI <span class="day-tag tag-sprint">Sprint</span></div>
-            <div class="day-subtitle">Sprint Résisté + GTG Block Start + BDF</div>
-            <ul class="ex-list">
-              <li>
-                <span class="ex-name">Sprint traîné 5-8 %</span><span class="ex-detail">4×30 m</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span></div>
-              </li>
-              <li><span class="ex-name">Drills ABC sprint</span></li>
-              <li>
-                <span class="ex-name">GTG Block Start</span><span class="ex-detail">2-3 départs 10 m / 90%</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span></div>
-              </li>
-              <li>
-                <span class="ex-name">BDF — Curl marteau</span><span class="ex-detail">3×8</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 90 s-2 min</span><span class="stat-badge badge-rir">RIR 1-2</span></div>
-              </li>
-              <li>
-                <span class="ex-name">BDF — Pronation explosive</span><span class="ex-detail">3×6</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2 min</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
-              </li>
-            </ul>
-          </div>
-          <div class="day-card">
-            <div class="day-name">MERCREDI <span class="day-tag tag-plyo">Puissance</span></div>
-            <div class="day-subtitle">Puissance Supérieure</div>
-            <ul class="ex-list">
-              <li>
-                <span class="ex-name">Développé balistique</span><span class="ex-detail">5×3</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Tractions explosives</span><span class="ex-detail">4×3</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Med ball slam</span><span class="ex-detail">4×5</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 90 s-2 min</span></div>
-              </li>
-              <li class="ex-note">Pas de BDF ce jour.</li>
-            </ul>
-          </div>
-          <div class="day-card">
-            <div class="day-name">JEUDI <span class="day-tag tag-gtg">GTG</span></div>
-            <div class="day-subtitle">GTG Block Start + GTG BDF</div>
-            <ul class="ex-list">
-              <li>
-                <span class="ex-name">GTG Block Start</span><span class="ex-detail">2-3 départs 10 m / 90%</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span></div>
-              </li>
-              <li>
-                <span class="ex-name">GTG BDF — Riser</span><span class="ex-detail">2-3×15 s</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span><span class="stat-badge badge-rir">RIR &gt;5</span></div>
-              </li>
-              <li>
-                <span class="ex-name">GTG BDF — Pronation lente</span><span class="ex-detail">2×10</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span><span class="stat-badge badge-rir">RIR &gt;5</span></div>
-              </li>
-            </ul>
-          </div>
-          <div class="day-card">
-            <div class="day-name">VENDREDI <span class="day-tag tag-sprint">Sprint</span></div>
-            <div class="day-subtitle">Sprint Libre + BDF</div>
-            <ul class="ex-list">
-              <li>
-                <span class="ex-name">30 m libre</span><span class="ex-detail">4 reps / 90-95%</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 3-4 min</span></div>
-              </li>
-              <li>
-                <span class="ex-name">50 m progressif</span><span class="ex-detail">2 reps</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span></div>
-              </li>
-              <li>
-                <span class="ex-name">BDF — Riser long (endurance)</span><span class="ex-detail">3×20 s</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
-              </li>
-              <li>
-                <span class="ex-name">BDF — Pronation endurance</span><span class="ex-detail">3×12</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
-              </li>
-            </ul>
-          </div>
-          <div class="day-card">
-            <div class="day-name">SAMEDI <span class="day-tag tag-plyo">Puissance</span></div>
-            <div class="day-subtitle">Puissance Inférieure B</div>
-            <ul class="ex-list">
-              <li>
-                <span class="ex-name">Squat dynamique</span><span class="ex-detail">5×3</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Bounding 10 m</span><span class="ex-detail">4×4</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 90 s-2 min</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Drop Jump 60 cm</span><span class="ex-detail">3×5</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 3-5 min</span></div>
-              </li>
-              <li><span class="ex-name">Berlin Achille</span><span class="ex-detail">2×45 s</span></li>
-            </ul>
-          </div>
-          <div class="day-card">
-            <div class="day-name">DIMANCHE <span class="day-tag tag-rest">Repos</span></div>
-            <div class="day-subtitle">Repos complet</div>
-            <ul class="ex-list">
-              <li><span class="ex-name">Repos complet</span></li>
-            </ul>
+      <div class="phase-collapse">
+        <div class="phase-body">
+          <div class="warning">Transition : semaine de décharge (-20 à -30 %) entre Phase 1 et Phase 2.</div>
+          <div class="day-cards">
+            <div class="day-card">
+              <div class="day-name">LUNDI <span class="day-tag tag-plyo">Puissance</span></div>
+              <div class="day-subtitle">Puissance Inférieure</div>
+              <ul class="ex-list">
+                <li>
+                  <span class="ex-name">Power Clean</span><span class="ex-detail">5×3 · explosif</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Squat dynamique</span><span class="ex-detail">6×3 · Vmax</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Trap Bar Jump</span><span class="ex-detail">4×4</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Drop Jump 40 cm</span><span class="ex-detail">4×5</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 4-5 min</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Hip thrust explosif</span><span class="ex-detail">4×5</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Nordic curl</span><span class="ex-detail">3×3</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 90 s-2 min</span><span class="stat-badge badge-rir">RIR 2-3</span></div>
+                </li>
+                <li><span class="ex-name">Berlin Achille</span><span class="ex-detail">2×45 s</span></li>
+                <li class="ex-note">Pas de BDF ce jour.</li>
+              </ul>
+            </div>
+            <div class="day-card">
+              <div class="day-name">MARDI <span class="day-tag tag-sprint">Sprint</span></div>
+              <div class="day-subtitle">Sprint Résisté + GTG Block Start + BDF</div>
+              <ul class="ex-list">
+                <li>
+                  <span class="ex-name">Sprint traîné 5-8 %</span><span class="ex-detail">4×30 m</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span></div>
+                </li>
+                <li><span class="ex-name">Drills ABC sprint</span></li>
+                <li>
+                  <span class="ex-name">GTG Block Start</span><span class="ex-detail">2-3 départs 10 m / 90%</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">BDF — Curl marteau</span><span class="ex-detail">3×8</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 90 s-2 min</span><span class="stat-badge badge-rir">RIR 1-2</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">BDF — Pronation explosive</span><span class="ex-detail">3×6</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2 min</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
+                </li>
+              </ul>
+            </div>
+            <div class="day-card">
+              <div class="day-name">MERCREDI <span class="day-tag tag-plyo">Puissance</span></div>
+              <div class="day-subtitle">Puissance Supérieure</div>
+              <ul class="ex-list">
+                <li>
+                  <span class="ex-name">Développé balistique</span><span class="ex-detail">5×3</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Tractions explosives</span><span class="ex-detail">4×3</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Med ball slam</span><span class="ex-detail">4×5</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 90 s-2 min</span></div>
+                </li>
+                <li class="ex-note">Pas de BDF ce jour.</li>
+              </ul>
+            </div>
+            <div class="day-card">
+              <div class="day-name">JEUDI <span class="day-tag tag-gtg">GTG</span></div>
+              <div class="day-subtitle">GTG Block Start + GTG BDF</div>
+              <ul class="ex-list">
+                <li>
+                  <span class="ex-name">GTG Block Start</span><span class="ex-detail">2-3 départs 10 m / 90%</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">GTG BDF — Riser</span><span class="ex-detail">2-3×15 s</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span><span class="stat-badge badge-rir">RIR &gt;5</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">GTG BDF — Pronation lente</span><span class="ex-detail">2×10</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span><span class="stat-badge badge-rir">RIR &gt;5</span></div>
+                </li>
+              </ul>
+            </div>
+            <div class="day-card">
+              <div class="day-name">VENDREDI <span class="day-tag tag-sprint">Sprint</span></div>
+              <div class="day-subtitle">Sprint Libre + BDF</div>
+              <ul class="ex-list">
+                <li>
+                  <span class="ex-name">30 m libre</span><span class="ex-detail">4 reps / 90-95%</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 3-4 min</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">50 m progressif</span><span class="ex-detail">2 reps</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">BDF — Riser long (endurance)</span><span class="ex-detail">3×20 s</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">BDF — Pronation endurance</span><span class="ex-detail">3×12</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
+                </li>
+              </ul>
+            </div>
+            <div class="day-card">
+              <div class="day-name">SAMEDI <span class="day-tag tag-plyo">Puissance</span></div>
+              <div class="day-subtitle">Puissance Inférieure B</div>
+              <ul class="ex-list">
+                <li>
+                  <span class="ex-name">Squat dynamique</span><span class="ex-detail">5×3</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Bounding 10 m</span><span class="ex-detail">4×4</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 90 s-2 min</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Drop Jump 60 cm</span><span class="ex-detail">3×5</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 3-5 min</span></div>
+                </li>
+                <li><span class="ex-name">Berlin Achille</span><span class="ex-detail">2×45 s</span></li>
+              </ul>
+            </div>
+            <div class="day-card">
+              <div class="day-name">DIMANCHE <span class="day-tag tag-rest">Repos</span></div>
+              <div class="day-subtitle">Repos complet</div>
+              <ul class="ex-list">
+                <li><span class="ex-name">Repos complet</span></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -758,120 +973,122 @@
         <div class="phase-info"><h3>Compétition</h3><div class="phase-meta">Janv – mars 2027 · 8-10 semaines</div></div>
         <span class="phase-toggle">▾</span>
       </div>
-      <div class="phase-body">
-        <div class="note">Structure : 2-3 mini-cycles de 3-4 semaines (charge légère → décharge → compétition). Semaine type hors compétition ci-dessous.</div>
-        <div class="day-cards">
-          <div class="day-card">
-            <div class="day-name">LUNDI <span class="day-tag tag-plyo">Pliométrie</span></div>
-            <div class="day-subtitle">Force Maintien + Pliométrie Choc</div>
-            <ul class="ex-list">
-              <li>
-                <span class="ex-name">Squat profond</span><span class="ex-detail">2×3</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 3-4 min</span><span class="stat-badge badge-rir">RIR 1-2</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Hip thrust explosif</span><span class="ex-detail">2×5</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Drop Jump 80 cm</span><span class="ex-detail">4×5</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 3-5 min</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Bounding horizontal</span><span class="ex-detail">3×10 m</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 90 s-2 min</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Hurdle hop</span><span class="ex-detail">3×5</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 3-5 min</span></div>
-              </li>
-              <li><span class="ex-name">Berlin Achille</span><span class="ex-detail">2×45 s</span></li>
-            </ul>
-          </div>
-          <div class="day-card">
-            <div class="day-name">MARDI <span class="day-tag tag-sprint">Sprint</span></div>
-            <div class="day-subtitle">Sprint Haute Intensité</div>
-            <ul class="ex-list">
-              <li><span class="ex-name">Échauffement complet</span><span class="ex-detail">25 min</span></li>
-              <li>
-                <span class="ex-name">Flying 30 m</span><span class="ex-detail">6 reps / 97%</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 4-6 min</span></div>
-              </li>
-              <li>
-                <span class="ex-name">60 m complet</span><span class="ex-detail">3 reps / 97%</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 4-6 min</span></div>
-              </li>
-              <li>
-                <span class="ex-name">GTG Block Start</span><span class="ex-detail">2×10 m / 90%</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span></div>
-              </li>
-            </ul>
-          </div>
-          <div class="day-card">
-            <div class="day-name">MERCREDI <span class="day-tag tag-rest">Récup</span></div>
-            <div class="day-subtitle">Récupération active</div>
-            <ul class="ex-list">
-              <li><span class="ex-name">Mobilité + marche</span><span class="ex-detail">20 min + 30 min</span></li>
-              <li>
-                <span class="ex-name">Riser BDF</span><span class="ex-detail">2×15 s</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span><span class="stat-badge badge-rir">RIR &gt;5</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Nordic curl léger</span><span class="ex-detail">2×3</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span><span class="stat-badge badge-rir">RIR 2-3</span></div>
-              </li>
-            </ul>
-          </div>
-          <div class="day-card">
-            <div class="day-name">JEUDI <span class="day-tag tag-sprint">Sprint</span></div>
-            <div class="day-subtitle">Sprint 60 m + Accélération</div>
-            <ul class="ex-list">
-              <li>
-                <span class="ex-name">Block start → 30 m</span><span class="ex-detail">4 reps / 95%</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 4-6 min</span></div>
-              </li>
-              <li>
-                <span class="ex-name">60 m complet</span><span class="ex-detail">2 reps / 97%</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 4-6 min</span></div>
-              </li>
-            </ul>
-          </div>
-          <div class="day-card">
-            <div class="day-name">VENDREDI <span class="day-tag tag-force">Force</span></div>
-            <div class="day-subtitle">Force Maintien Supérieur</div>
-            <ul class="ex-list">
-              <li>
-                <span class="ex-name">Trap bar lourd</span><span class="ex-detail">2×3</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 3-4 min</span><span class="stat-badge badge-rir">RIR 1-2</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Développé couché</span><span class="ex-detail">3×3</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 3-4 min</span><span class="stat-badge badge-rir">RIR 1-2</span></div>
-              </li>
-              <li>
-                <span class="ex-name">Tractions lestées</span><span class="ex-detail">3×3</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span><span class="stat-badge badge-rir">RIR 1-2</span></div>
-              </li>
-              <li><span class="ex-name">Prévention coude</span><span class="ex-detail">10 min</span></li>
-            </ul>
-          </div>
-          <div class="day-card">
-            <div class="day-name">SAMEDI <span class="day-tag tag-sprint">Compét.</span></div>
-            <div class="day-subtitle">Simulation Compétition</div>
-            <ul class="ex-list">
-              <li>
-                <span class="ex-name">60 m simulation</span><span class="ex-detail">1-2 reps / 100%</span>
-                <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 15 min</span></div>
-              </li>
-              <li class="ex-note">Semaines de compétition uniquement.</li>
-            </ul>
-          </div>
-          <div class="day-card">
-            <div class="day-name">DIMANCHE <span class="day-tag tag-rest">Repos</span></div>
-            <div class="day-subtitle">Repos complet</div>
-            <ul class="ex-list">
-              <li><span class="ex-name">Repos complet</span></li>
-            </ul>
+      <div class="phase-collapse">
+        <div class="phase-body">
+          <div class="note">Structure : 2-3 mini-cycles de 3-4 semaines (charge légère → décharge → compétition). Semaine type hors compétition ci-dessous.</div>
+          <div class="day-cards">
+            <div class="day-card">
+              <div class="day-name">LUNDI <span class="day-tag tag-plyo">Pliométrie</span></div>
+              <div class="day-subtitle">Force Maintien + Pliométrie Choc</div>
+              <ul class="ex-list">
+                <li>
+                  <span class="ex-name">Squat profond</span><span class="ex-detail">2×3</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 3-4 min</span><span class="stat-badge badge-rir">RIR 1-2</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Hip thrust explosif</span><span class="ex-detail">2×5</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span><span class="stat-badge badge-rir">RIR 4-5</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Drop Jump 80 cm</span><span class="ex-detail">4×5</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 3-5 min</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Bounding horizontal</span><span class="ex-detail">3×10 m</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 90 s-2 min</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Hurdle hop</span><span class="ex-detail">3×5</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 3-5 min</span></div>
+                </li>
+                <li><span class="ex-name">Berlin Achille</span><span class="ex-detail">2×45 s</span></li>
+              </ul>
+            </div>
+            <div class="day-card">
+              <div class="day-name">MARDI <span class="day-tag tag-sprint">Sprint</span></div>
+              <div class="day-subtitle">Sprint Haute Intensité</div>
+              <ul class="ex-list">
+                <li><span class="ex-name">Échauffement complet</span><span class="ex-detail">25 min</span></li>
+                <li>
+                  <span class="ex-name">Flying 30 m</span><span class="ex-detail">6 reps / 97%</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 4-6 min</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">60 m complet</span><span class="ex-detail">3 reps / 97%</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 4-6 min</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">GTG Block Start</span><span class="ex-detail">2×10 m / 90%</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span></div>
+                </li>
+              </ul>
+            </div>
+            <div class="day-card">
+              <div class="day-name">MERCREDI <span class="day-tag tag-rest">Récup</span></div>
+              <div class="day-subtitle">Récupération active</div>
+              <ul class="ex-list">
+                <li><span class="ex-name">Mobilité + marche</span><span class="ex-detail">20 min + 30 min</span></li>
+                <li>
+                  <span class="ex-name">Riser BDF</span><span class="ex-detail">2×15 s</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span><span class="stat-badge badge-rir">RIR &gt;5</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Nordic curl léger</span><span class="ex-detail">2×3</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 60-90 s</span><span class="stat-badge badge-rir">RIR 2-3</span></div>
+                </li>
+              </ul>
+            </div>
+            <div class="day-card">
+              <div class="day-name">JEUDI <span class="day-tag tag-sprint">Sprint</span></div>
+              <div class="day-subtitle">Sprint 60 m + Accélération</div>
+              <ul class="ex-list">
+                <li>
+                  <span class="ex-name">Block start → 30 m</span><span class="ex-detail">4 reps / 95%</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 4-6 min</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">60 m complet</span><span class="ex-detail">2 reps / 97%</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 4-6 min</span></div>
+                </li>
+              </ul>
+            </div>
+            <div class="day-card">
+              <div class="day-name">VENDREDI <span class="day-tag tag-force">Force</span></div>
+              <div class="day-subtitle">Force Maintien Supérieur</div>
+              <ul class="ex-list">
+                <li>
+                  <span class="ex-name">Trap bar lourd</span><span class="ex-detail">2×3</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 3-4 min</span><span class="stat-badge badge-rir">RIR 1-2</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Développé couché</span><span class="ex-detail">3×3</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 3-4 min</span><span class="stat-badge badge-rir">RIR 1-2</span></div>
+                </li>
+                <li>
+                  <span class="ex-name">Tractions lestées</span><span class="ex-detail">3×3</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 2-3 min</span><span class="stat-badge badge-rir">RIR 1-2</span></div>
+                </li>
+                <li><span class="ex-name">Prévention coude</span><span class="ex-detail">10 min</span></li>
+              </ul>
+            </div>
+            <div class="day-card">
+              <div class="day-name">SAMEDI <span class="day-tag tag-sprint">Compét.</span></div>
+              <div class="day-subtitle">Simulation Compétition</div>
+              <ul class="ex-list">
+                <li>
+                  <span class="ex-name">60 m simulation</span><span class="ex-detail">1-2 reps / 100%</span>
+                  <div class="stat-badges"><span class="stat-badge badge-rest">⏱ 15 min</span></div>
+                </li>
+                <li class="ex-note">Semaines de compétition uniquement.</li>
+              </ul>
+            </div>
+            <div class="day-card">
+              <div class="day-name">DIMANCHE <span class="day-tag tag-rest">Repos</span></div>
+              <div class="day-subtitle">Repos complet</div>
+              <ul class="ex-list">
+                <li><span class="ex-name">Repos complet</span></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -916,8 +1133,12 @@
   Nadhir Ben Nasr — Programme Hivernal 2026–2027 · Compétition 60 m indoor
 </footer>
 
+<button id="backToTop" class="back-to-top" aria-label="Retour en haut de page" title="Retour en haut">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
 <script>
-  // Accordéon des phases (clic + clavier)
+  // ---------- Accordéon des phases (clic + clavier) ----------
   document.querySelectorAll('.phase-header').forEach(header => {
     const card = header.parentElement;
     const toggle = () => {
@@ -926,37 +1147,107 @@
     };
     header.addEventListener('click', toggle);
     header.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggle();
-      }
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
     });
   });
 
-  // Navigation fluide + suivi de la section active au scroll
+  // ---------- Navigation fluide + suivi de la section active ----------
   const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
-  const sections = navLinks
-    .map(link => document.querySelector(link.getAttribute('href')))
-    .filter(Boolean);
+  const sections = navLinks.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
 
   navLinks.forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
       const target = document.querySelector(link.getAttribute('href'));
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (target) target.scrollIntoView({ behavior:'smooth', block:'start' });
     });
   });
 
   if ('IntersectionObserver' in window) {
-    const setActive = id => {
-      navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
-    };
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) setActive(entry.target.id);
+    const setActive = id => navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    const navObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) setActive(entry.target.id); });
+    }, { rootMargin:'-56px 0px -70% 0px', threshold:0 });
+    sections.forEach(section => navObserver.observe(section));
+  }
+
+  // ---------- Nav qui se réduit au scroll + bouton retour en haut ----------
+  const mainNav = document.getElementById('mainNav');
+  const backToTop = document.getElementById('backToTop');
+  let ticking = false;
+  function onScroll() {
+    const y = window.scrollY;
+    mainNav.classList.toggle('scrolled', y > 30);
+    backToTop.classList.toggle('visible', y > 480);
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
+  }, { passive:true });
+  onScroll();
+  backToTop.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+
+  // ---------- Compte à rebours vers la compétition (21 février 2027) ----------
+  const targetDate = new Date('2027-02-21T00:00:00');
+  const cdD = document.getElementById('cdD');
+  const cdH = document.getElementById('cdH');
+  const cdM = document.getElementById('cdM');
+  const cdS = document.getElementById('cdS');
+  const clockLabel = document.querySelector('.clock-label');
+
+  function updateClock() {
+    const diff = targetDate.getTime() - Date.now();
+    if (diff <= 0) {
+      cdD.textContent = '000'; cdH.textContent = '00'; cdM.textContent = '00'; cdS.textContent = '00';
+      if (clockLabel) clockLabel.innerHTML = '<span class="beacon" aria-hidden="true"></span>Jour J — 60 m Indoor';
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    cdD.textContent = String(d).padStart(3,'0');
+    cdH.textContent = String(h).padStart(2,'0');
+    cdM.textContent = String(m).padStart(2,'0');
+    cdS.textContent = String(s).padStart(2,'0');
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  // ---------- Effet tilt léger sur les cartes de jour (souris fine uniquement) ----------
+  const canTilt = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+    && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (canTilt) {
+    document.querySelectorAll('.day-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width;
+        const py = (e.clientY - r.top) / r.height;
+        const rx = (0.5 - py) * 6;
+        const ry = (px - 0.5) * 6;
+        card.style.transition = 'transform .08s linear';
+        card.style.transform = `perspective(700px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
       });
-    }, { rootMargin: '-56px 0px -70% 0px', threshold: 0 });
-    sections.forEach(section => observer.observe(section));
+      card.addEventListener('mouseleave', () => {
+        card.style.transition = 'transform .5s cubic-bezier(.2,.8,.2,1)';
+        card.style.transform = '';
+      });
+    });
+  }
+
+  // ---------- Apparition progressive au scroll (dégradation propre sans JS) ----------
+  if ('IntersectionObserver' in window) {
+    const revealTargets = document.querySelectorAll('.day-card, .protocol-card');
+    revealTargets.forEach(el => el.classList.add('reveal'));
+    const revealObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal-in');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold:0.12, rootMargin:'0px 0px -40px 0px' });
+    revealTargets.forEach(el => revealObserver.observe(el));
   }
 </script>
 
